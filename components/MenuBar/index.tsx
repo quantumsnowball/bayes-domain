@@ -7,11 +7,14 @@ import {
 import MenuIcon from '@mui/icons-material/Menu'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
+import { useState } from "react"
+import MenuDrawer from "../MenuDrawer"
 
 
 const MenuBar = () => {
   const isMobile = false
   const mode = 'light'
+  const [menuOpen, setMenuOpen] = useState(false)
 
   return (
     <>
@@ -23,7 +26,7 @@ const MenuBar = () => {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={() => alert('clicked icon button')}
+            onClick={() => setMenuOpen(!menuOpen)}
           >
             <MenuIcon />
           </IconButton>
@@ -40,6 +43,7 @@ const MenuBar = () => {
           </IconButton>
         </Toolbar>
       </AppBar>
+      <MenuDrawer {...{ menuOpen, setMenuOpen }} />
     </>
   )
 }

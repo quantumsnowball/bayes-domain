@@ -1,15 +1,16 @@
 import { Stretch, CenterContent, Overflow } from '../styled/containers'
 import { styled } from '@mui/material'
+import { CustomFC } from '../../types'
 
 
 // .main-ctn
 const CenteredDiv = styled(Overflow(Stretch(CenterContent('div'))))`
 `
 
-const Main = () => {
+const Main: CustomFC = ({ children }) => {
   return (
     <CenteredDiv id='main-ctn'>
-      <span>Main Area</span>
+      {children}
     </CenteredDiv>
   )
 }

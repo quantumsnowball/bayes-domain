@@ -1,4 +1,5 @@
 import { Box, Divider, SwipeableDrawer } from '@mui/material'
+import AboutMenu from './AboutMenu'
 import { MenuTitle } from './common'
 import ThemeMenu from './ThemeMenu'
 
@@ -27,6 +28,8 @@ function MenuDrawer({ menuOpen, setMenuOpen }: MenuDrawerProps) {
         <MenuTitle title="Bayes" />
         <Divider />
         <ThemeMenu />
+        <Divider />
+        <AboutMenu />
       </Box>
     </SwipeableDrawer>
   )

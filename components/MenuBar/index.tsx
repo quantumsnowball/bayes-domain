@@ -2,18 +2,23 @@ import {
   AppBar,
   IconButton,
   Toolbar,
-  Typography
+  Typography,
+  useMediaQuery,
+  useTheme
 } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { useState } from "react"
 import MenuDrawer from "../MenuDrawer"
+import { useDispatch } from "react-redux"
+import { themeActions } from "../../redux/slices/themeSlice"
 
 
 const MenuBar = () => {
-  const isMobile = false
-  const mode = 'light'
+  const dispatch = useDispatch()
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -36,10 +41,9 @@ const MenuBar = () => {
           >
             Bayes Theorem
           </Typography>
-          <IconButton onClick={() => alert('toggle light/dark mode')}>
-            {mode === 'light' ?
-              <LightModeIcon sx={{ color: '#fff' }} /> :
-              <DarkModeIcon />}
+          <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
+            {theme.palette.mode === 'light' ?
+              <LightModeIcon sx={{ color: '#fff' }} /> : <DarkModeIcon />}
           </IconButton>
         </Toolbar>
       </AppBar>

@@ -38,7 +38,7 @@ function EvidenceCard({ index }: EvidenceCardProps) {
 
   return (
     <Card variant='outlined'>
-      <CardContent sx={{ minWidth: 450 }}>
+      <CardContent >
         <Typography variant="h5" color="text.secondary" gutterBottom>
           Evidence
         </Typography>
@@ -64,7 +64,7 @@ function EvidenceCard({ index }: EvidenceCardProps) {
 }
 
 
-const ContentDiv = styled(Overflow(Stretch(TopContent('div'))))`
+const ContentDiv = styled(Overflow(Stretch('div')))`
 `
 
 function Home() {

@@ -7,8 +7,8 @@ import {
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useSelector } from "react-redux"
-import { RootState } from '../../redux/store'
-import { Overflow, Stretch, TopContent } from "../styled/containers"
+import { RootState } from '../../../redux/store'
+import { Overflow, Stretch, TopContent } from "../../styled/containers"
 
 
 function HypothesisCard() {

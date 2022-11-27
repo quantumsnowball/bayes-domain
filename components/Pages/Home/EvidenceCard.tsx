@@ -42,6 +42,7 @@ function EvidenceCard({ index }: EvidenceCardProps) {
                 <Chip label='Evidence' variant='outlined' color='secondary' />
               </InputAdornment>,
           }}
+          onFocus={e => e.target.select()}
         >
         </TextField>
         <Typography variant="h5" sx={{ textAlign: 'left' }} color="text.secondary">Likelihood:</Typography>

@@ -34,6 +34,7 @@ function HypothesisCard() {
           }}
           value={title}
           onChange={e => dispatch(contentActions.setHypothesisTitle(e.target.value))}
+          onFocus={e => e.target.select()}
         >
         </TextField>
         <Typography variant="h5" sx={{ textAlign: 'left' }} color="text.secondary">Prior:</Typography>
@@ -41,7 +42,7 @@ function HypothesisCard() {
         <Typography variant="h4" sx={{ textAlign: 'left' }} color="text.secondary">Posterior:</Typography>
         <Typography variant="h3">P(H|E) = 0.863746</Typography>
       </CardContent>
-    </Card>
+    </Card >
   )
 }
 

@@ -1,13 +1,10 @@
 import {
-  Avatar,
-  Box,
   Card, CardContent,
   Chip,
   InputAdornment,
   Paper,
   Slider,
   TextField,
-  Typography
 } from "@mui/material"
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from '../../../redux/store'
@@ -61,7 +58,11 @@ function HypothesisCard() {
             max={1.0}
             step={0.0001}
             valueLabelDisplay='on'
-            onChange={e => setPriorLocal(e.target.value)}
+            onChange={(event, value) => {
+              if (!event.target) return
+              if (Array.isArray(value)) return
+              setPriorLocal(value)
+            }}
             onChangeCommitted={e => dispatch(contentActions.setHypothesisPrior(priorLocal))}
           />
           <TextField
@@ -82,8 +83,9 @@ function HypothesisCard() {
             }}
             value={prior}
             onChange={e => {
-              setPriorLocal(e.target.value.toString())
-              dispatch(contentActions.setHypothesisPrior(e.target.value))
+              const numericValue = parseFloat(e.target.value)
+              setPriorLocal(numericValue)
+              dispatch(contentActions.setHypothesisPrior(numericValue))
             }}
             onFocus={e => e.target.select()}
           >

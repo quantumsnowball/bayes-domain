@@ -8,6 +8,7 @@ import {
 import ExploreIcon from '@mui/icons-material/Explore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import AddButton from './AddButton'
+import Link from 'next/link'
 
 
 function BottomNav() {
@@ -37,10 +38,14 @@ function BottomNav() {
         }}
       >
         <BottomNavigationAction
+          component={Link}
+          href='/'
           label="Home"
           icon={<ExploreIcon />}
         />
         <BottomNavigationAction
+          component={Link}
+          href='/favorite'
           label="Favorite"
           icon={<FavoriteIcon />}
         />

@@ -9,6 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import { useSelector } from "react-redux"
 import { RootState } from '../../../redux/store'
 import { Overflow, Stretch, TopContent } from "../../styled/containers"
+import { useDispatch } from "react-redux"
+import { contentActions } from "../../../redux/slices/contentSlice"
 
 
 function HypothesisCard() {
@@ -25,8 +27,14 @@ function HypothesisCard() {
 }
 
 
+interface EvidenceCardProps {
+  index: number
+}
 
-function EvidenceCard() {
+
+function EvidenceCard({ index }: EvidenceCardProps) {
+  const dispatch = useDispatch()
+
   return (
     <Card variant='outlined'>
       <CardContent sx={{ minWidth: 450 }}>
@@ -45,8 +53,7 @@ function EvidenceCard() {
           startIcon={<DeleteIcon />}
           onClick={e => {
             e.stopPropagation()
-            // dispatch(contentActions.removeEntry(index))
-            alert('Please delete me')
+            dispatch(contentActions.removeEvidence(index))
           }}>
           DELETE
         </Button>
@@ -60,13 +67,14 @@ const ContentDiv = styled(Overflow(Stretch(TopContent('div'))))`
 `
 
 function Home() {
-  const evidence = useSelector((s: RootState) => s.content.evidence)
+  const evidenceItems = useSelector((s: RootState) => s.content.evidence)
 
   return (
     <ContentDiv id='content-ctn'>
       <HypothesisCard />
       {
-        evidence.map(() => <EvidenceCard />)
+        evidenceItems.map((item: boolean, i: number) =>
+          <EvidenceCard key={i} index={i} />)
       }
     </ContentDiv>
   )

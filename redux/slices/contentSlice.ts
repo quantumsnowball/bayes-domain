@@ -9,7 +9,10 @@ const contentSlice = createSlice({
   reducers: {
     addEvidence: (s, a: PayloadAction<boolean>) => {
       s.evidence.push(a.payload)
-    }
+    },
+    removeEvidence: (s, a: PayloadAction<number>) => {
+      s.evidence = s.evidence.filter((_, i) => i !== a.payload)
+    },
   }
 })
 

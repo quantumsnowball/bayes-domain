@@ -12,11 +12,14 @@ import {
 import { useSelector, useDispatch } from "react-redux"
 import { RootState } from '../../../redux/store'
 import { contentActions } from "../../../redux/slices/contentSlice"
+import { useState } from "react"
 
 
 function HypothesisCard() {
   const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
+  const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
+  const [priorLocal, setPriorLocal] = useState(prior)
 
   return (
     <Card>
@@ -47,10 +50,13 @@ function HypothesisCard() {
           sx={{ p: 2 }}>
           <Slider
             defaultValue={0.5}
+            value={priorLocal}
             min={0.0}
             max={1.0}
             step={0.0001}
             valueLabelDisplay='on'
+            onChange={e => setPriorLocal(e.target.value)}
+            onChangeCommitted={e => dispatch(contentActions.setHypothesisPrior(priorLocal))}
           />
           <TextField
             fullWidth
@@ -67,6 +73,11 @@ function HypothesisCard() {
                 <InputAdornment position="end" >
                   <Chip label='Prior Probability' variant='outlined' color='primary' />
                 </InputAdornment>,
+            }}
+            value={prior}
+            onChange={e => {
+              setPriorLocal(e.target.value.toString())
+              dispatch(contentActions.setHypothesisPrior(e.target.value))
             }}
             onFocus={e => e.target.select()}
           >

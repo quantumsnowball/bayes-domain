@@ -7,13 +7,17 @@ const contentSlice = createSlice({
   name: 'layout',
   initialState: {
     hypothesis: {
-      title: ''
+      title: '',
+      prior: 0.5
     } as Hypothesis,
     evidence: [] as Evidence[],
   },
   reducers: {
     setHypothesisTitle: (s, a: PayloadAction<string>) => {
       s.hypothesis.title = a.payload
+    },
+    setHypothesisPrior: (s, a: PayloadAction<number>) => {
+      s.hypothesis.prior = a.payload
     },
     setEvidenceTitle: (s, a: PayloadAction<{ i: number, title: string }>) => {
       s.evidence[a.payload.i].title = a.payload.title

@@ -23,7 +23,7 @@ const MenuBar = () => {
 
   return (
     <>
-      <AppBar position={isMobile ? "fixed" : "static"}>
+      <AppBar position='static'>
         <Toolbar>
           <IconButton
             size="large"

@@ -2,6 +2,9 @@ import {
   Box,
   Button,
   Card, CardActions, CardContent,
+  Chip,
+  InputAdornment,
+  TextField,
   Typography
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -24,9 +27,23 @@ function EvidenceCard({ index }: EvidenceCardProps) {
       onClick={() => setExpanded(!expanded)}
     >
       <CardContent >
-        <Typography variant="h5" color="text.secondary" gutterBottom>
-          Evidence
-        </Typography>
+        <TextField
+          fullWidth
+          variant="outlined"
+          color='secondary'
+          label='What is your Evidence?'
+          helperText="Provide anything to support your hypothesis"
+          InputProps={{
+            startAdornment:
+              <InputAdornment
+                position="start"
+                sx={{ fontsize: 30 }}
+              >
+                <Chip label='Evidence' variant='outlined' color='secondary' />
+              </InputAdornment>,
+          }}
+        >
+        </TextField>
         <Typography variant="h5" sx={{ textAlign: 'left' }} color="text.secondary">Likelihood:</Typography>
         <Typography variant="h4">P(E|H) = ?</Typography>
         <Typography variant="h6" sx={{ textAlign: 'left' }} color="text.secondary">Normalizing Factor:</Typography>

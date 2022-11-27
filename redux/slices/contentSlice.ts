@@ -15,6 +15,9 @@ const contentSlice = createSlice({
     setHypothesisTitle: (s, a: PayloadAction<string>) => {
       s.hypothesis.title = a.payload
     },
+    setEvidenceTitle: (s, a: PayloadAction<{ i: number, title: string }>) => {
+      s.evidence[a.payload.i].title = a.payload.title
+    },
     addEvidence: (s, a: PayloadAction<Evidence>) => {
       s.evidence.push(a.payload)
     },

@@ -8,9 +8,10 @@ import {
   Typography
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../redux/slices/contentSlice"
 import { useState } from "react"
+import { RootState } from "../../../redux/store"
 
 
 interface EvidenceCardProps {
@@ -20,6 +21,7 @@ interface EvidenceCardProps {
 
 function EvidenceCard({ index }: EvidenceCardProps) {
   const dispatch = useDispatch()
+  const title = useSelector((s: RootState) => s.content.evidence[index].title)
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -42,6 +44,8 @@ function EvidenceCard({ index }: EvidenceCardProps) {
                 <Chip label='Evidence' variant='outlined' color='secondary' />
               </InputAdornment>,
           }}
+          value={title}
+          onChange={e => dispatch(contentActions.setEvidenceTitle({ i: index, title: e.target.value }))}
           onFocus={e => e.target.select()}
         >
         </TextField>

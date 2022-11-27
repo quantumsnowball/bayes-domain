@@ -3,13 +3,13 @@ import {
   Fab
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import { useDispatch } from 'react-redux'
+import { contentActions } from '../../redux/slices/contentSlice'
 
 
-interface AddButtonProps {
-  handleAction: () => void
-}
+function AddButton() {
+  const dispatch = useDispatch()
 
-function AddButton({ handleAction }: AddButtonProps) {
   return (
     <Box sx={{
       position: 'fixed',
@@ -21,7 +21,7 @@ function AddButton({ handleAction }: AddButtonProps) {
         variant="extended"
         color="primary"
         aria-label="new"
-        onClick={() => handleAction()}
+        onClick={() => dispatch(contentActions.addEvidence(true))}
       >
         <AddIcon />
         ADD

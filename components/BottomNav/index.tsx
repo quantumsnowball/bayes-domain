@@ -50,7 +50,7 @@ function BottomNav() {
           icon={<FavoriteIcon />}
         />
       </BottomNavigation>
-      <AddButton handleAction={() => alert('handleAction')} />
+      <AddButton />
     </>
   )
 }

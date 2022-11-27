@@ -1,13 +1,20 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Evidence } from '../../types/evidence'
+import { Hypothesis } from '../../types/hypothesis'
 
 
 const contentSlice = createSlice({
   name: 'layout',
   initialState: {
+    hypothesis: {
+      title: ''
+    } as Hypothesis,
     evidence: [] as Evidence[],
   },
   reducers: {
+    setHypothesisTitle: (s, a: PayloadAction<string>) => {
+      s.hypothesis.title = a.payload
+    },
     addEvidence: (s, a: PayloadAction<Evidence>) => {
       s.evidence.push(a.payload)
     },

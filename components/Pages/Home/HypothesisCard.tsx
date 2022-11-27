@@ -5,9 +5,15 @@ import {
   TextField,
   Typography
 } from "@mui/material"
+import { useSelector, useDispatch } from "react-redux"
+import { RootState } from '../../../redux/store'
+import { contentActions } from "../../../redux/slices/contentSlice"
 
 
 function HypothesisCard() {
+  const dispatch = useDispatch()
+  const title = useSelector((s: RootState) => s.content.hypothesis.title)
+
   return (
     <Card>
       <CardContent>
@@ -26,6 +32,8 @@ function HypothesisCard() {
                 <Chip label='Hypothesis' variant='outlined' color='primary' />
               </InputAdornment>,
           }}
+          value={title}
+          onChange={e => dispatch(contentActions.setHypothesisTitle(e.target.value))}
         >
         </TextField>
         <Typography variant="h5" sx={{ textAlign: 'left' }} color="text.secondary">Prior:</Typography>

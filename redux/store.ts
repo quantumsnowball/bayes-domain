@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
 
 // store
 export const store = configureStore({
-  reducer: persistReducer({ key: 'root', storage, blacklist: ['content'] }, rootReducer),
+  reducer: persistReducer({ key: 'root', storage, blacklist: [] }, rootReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

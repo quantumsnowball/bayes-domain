@@ -5,6 +5,7 @@ import {
 import AddIcon from '@mui/icons-material/Add'
 import { useDispatch } from 'react-redux'
 import { contentActions } from '../../redux/slices/contentSlice'
+import { v4 } from 'uuid'
 
 
 function AddButton() {
@@ -21,7 +22,7 @@ function AddButton() {
         variant="extended"
         color="primary"
         aria-label="new"
-        onClick={() => dispatch(contentActions.addEvidence(true))}
+        onClick={() => dispatch(contentActions.addEvidence({ uuid: v4() }))}
       >
         <AddIcon />
         ADD

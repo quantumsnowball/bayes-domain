@@ -1,13 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Evidence } from '../../types/evidence'
 
 
 const contentSlice = createSlice({
   name: 'layout',
   initialState: {
-    evidence: [] as boolean[],
+    evidence: [] as Evidence[],
   },
   reducers: {
-    addEvidence: (s, a: PayloadAction<boolean>) => {
+    addEvidence: (s, a: PayloadAction<Evidence>) => {
       s.evidence.push(a.payload)
     },
     removeEvidence: (s, a: PayloadAction<number>) => {

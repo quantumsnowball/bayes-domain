@@ -11,6 +11,7 @@ import { RootState } from '../../../redux/store'
 import { Overflow, Stretch, TopContent } from "../../styled/containers"
 import { useDispatch } from "react-redux"
 import { contentActions } from "../../../redux/slices/contentSlice"
+import { Evidence } from "../../../types/evidence"
 
 
 function HypothesisCard() {
@@ -73,8 +74,8 @@ function Home() {
     <ContentDiv id='content-ctn'>
       <HypothesisCard />
       {
-        evidenceItems.map((item: boolean, i: number) =>
-          <EvidenceCard key={i} index={i} />)
+        evidenceItems.map((item: Evidence, i: number) =>
+          <EvidenceCard key={item.uuid} index={i} />)
       }
     </ContentDiv>
   )

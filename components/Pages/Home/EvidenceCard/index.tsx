@@ -53,8 +53,7 @@ function EvidenceCard({ index }: EvidenceCardProps) {
         >
           {(expanded) ?
             <Chip
-              label={`${expanded ? "Evidence " : "E"}${index + 1}`}
-              variant='outlined'
+              label={`Evidence ${index + 1}`}
               color='secondary'
             />
             :

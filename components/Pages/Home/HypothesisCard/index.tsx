@@ -50,8 +50,7 @@ function HypothesisCard() {
           >
             {expanded ?
               <Chip
-                label={`${expanded ? "Hypothesis" : "H"}`}
-                variant='outlined'
+                label='Hypothesis'
                 color='primary'
               />
               :

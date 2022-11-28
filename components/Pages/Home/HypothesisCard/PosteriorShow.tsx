@@ -45,11 +45,11 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
         InputProps={{
           startAdornment:
             <InputAdornment position="start" >
-              <Chip label=' P ( H | E ) ' variant='outlined' color='error' />
+              <Chip label=' P ( H | E ) ' variant='filled' color='error' />
             </InputAdornment>,
           endAdornment:
             <InputAdornment position="end" >
-              <Chip label='Posterior' variant='outlined' color='error' />
+              <Chip label='Posterior' variant='filled' color='error' />
             </InputAdornment>,
         }}
         value={posteriorLocal}

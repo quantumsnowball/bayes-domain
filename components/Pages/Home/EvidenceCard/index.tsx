@@ -4,7 +4,7 @@ import {
   AccordionSummary,
   Box,
   Button,
-  Card, CardActions, CardContent,
+  Card, CardActions, CardContent, Chip, Typography,
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from "react-redux"
@@ -14,6 +14,8 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import TitlePrompt from "./TitlePrompt"
 import LikelihoodPrompt from "./LikelihoodPrompt"
 import NormalizerPrompt from "./NormalizerPrompt"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../../redux/store"
 
 
 interface EvidenceCardProps {
@@ -23,6 +25,7 @@ interface EvidenceCardProps {
 
 function EvidenceCard({ index }: EvidenceCardProps) {
   const dispatch = useDispatch()
+  const title = useSelector((s: RootState) => s.content.evidence[index].title)
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -38,7 +41,17 @@ function EvidenceCard({ index }: EvidenceCardProps) {
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
       >
-        {`Evidence ${index + 1}`}
+        <Chip
+          label={`${expanded ? "Evidence " : "E"}${index + 1}`}
+          variant='outlined'
+          color='secondary'
+        />
+        {(!expanded && title.length > 0) ?
+          <Chip
+            label={title}
+            variant='filled'
+          /> : null
+        }
       </AccordionSummary>
       <AccordionDetails>
         <Card

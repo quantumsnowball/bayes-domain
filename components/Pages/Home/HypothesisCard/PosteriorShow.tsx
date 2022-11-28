@@ -29,6 +29,7 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
       <Slider
         defaultValue={0.5}
         value={posteriorLocal}
+        valueLabelFormat={value => (value * 100).toFixed(2) + '%'}
         min={0.0}
         max={1.0}
         step={0.0001}
@@ -52,7 +53,7 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
               <Chip label='Posterior' variant='filled' color='error' />
             </InputAdornment>,
         }}
-        value={posteriorLocal}
+        value={posteriorLocal.toFixed(4)}
       >
       </TextField>
     </Paper>

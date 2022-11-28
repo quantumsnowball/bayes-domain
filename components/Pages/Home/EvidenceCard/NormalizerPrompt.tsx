@@ -20,7 +20,9 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
   const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.evidence[index].title)
   const normalizer = useSelector((s: RootState) => s.content.evidence[index].normalizer)
+  const normalizerText = useSelector((s: RootState) => s.content.evidence[index].normalizerText)
   const [normalizerLocal, setNormalizerLocal] = useState(normalizer)
+  const [evalError, setEvalError] = useState(false)
 
   return (
     <Paper
@@ -40,13 +42,20 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
           if (Array.isArray(value)) return
           setNormalizerLocal(value)
         }}
-        onChangeCommitted={e => dispatch(contentActions.setEvidenceNormalizer({
-          i: index,
-          normalizer: normalizerLocal
-        }))}
+        onChangeCommitted={e => {
+          dispatch(contentActions.setEvidenceNormalizer({
+            i: index,
+            normalizer: normalizerLocal
+          }))
+          dispatch(contentActions.setEvidenceNormalizerText({
+            i: index,
+            normalizerText: normalizerLocal.toFixed(4)
+          }))
+        }}
       />
       <TextField
         fullWidth
+        error={evalError}
         variant="outlined"
         color='secondary'
         label='Probability of seeing this evidence in general?'
@@ -61,14 +70,23 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
               <Chip label='Normalizer' variant='outlined' color='secondary' />
             </InputAdornment>,
         }}
-        value={normalizer}
+        value={normalizerText}
         onChange={e => {
-          const numericValue = parseFloat(e.target.value)
-          setNormalizerLocal(numericValue)
-          dispatch(contentActions.setEvidenceNormalizer({
-            i: index,
-            normalizer: numericValue
-          }))
+          try {
+            dispatch(contentActions.setEvidenceNormalizerText({
+              i: index,
+              normalizerText: e.target.value
+            }))
+            const numericValue = parseFloat(eval(e.target.value))
+            setNormalizerLocal(numericValue)
+            dispatch(contentActions.setEvidenceNormalizer({
+              i: index,
+              normalizer: numericValue
+            }))
+            setEvalError(false)
+          } catch (error) {
+            setEvalError(true)
+          }
         }}
         onFocus={e => e.target.select()}
       >

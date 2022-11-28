@@ -32,7 +32,9 @@ function Home() {
           uuid: v4(),
           title: 'Untitled Evidence',
           likelihood: 0.5,
+          likelihoodText: '1/2',
           normalizer: 0.5,
+          normalizerText: '1/2',
         }))}
       >
         New Evidence

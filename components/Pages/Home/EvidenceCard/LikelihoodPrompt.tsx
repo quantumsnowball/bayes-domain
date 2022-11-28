@@ -13,8 +13,10 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
   const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.evidence[index].title)
   const likelihood = useSelector((s: RootState) => s.content.evidence[index].likelihood)
+  const likelihoodText = useSelector((s: RootState) => s.content.evidence[index].likelihoodText)
   const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [likelihoodLocal, setLikelihoodLocal] = useState(likelihood)
+  const [evalError, setEvalError] = useState(false)
 
   return (
     <Paper
@@ -34,13 +36,20 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
           if (Array.isArray(value)) return
           setLikelihoodLocal(value)
         }}
-        onChangeCommitted={e => dispatch(contentActions.setEvidenceLikelihood({
-          i: index,
-          likelihood: likelihoodLocal
-        }))}
+        onChangeCommitted={e => {
+          dispatch(contentActions.setEvidenceLikelihood({
+            i: index,
+            likelihood: likelihoodLocal
+          }))
+          dispatch(contentActions.setEvidenceLikelihoodText({
+            i: index,
+            likelihoodText: likelihoodLocal.toFixed(4)
+          }))
+        }}
       />
       <TextField
         fullWidth
+        error={evalError}
         variant="outlined"
         color='secondary'
         label='Probability of seeing this evidence if hypothesis is true?'
@@ -55,14 +64,23 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
               <Chip label='Likelihood' variant='outlined' color='secondary' />
             </InputAdornment>,
         }}
-        value={likelihood}
+        value={likelihoodText}
         onChange={e => {
-          const numericValue = parseFloat(e.target.value)
-          setLikelihoodLocal(numericValue)
-          dispatch(contentActions.setEvidenceLikelihood({
-            i: index,
-            likelihood: numericValue
-          }))
+          try {
+            dispatch(contentActions.setEvidenceLikelihoodText({
+              i: index,
+              likelihoodText: e.target.value
+            }))
+            const numericValue = parseFloat(eval(e.target.value))
+            setLikelihoodLocal(numericValue)
+            dispatch(contentActions.setEvidenceLikelihood({
+              i: index,
+              likelihood: numericValue
+            }))
+            setEvalError(false)
+          } catch (error) {
+            setEvalError(true)
+          }
         }}
         onFocus={e => e.target.select()}
       >

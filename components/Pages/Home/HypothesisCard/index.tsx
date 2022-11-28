@@ -63,7 +63,7 @@ function HypothesisCard() {
             }
             <Chip
               avatar={<Avatar>P</Avatar>}
-              label={prior}
+              label={prior.toFixed(4)}
               variant='outlined'
               color='primary'
             />

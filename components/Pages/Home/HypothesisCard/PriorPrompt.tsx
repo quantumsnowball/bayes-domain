@@ -30,6 +30,7 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
       <Slider
         defaultValue={0.5}
         value={priorLocal}
+        valueLabelFormat={value => (value * 100).toFixed(2) + '%'}
         min={0.0}
         max={1.0}
         step={0.0001}

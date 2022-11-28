@@ -27,6 +27,7 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
       <Slider
         defaultValue={0.5}
         value={likelihoodLocal}
+        valueLabelFormat={value => (value * 100).toFixed(2) + '%'}
         min={0.0}
         max={1.0}
         step={0.0001}

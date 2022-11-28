@@ -7,7 +7,6 @@ import {
 } from '@mui/material'
 import ExploreIcon from '@mui/icons-material/Explore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import AddButton from './AddButton'
 import Link from 'next/link'
 
 
@@ -50,7 +49,6 @@ function BottomNav() {
           icon={<FavoriteIcon />}
         />
       </BottomNavigation>
-      <AddButton />
     </>
   )
 }

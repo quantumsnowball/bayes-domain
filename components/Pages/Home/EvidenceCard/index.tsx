@@ -34,23 +34,18 @@ function EvidenceCard({ index }: EvidenceCardProps) {
         <LikelihoodPrompt {...{ index }} />
         <NormalizerPrompt {...{ index }} />
       </CardContent>
-      {
-        expanded ?
-          <CardActions disableSpacing>
-            <Box sx={{ flexGrow: 1 }} />
-            <Button
-              color="error"
-              startIcon={<DeleteIcon />}
-              onClick={e => {
-                e.stopPropagation()
-                dispatch(contentActions.removeEvidence(index))
-              }}>
-              DELETE
-            </Button>
-          </CardActions>
-          :
-          null
-      }
+      <CardActions disableSpacing>
+        <Box sx={{ flexGrow: 1 }} />
+        <Button
+          color="error"
+          startIcon={<DeleteIcon />}
+          onClick={e => {
+            e.stopPropagation()
+            dispatch(contentActions.removeEvidence(index))
+          }}>
+          DELETE
+        </Button>
+      </CardActions>
     </Card>
   )
 }

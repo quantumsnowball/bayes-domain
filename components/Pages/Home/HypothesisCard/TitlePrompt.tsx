@@ -1,6 +1,7 @@
 import {
   Chip,
   InputAdornment,
+  Paper,
   TextField,
 } from "@mui/material"
 import { RootState } from '../../../../redux/store'
@@ -13,27 +14,32 @@ function TitlePrompt() {
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
 
   return (
-    <TextField
-      fullWidth
-      variant="outlined"
-      color='primary'
-      label='What is your Hypothesis?'
-      helperText="Make a guess or forecast about anything"
-      InputProps={{
-        startAdornment:
-          <InputAdornment position="start" >
-            <Chip label=' H ' variant='outlined' color='primary' />
-          </InputAdornment>,
-        endAdornment:
-          <InputAdornment position="end" >
-            <Chip label='Hypothesis' variant='outlined' color='info' />
-          </InputAdornment>,
-      }}
-      value={title}
-      onChange={e => dispatch(contentActions.setHypothesisTitle(e.target.value))}
-      onFocus={e => e.target.select()}
-    >
-    </TextField>
+    <Paper
+      elevation={1}
+      variant='outlined'
+      sx={{ p: 1 }}>
+      <TextField
+        fullWidth
+        variant="outlined"
+        color='primary'
+        label='What is your Hypothesis?'
+        helperText="Make a guess or forecast about anything"
+        InputProps={{
+          startAdornment:
+            <InputAdornment position="start" >
+              <Chip label=' H ' variant='outlined' color='primary' />
+            </InputAdornment>,
+          endAdornment:
+            <InputAdornment position="end" >
+              <Chip label='Hypothesis' variant='outlined' color='info' />
+            </InputAdornment>,
+        }}
+        value={title}
+        onChange={e => dispatch(contentActions.setHypothesisTitle(e.target.value))}
+        onFocus={e => e.target.select()}
+      >
+      </TextField>
+    </Paper>
   )
 }
 

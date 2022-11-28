@@ -14,9 +14,9 @@ interface PosteriorShowProps {
 function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
   return (
     <Paper
-      elevation={3}
+      elevation={1}
       variant='outlined'
-      sx={{ p: 2 }}>
+      sx={{ p: 1, pt: 2 }}>
       <Slider
         disabled
         defaultValue={0.5}
@@ -40,7 +40,7 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
             </InputAdornment>,
           endAdornment:
             <InputAdornment position="end" >
-              <Chip label='Posterior Probability' variant='outlined' color='error' />
+              <Chip label='Posterior' variant='outlined' color='error' />
             </InputAdornment>,
         }}
         value={posteriorLocal}

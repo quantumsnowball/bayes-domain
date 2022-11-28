@@ -23,7 +23,7 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
   return (
     <Paper
       elevation={1}
-      sx={{ p: 2 }}>
+      sx={{ p: 1 }}>
       <Slider
         defaultValue={0.5}
         value={priorLocal}
@@ -51,7 +51,7 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
             </InputAdornment>,
           endAdornment:
             <InputAdornment position="end" >
-              <Chip label='Prior Probability' variant='outlined' color='primary' />
+              <Chip label='Prior' variant='outlined' color='primary' />
             </InputAdornment>,
         }}
         value={prior}

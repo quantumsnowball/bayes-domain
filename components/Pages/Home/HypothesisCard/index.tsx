@@ -18,11 +18,13 @@ function HypothesisCard() {
   }, [prior])
 
   return (
-    <Card>
+    <Card
+      elevation={Math.round(24 * posteriorLocal)}
+      sx={{ m: 1 }}>
       <CardContent>
+        <PosteriorShow {...{ posteriorLocal }} />
         <TitlePrompt />
         <PriorPrompt {...{ priorLocal, setPriorLocal }} />
-        <PosteriorShow {...{ posteriorLocal }} />
       </CardContent>
     </Card >
   )

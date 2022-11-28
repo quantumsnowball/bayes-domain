@@ -27,14 +27,15 @@ function TitlePrompt({ index }: TitlePromptProps) {
         fullWidth
         variant="outlined"
         color='secondary'
-        label='What is your Evidence?'
-        helperText="Provide anything to support your hypothesis"
+        label='What is your Evidence? Describe what you see.'
+        helperText={`Using '${title}' as evidence to support the hypothesis.`}
         InputProps={{
           startAdornment:
-            <InputAdornment
-              position="start"
-              sx={{ fontsize: 30 }}
-            >
+            <InputAdornment position="start" >
+              <Chip label='E' variant='outlined' color='secondary' />
+            </InputAdornment>,
+          endAdornment:
+            <InputAdornment position="end" >
               <Chip label='Evidence' variant='outlined' color='secondary' />
             </InputAdornment>,
         }}

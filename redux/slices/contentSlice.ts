@@ -22,6 +22,9 @@ const contentSlice = createSlice({
     setEvidenceTitle: (s, a: PayloadAction<{ i: number, title: string }>) => {
       s.evidence[a.payload.i].title = a.payload.title
     },
+    setEvidenceLikelihood: (s, a: PayloadAction<{ i: number, likelihood: number }>) => {
+      s.evidence[a.payload.i].likelihood = a.payload.likelihood
+    },
     addEvidence: (s, a: PayloadAction<Evidence>) => {
       s.evidence.push(a.payload)
     },

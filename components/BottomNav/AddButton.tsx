@@ -22,7 +22,11 @@ function AddButton() {
         variant="extended"
         color="primary"
         aria-label="new"
-        onClick={() => dispatch(contentActions.addEvidence({ uuid: v4(), title: '' }))}
+        onClick={() => dispatch(contentActions.addEvidence({
+          uuid: v4(),
+          title: '',
+          likelihood: 0.5
+        }))}
       >
         <AddIcon />
         ADD

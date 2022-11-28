@@ -31,7 +31,7 @@ function EvidenceCard({ index }: EvidenceCardProps) {
     >
       <CardContent >
         <TitlePrompt {...{ index }} />
-        <LikelihoodPrompt />
+        <LikelihoodPrompt {...{ index }} />
         <NormalizerPrompt />
       </CardContent>
       {

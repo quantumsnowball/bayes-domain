@@ -5,7 +5,7 @@ import {
   Slider,
   TextField,
 } from "@mui/material"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
@@ -19,7 +19,9 @@ interface PriorPromptProps {
 function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
   const dispatch = useDispatch()
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
+  const priorText = useSelector((s: RootState) => s.content.hypothesis.priorText)
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
+  const [evalError, setEvalError] = useState(false)
 
   return (
     <Paper
@@ -37,10 +39,14 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
           if (Array.isArray(value)) return
           setPriorLocal(value)
         }}
-        onChangeCommitted={e => dispatch(contentActions.setHypothesisPrior(priorLocal))}
+        onChangeCommitted={e => {
+          dispatch(contentActions.setHypothesisPriorText(priorLocal.toFixed(4)))
+          dispatch(contentActions.setHypothesisPrior(priorLocal))
+        }}
       />
       <TextField
         fullWidth
+        error={evalError}
         variant="outlined"
         color='primary'
         label='What is the prior probability of your hypothesis?'
@@ -55,11 +61,17 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
               <Chip label='Prior' variant='outlined' color='primary' />
             </InputAdornment>,
         }}
-        value={prior}
+        value={priorText}
         onChange={e => {
-          const numericValue = parseFloat(e.target.value)
-          setPriorLocal(numericValue)
-          dispatch(contentActions.setHypothesisPrior(numericValue))
+          try {
+            dispatch(contentActions.setHypothesisPriorText(e.target.value))
+            const numericValue = parseFloat(eval(e.target.value))
+            setPriorLocal(numericValue)
+            dispatch(contentActions.setHypothesisPrior(numericValue))
+            setEvalError(false)
+          } catch (error) {
+            setEvalError(true)
+          }
         }}
         onFocus={e => e.target.select()}
       >

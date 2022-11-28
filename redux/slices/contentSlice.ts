@@ -8,7 +8,8 @@ const contentSlice = createSlice({
   initialState: {
     hypothesis: {
       title: 'Untitled Hypothesis',
-      prior: 0.5
+      prior: 0.5,
+      priorText: '1/2',
     } as Hypothesis,
     evidence: [] as Evidence[],
   },
@@ -18,6 +19,9 @@ const contentSlice = createSlice({
     },
     setHypothesisPrior: (s, a: PayloadAction<number>) => {
       s.hypothesis.prior = a.payload
+    },
+    setHypothesisPriorText: (s, a: PayloadAction<string>) => {
+      s.hypothesis.priorText = a.payload
     },
     setEvidenceTitle: (s, a: PayloadAction<{ i: number, title: string }>) => {
       s.evidence[a.payload.i].title = a.payload.title

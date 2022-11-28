@@ -25,7 +25,8 @@ function AddButton() {
         onClick={() => dispatch(contentActions.addEvidence({
           uuid: v4(),
           title: '',
-          likelihood: 0.5
+          likelihood: 0.5,
+          normalizer: 0.5,
         }))}
       >
         <AddIcon />

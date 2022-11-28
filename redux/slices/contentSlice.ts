@@ -25,6 +25,9 @@ const contentSlice = createSlice({
     setEvidenceLikelihood: (s, a: PayloadAction<{ i: number, likelihood: number }>) => {
       s.evidence[a.payload.i].likelihood = a.payload.likelihood
     },
+    setEvidenceNormalizer: (s, a: PayloadAction<{ i: number, normalizer: number }>) => {
+      s.evidence[a.payload.i].normalizer = a.payload.normalizer
+    },
     addEvidence: (s, a: PayloadAction<Evidence>) => {
       s.evidence.push(a.payload)
     },

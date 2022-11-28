@@ -23,18 +23,6 @@ function BottomNav() {
         onChange={(_, newValue) => {
           setValue(newValue)
         }}
-        sx={isMobile ? {
-          position: 'fixed',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          minWidth: 0,
-          minHeight: "56px",
-        } : {
-          minWidth: theme.breakpoints.values.sm,
-          minHeight: "56px",
-          alignSelf: "center"
-        }}
       >
         <BottomNavigationAction
           component={Link}

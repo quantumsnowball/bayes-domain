@@ -23,7 +23,8 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
       variant='outlined'
       sx={{
         m: 1,
-        p: 1, pt: 4
+        p: 1, pt: 4,
+        bgcolor: posteriorLocal > 1 ? 'red' : null
       }}>
       <Slider
         defaultValue={0.5}

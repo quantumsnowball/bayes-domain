@@ -21,7 +21,10 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
     <Paper
       elevation={1}
       variant='outlined'
-      sx={{ p: 1, pt: 2 }}>
+      sx={{
+        m: 1,
+        p: 1, pt: 4
+      }}>
       <Slider
         disabled
         defaultValue={0.5}

@@ -1,14 +1,16 @@
 import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
   Box,
   Button,
   Card, CardActions, CardContent,
-  Typography
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { useState } from "react"
-import { RootState } from "../../../../redux/store"
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import TitlePrompt from "./TitlePrompt"
 import LikelihoodPrompt from "./LikelihoodPrompt"
 import NormalizerPrompt from "./NormalizerPrompt"
@@ -24,29 +26,44 @@ function EvidenceCard({ index }: EvidenceCardProps) {
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <Card
-      variant='outlined'
+    <Accordion
+      disableGutters
+      elevation={1}
       sx={{ m: 1 }}
-      onClick={() => setExpanded(!expanded)}
+      expanded={expanded}
+      onChange={(e, isExpanded) => {
+        setExpanded(isExpanded)
+      }}
     >
-      <CardContent >
-        <TitlePrompt {...{ index }} />
-        <LikelihoodPrompt {...{ index }} />
-        <NormalizerPrompt {...{ index }} />
-      </CardContent>
-      <CardActions disableSpacing>
-        <Box sx={{ flexGrow: 1 }} />
-        <Button
-          color="error"
-          startIcon={<DeleteIcon />}
-          onClick={e => {
-            e.stopPropagation()
-            dispatch(contentActions.removeEvidence(index))
-          }}>
-          DELETE
-        </Button>
-      </CardActions>
-    </Card>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+      >
+        {`Evidence ${index + 1}`}
+      </AccordionSummary>
+      <AccordionDetails>
+        <Card
+          variant='outlined'
+        >
+          <CardContent >
+            <TitlePrompt {...{ index }} />
+            <LikelihoodPrompt {...{ index }} />
+            <NormalizerPrompt {...{ index }} />
+          </CardContent>
+          <CardActions disableSpacing>
+            <Box sx={{ flexGrow: 1 }} />
+            <Button
+              color="error"
+              startIcon={<DeleteIcon />}
+              onClick={e => {
+                e.stopPropagation()
+                dispatch(contentActions.removeEvidence(index))
+              }}>
+              DELETE
+            </Button>
+          </CardActions>
+        </Card>
+      </AccordionDetails>
+    </Accordion>
   )
 }
 

@@ -1,4 +1,4 @@
-import { Card, CardContent, Paper, } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, Paper, } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from '../../../../redux/store'
 import { useEffect, useState } from "react"
@@ -6,6 +6,7 @@ import TitlePrompt from "./TitlePrompt"
 import PriorPrompt from "./PriorPrompt"
 import PosteriorShow from "./PosteriorShow"
 import { Evidence } from "../../../../types/evidence"
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 
 function HypothesisCard() {
@@ -13,6 +14,7 @@ function HypothesisCard() {
   const evidence = useSelector((s: RootState) => s.content.evidence)
   const [priorLocal, setPriorLocal] = useState(prior)
   const [posteriorLocal, setPosteriorLocal] = useState(prior)
+  const [expanded, setExpanded] = useState(true)
 
 
   useEffect(() => {
@@ -23,15 +25,35 @@ function HypothesisCard() {
   }, [prior, evidence])
 
   return (
-    <Card
-      elevation={Math.round(24 * posteriorLocal)}
-      sx={{ m: 1 }}>
-      <CardContent>
-        <PosteriorShow {...{ posteriorLocal }} />
-        <TitlePrompt />
-        <PriorPrompt {...{ priorLocal, setPriorLocal }} />
-      </CardContent>
-    </Card >
+    <>
+      <PosteriorShow {...{ posteriorLocal }} />
+      <Accordion
+        disableGutters
+        elevation={1}
+        sx={{ m: 1 }}
+        expanded={expanded}
+        onChange={(e, isExpanded) => {
+          setExpanded(isExpanded)
+        }}
+        defaultExpanded
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+        >
+          Hypothesis
+        </AccordionSummary>
+        <AccordionDetails>
+          <Card
+            elevation={Math.round(24 * posteriorLocal)}
+          >
+            <CardContent>
+              <TitlePrompt />
+              <PriorPrompt {...{ priorLocal, setPriorLocal }} />
+            </CardContent>
+          </Card >
+        </AccordionDetails>
+      </Accordion>
+    </>
   )
 }
 

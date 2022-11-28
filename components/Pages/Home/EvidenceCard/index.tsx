@@ -27,6 +27,8 @@ interface EvidenceCardProps {
 function EvidenceCard({ index }: EvidenceCardProps) {
   const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.evidence[index].title)
+  const likelihood = useSelector((s: RootState) => s.content.evidence[index].likelihood)
+  const normalizer = useSelector((s: RootState) => s.content.evidence[index].normalizer)
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -42,20 +44,33 @@ function EvidenceCard({ index }: EvidenceCardProps) {
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
       >
-        {(expanded) ?
+        <Box
+          sx={{
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
+          {(expanded) ?
+            <Chip
+              label={`${expanded ? "Evidence " : "E"}${index + 1}`}
+              variant='outlined'
+              color='secondary'
+            />
+            :
+            <Chip
+              avatar={<Avatar>E{index + 1}</Avatar>}
+              label={title}
+              variant='outlined'
+              color='secondary'
+            />
+          }
           <Chip
-            label={`${expanded ? "Evidence " : "E"}${index + 1}`}
+            avatar={<Avatar>x</Avatar>}
+            label={(likelihood / normalizer).toFixed(4)}
             variant='outlined'
-            color='secondary'
           />
-          :
-          <Chip
-            avatar={<Avatar>E{index + 1}</Avatar>}
-            label={title}
-            variant='outlined'
-            color='secondary'
-          />
-        }
+        </Box>
       </AccordionSummary>
       <AccordionDetails>
         <Card

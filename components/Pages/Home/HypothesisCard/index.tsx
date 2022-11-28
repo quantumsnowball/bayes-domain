@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Card, CardContent, Chip, Paper, } from "@mui/material"
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Card, CardContent, Chip, Paper, } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from '../../../../redux/store'
 import { useEffect, useState } from "react"
@@ -41,16 +41,19 @@ function HypothesisCard() {
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
         >
-          <Chip
-            label={`${expanded ? "Hypothesis" : "H"}`}
-            variant='outlined'
-            color='primary'
-          />
-          {!expanded && title.length>0 ?
+          {expanded ?
             <Chip
+              label={`${expanded ? "Hypothesis" : "H"}`}
+              variant='outlined'
+              color='primary'
+            />
+            :
+            <Chip
+              avatar={<Avatar>H</Avatar>}
               label={title}
-              variant='filled'
-            />: null
+              variant='outlined'
+              color='primary'
+            />
           }
         </AccordionSummary>
         <AccordionDetails>

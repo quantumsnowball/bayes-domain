@@ -2,6 +2,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Avatar,
   Box,
   Button,
   Card, CardActions, CardContent, Chip, Typography,
@@ -41,16 +42,19 @@ function EvidenceCard({ index }: EvidenceCardProps) {
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
       >
-        <Chip
-          label={`${expanded ? "Evidence " : "E"}${index + 1}`}
-          variant='outlined'
-          color='secondary'
-        />
-        {(!expanded && title.length > 0) ?
+        {(expanded) ?
           <Chip
+            label={`${expanded ? "Evidence " : "E"}${index + 1}`}
+            variant='outlined'
+            color='secondary'
+          />
+          :
+          <Chip
+            avatar={<Avatar>E{index + 1}</Avatar>}
             label={title}
-            variant='filled'
-          /> : null
+            variant='outlined'
+            color='secondary'
+          />
         }
       </AccordionSummary>
       <AccordionDetails>

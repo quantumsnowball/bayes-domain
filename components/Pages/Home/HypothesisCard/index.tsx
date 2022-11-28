@@ -5,17 +5,22 @@ import { useEffect, useState } from "react"
 import TitlePrompt from "./TitlePrompt"
 import PriorPrompt from "./PriorPrompt"
 import PosteriorShow from "./PosteriorShow"
+import { Evidence } from "../../../../types/evidence"
 
 
 function HypothesisCard() {
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
+  const evidence = useSelector((s: RootState) => s.content.evidence)
   const [priorLocal, setPriorLocal] = useState(prior)
   const [posteriorLocal, setPosteriorLocal] = useState(prior)
 
 
   useEffect(() => {
-    setPosteriorLocal(prior * 1.0)
-  }, [prior])
+    const posterior = evidence.reduce(
+      (a: number, e: Evidence) => a * e.likelihood / e.normalizer,
+      prior)
+    setPosteriorLocal(posterior)
+  }, [prior, evidence])
 
   return (
     <Card

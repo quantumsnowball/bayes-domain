@@ -5,6 +5,8 @@ import {
   Slider,
   TextField,
 } from "@mui/material"
+import { useSelector } from "react-redux"
+import { RootState } from "../../../../redux/store"
 
 
 interface PosteriorShowProps {
@@ -12,6 +14,9 @@ interface PosteriorShowProps {
 }
 
 function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
+  const title = useSelector((s: RootState) => s.content.hypothesis.title)
+  const evidence = useSelector((s: RootState) => s.content.evidence)
+
   return (
     <Paper
       elevation={1}
@@ -32,7 +37,8 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
         variant="outlined"
         color='error'
         label='How does probability change after updating by evidence?'
-        helperText='The probability of hypothesis after all evidence'
+        helperText={`After ${evidence.length} piece${evidence.length > 1 ? "s" : ""} of evidence, `
+          + `the hypothesis '${title}' is true about ${(posteriorLocal * 100).toFixed(2)}% of time.`}
         InputProps={{
           startAdornment:
             <InputAdornment position="start" >

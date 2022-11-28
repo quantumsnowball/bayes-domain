@@ -19,6 +19,7 @@ interface PriorPromptProps {
 function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
   const dispatch = useDispatch()
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
+  const title = useSelector((s: RootState) => s.content.hypothesis.title)
 
   return (
     <Paper
@@ -42,8 +43,8 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
         fullWidth
         variant="outlined"
         color='primary'
-        label='What is the prior probability?'
-        helperText='The probability of hypothesis before any evidence'
+        label='What is the prior probability of your hypothesis?'
+        helperText={`Your expect '${title}' is true about ${(prior * 100).toFixed(2)}% of time.`}
         InputProps={{
           startAdornment:
             <InputAdornment position="start" >
@@ -63,7 +64,7 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
         onFocus={e => e.target.select()}
       >
       </TextField>
-    </Paper>
+    </Paper >
   )
 }
 

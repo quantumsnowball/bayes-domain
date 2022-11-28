@@ -22,8 +22,8 @@ function TitlePrompt() {
         fullWidth
         variant="outlined"
         color='primary'
-        label='What is your Hypothesis?'
-        helperText="Make a guess or forecast about anything"
+        label='What is your Hypothesis? Please make a prediction.'
+        helperText={`Your hypothesis is '${title}'.`}
         InputProps={{
           startAdornment:
             <InputAdornment position="start" >

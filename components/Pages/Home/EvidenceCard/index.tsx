@@ -24,7 +24,9 @@ function EvidenceCard({ index }: EvidenceCardProps) {
   const [expanded, setExpanded] = useState(false)
 
   return (
-    <Card variant='outlined'
+    <Card
+      variant='outlined'
+      sx={{ m: 1 }}
       onClick={() => setExpanded(!expanded)}
     >
       <CardContent >

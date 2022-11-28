@@ -22,6 +22,7 @@ function TitlePrompt({ index }: TitlePromptProps) {
     <Paper
       elevation={1}
       variant='outlined'
+      sx={{ p: 1 }}
     >
       <TextField
         fullWidth

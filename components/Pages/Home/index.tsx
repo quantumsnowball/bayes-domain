@@ -27,10 +27,10 @@ function Home() {
       <Button
         variant='contained'
         startIcon={<AddIcon />}
-        sx={{ m: 2}}
+        sx={{ m: 2 }}
         onClick={() => dispatch(contentActions.addEvidence({
           uuid: v4(),
-          title: '',
+          title: 'Untitled Evidence',
           likelihood: 0.5,
           normalizer: 0.5,
         }))}

@@ -7,7 +7,7 @@ const contentSlice = createSlice({
   name: 'layout',
   initialState: {
     hypothesis: {
-      title: '',
+      title: 'Untitled Hypothesis',
       prior: 0.5
     } as Hypothesis,
     evidence: [] as Evidence[],

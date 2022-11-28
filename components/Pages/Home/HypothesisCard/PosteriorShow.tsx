@@ -26,7 +26,6 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
         p: 1, pt: 4
       }}>
       <Slider
-        disabled
         defaultValue={0.5}
         value={posteriorLocal}
         min={0.0}

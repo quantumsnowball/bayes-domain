@@ -31,7 +31,9 @@ function PosteriorShow() {
 
   const tag = evidence.length == 0 ?
     '( H )' : evidence.length == 1 ?
-      '( H | E1 )' : `( H | E1 ... E${evidence.length})`
+      '( H | E1 )' : evidence.length == 2 ?
+        '( H | E1,E2 )' :
+        `( H | E1,... E${evidence.length})`
 
   const SharpAvatar = (name: string) =>
     <Avatar sx={{ bgcolor: theme.palette.error.main }}>

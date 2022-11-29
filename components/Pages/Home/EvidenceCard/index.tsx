@@ -20,6 +20,9 @@ function EvidenceCard({ i }: EvidenceCardProps) {
   const title = useSelector((s: RootState) => s.content.evidence[i].title)
   const likelihood = useSelector((s: RootState) => s.content.evidence[i].likelihood)
   const normalizer = useSelector((s: RootState) => s.content.evidence[i].normalizer)
+  const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
+
+  const bayesFactor = likelihood / (prior * likelihood + (1 - prior) * normalizer)
 
   return (
     <Section
@@ -35,7 +38,7 @@ function EvidenceCard({ i }: EvidenceCardProps) {
       }}
       rightChipProps={{
         avatar: <Avatar>x</Avatar>,
-        label: (likelihood / normalizer).toFixed(4),
+        label: bayesFactor.toFixed(4),
         variant: 'outlined'
       }}
       expandedActionComponent={

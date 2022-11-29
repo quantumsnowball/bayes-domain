@@ -1,9 +1,4 @@
-import {
-  Chip,
-  InputAdornment,
-  Paper,
-  TextField,
-} from "@mui/material"
+import { Paper, } from "@mui/material"
 import { RootState } from '../../../../redux/store'
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { useDispatch, useSelector } from "react-redux"
@@ -20,7 +15,6 @@ function TitlePrompt() {
   return (
     <Paper
       elevation={1}
-      variant='outlined'
       sx={{ p: 1 }}
     >
       <NormalTextField

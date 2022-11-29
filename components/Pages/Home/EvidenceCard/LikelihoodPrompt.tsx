@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
+import { validateProb } from "../share/math"
 import { ProbSlider } from "../share/Slider"
 import { ProbTextField } from "../share/TextField"
 
@@ -28,7 +29,6 @@ function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
   return (
     <Paper
       elevation={1}
-      variant='outlined'
       sx={{ p: 1 }}
     >
       <ProbSlider
@@ -47,7 +47,7 @@ function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
         value={likelihoodText}
         onTyping={e => {
           setLikelihoodText(e.target.value)
-          const numericValue = parseFloat(eval(e.target.value))
+          const numericValue = validateProb(parseFloat(eval(e.target.value)))
           setValSync(numericValue)
           setLikelihood(numericValue)
         }}

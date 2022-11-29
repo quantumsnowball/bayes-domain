@@ -5,6 +5,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
+import { validateProb } from "../share/math"
 import { ProbSlider } from "../share/Slider"
 import { ProbTextField } from "../share/TextField"
 
@@ -42,7 +43,7 @@ function PriorPrompt() {
         value={priorText}
         onTyping={e => {
           setPriorText(e.target.value)
-          const numericValue = parseFloat(eval(e.target.value))
+          const numericValue = validateProb(parseFloat(eval(e.target.value)))
           setValSync(numericValue)
           setPrior(numericValue)
         }}

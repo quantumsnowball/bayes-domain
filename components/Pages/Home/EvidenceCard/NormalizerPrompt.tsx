@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
+import { validateProb } from "../share/math"
 import { ProbSlider } from "../share/Slider"
 import { ProbTextField } from "../share/TextField"
 
@@ -23,12 +24,12 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
     useSelector((s: RootState) => s.content.evidence[i].normalizerText),
     (txt: string) => dispatch(contentActions.setEvidenceNormalizerText({ i, txt }))
   ]
+  const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(normalizer)
 
   return (
     <Paper
       elevation={1}
-      variant='outlined'
       sx={{ p: 1 }}
     >
       <ProbSlider
@@ -40,14 +41,14 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
         }}
       />
       <ProbTextField
-        label='Probability of seeing this evidence in general?'
-        helperText={`In general, your expect to see '${title}' about ${(normalizer * 100).toFixed(2)}% of time.`}
-        startChipProps={{ label: ' P ( E ) ', color: 'secondary' }}
+        label='Probability of seeing this evidence if hypothesis is false?'
+        helperText={`Even if hypothesis '${hypothesisTitle}' is false, your expect '${title}' is STILL true about ${(normalizer * 100).toFixed(2)}% of time.`}
+        startChipProps={{ label: ' P ( E | H\' ) ', color: 'secondary' }}
         endChipProps={{ label: 'Normalizer', color: 'secondary' }}
         value={normalizerText}
         onTyping={e => {
           setNormalizerText(e.target.value)
-          const numericValue = parseFloat(eval(e.target.value))
+          const numericValue = validateProb(parseFloat(eval(e.target.value)))
           setValSync(numericValue)
           setNormalizer(numericValue)
         }}

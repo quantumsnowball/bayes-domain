@@ -1,10 +1,10 @@
 import { Paper, } from "@mui/material"
 import { useSelector } from "react-redux"
-import { RootState } from "../../../../redux/store"
-import { NormalSlider } from "../share/Slider"
-import { NormalTextField } from "../share/TextField"
+import { RootState } from "../../../redux/store"
+import { NormalSlider } from "./share/Slider"
+import { NormalTextField } from "./share/TextField"
 import { useEffect, useState } from "react"
-import { Evidence } from "../../../../types/evidence"
+import { Evidence } from "../../../types/evidence"
 
 
 function PosteriorShow() {

@@ -8,6 +8,7 @@ import EvidenceCard from "./EvidenceCard"
 import AddIcon from '@mui/icons-material/Add'
 import { contentActions } from "../../../redux/slices/contentSlice"
 import { v4 } from "uuid"
+import PosteriorShow from "./PosteriorShow"
 
 
 const ContentDiv = styled(Overflow(Stretch('div')))`
@@ -19,6 +20,7 @@ function Home() {
 
   return (
     <ContentDiv id='content-ctn'>
+      <PosteriorShow />
       <HypothesisCard />
       {
         evidenceItems.map((item: Evidence, i: number) =>

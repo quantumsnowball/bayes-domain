@@ -11,7 +11,7 @@ export function NormalTextField(props: NormalTextFieldProps) {
   const {
     startChipProps,
     endChipProps,
-    ...textFieldProps
+    ...otherProps
   } = props
 
   const presets: TextFieldProps = {
@@ -36,7 +36,7 @@ export function NormalTextField(props: NormalTextFieldProps) {
     },
   }
 
-  return <TextField {...{ ...presets, ...textFieldProps }} />
+  return <TextField {...{ ...presets, ...otherProps }} />
 }
 
 
@@ -47,9 +47,9 @@ type ProbTextFieldProps = NormalTextFieldProps & {
 export function ProbTextField(props: ProbTextFieldProps) {
   const [evalError, setEvalError] = useState(false)
 
-  const { onTyping, ...normalTextFieldProps } = props
+  const { onTyping, ...otherProps } = props
 
-  const defaults: TextFieldProps = {
+  const presets: TextFieldProps = {
     error: evalError,
     onChange: e => {
       try {
@@ -60,6 +60,6 @@ export function ProbTextField(props: ProbTextFieldProps) {
       }
     }
   }
-  return <NormalTextField {...{ ...defaults, ...normalTextFieldProps }} />
+  return <NormalTextField {...{ ...presets, ...otherProps }} />
 }
 

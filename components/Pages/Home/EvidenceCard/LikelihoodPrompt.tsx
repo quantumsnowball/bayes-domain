@@ -29,7 +29,6 @@ function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
   return (
     <Paper
       elevation={1}
-      variant='outlined'
       sx={{ p: 1 }}
     >
       <ProbSlider

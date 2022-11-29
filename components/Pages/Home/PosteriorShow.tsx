@@ -61,7 +61,6 @@ function PosteriorShow() {
     >
       <Paper
         elevation={1}
-        variant='outlined'
         sx={{ p: 1 }}>
         <NormalSlider value={posteriorLocal} />
         <NormalTextField

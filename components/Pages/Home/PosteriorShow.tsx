@@ -17,7 +17,14 @@ function PosteriorShow() {
 
   useEffect(() => {
     const posterior = evidence.reduce(
-      (a: number, e: Evidence) => a * e.likelihood / e.normalizer,
+      (p_H: number, ev: Evidence) => {
+        const p_H_null = 1 - p_H
+        const p_E_given_H = ev.likelihood
+        const p_E_given_H_null = ev.normalizer
+        const p_E = (p_H * p_E_given_H + p_H_null * p_E_given_H_null)
+        const p_H_given_E = p_E_given_H / p_E * p_H
+        return p_H_given_E
+      },
       prior)
     setPosteriorLocal(posterior)
   }, [prior, evidence])

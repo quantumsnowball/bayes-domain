@@ -1,4 +1,4 @@
-import { Avatar, Paper, useTheme, } from "@mui/material"
+import { Avatar, Paper, Typography, useTheme, } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { NormalSlider } from "./share/Slider"
@@ -29,7 +29,7 @@ function PosteriorShow() {
   return (
     <Section
       expandedLeftChipProps={{
-        label: `Posterior Probability: ${tag}`,
+        label: `Posterior: ${tag}`,
         color: 'error'
       }}
       collapsedLeftChipProps={{
@@ -37,10 +37,10 @@ function PosteriorShow() {
         color: 'error'
       }}
       rightChipProps={{
-        avatar: <Avatar sx={{
-          color: '#fff',
-          bgcolor: theme.palette.error.main
-        }}>P</Avatar>,
+        avatar:
+          <Avatar sx={{ bgcolor: theme.palette.error.main }}>
+            <span style={{ color: 'white' }}>P</span>
+          </Avatar>,
         label: posteriorLocal.toFixed(4),
         variant: 'outlined',
         color: 'error'
@@ -56,8 +56,8 @@ function PosteriorShow() {
           label='How does probability change after updating by evidence?'
           helperText={`After ${evidence.length} piece${evidence.length > 1 ? "s" : ""} of evidence, `
             + `the hypothesis '${title}' is true about ${(posteriorLocal * 100).toFixed(2)}% of time.`}
-          startChipProps={{ label: ' P ( H | E ) ', variant: 'filled', color: 'error' }}
-          endChipProps={{ label: 'Posterior', variant: 'filled', color: 'error' }}
+          startChipProps={{ label: ' P ( H | E ) ', color: 'error' }}
+          endChipProps={{ label: 'Posterior', color: 'error' }}
           value={posteriorLocal.toFixed(4)}
         />
       </Paper>

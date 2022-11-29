@@ -23,24 +23,28 @@ function PosteriorShow() {
   }, [prior, evidence])
 
   const tag = evidence.length == 0 ?
-    'P ( H )' : evidence.length == 1 ?
-      'P ( H | E1 )' : `P ( H | E1 ... E${evidence.length})`
+    '( H )' : evidence.length == 1 ?
+      '( H | E1 )' : `( H | E1 ... E${evidence.length})`
+
+  const SharpAvatar = (name: string) =>
+    <Avatar sx={{ bgcolor: theme.palette.error.main }}>
+      <span style={{ color: 'white' }}>{name}</span>
+    </Avatar>
 
   return (
     <Section
       expandedLeftChipProps={{
-        label: `Posterior: ${tag}`,
+        label: `Posterior`,
         color: 'error'
       }}
       collapsedLeftChipProps={{
+        avatar: SharpAvatar('P'),
         label: tag,
+        variant: 'outlined',
         color: 'error'
       }}
       rightChipProps={{
-        avatar:
-          <Avatar sx={{ bgcolor: theme.palette.error.main }}>
-            <span style={{ color: 'white' }}>P</span>
-          </Avatar>,
+        avatar: SharpAvatar('P'),
         label: posteriorLocal.toFixed(4),
         variant: 'outlined',
         color: 'error'

@@ -28,6 +28,7 @@ function Home() {
       }
       <Button
         variant='contained'
+        color='secondary'
         startIcon={<AddIcon />}
         sx={{ m: 2 }}
         onClick={() => dispatch(contentActions.addEvidence({

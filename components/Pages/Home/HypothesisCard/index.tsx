@@ -1,4 +1,8 @@
-import { Accordion, AccordionDetails, AccordionSummary, Avatar, Box, Card, CardContent, Chip, Paper, } from "@mui/material"
+import {
+  Avatar,
+  Card,
+  CardContent,
+} from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from '../../../../redux/store'
 import { useEffect, useState } from "react"
@@ -6,7 +10,7 @@ import TitlePrompt from "./TitlePrompt"
 import PriorPrompt from "./PriorPrompt"
 import PosteriorShow from "./PosteriorShow"
 import { Evidence } from "../../../../types/evidence"
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { Section } from "../share/Section"
 
 
 function HypothesisCard() {
@@ -14,7 +18,6 @@ function HypothesisCard() {
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
   const evidence = useSelector((s: RootState) => s.content.evidence)
   const [posteriorLocal, setPosteriorLocal] = useState(prior)
-  const [expanded, setExpanded] = useState(true)
 
 
   useEffect(() => {
@@ -27,56 +30,31 @@ function HypothesisCard() {
   return (
     <>
       <PosteriorShow {...{ posteriorLocal }} />
-      <Accordion
-        disableGutters
-        elevation={1}
-        sx={{ m: 1 }}
-        expanded={expanded}
-        onChange={(e, isExpanded) => {
-          setExpanded(isExpanded)
+      <Section
+        expandedLeftChipProps={{
+          label: 'Hypothesis',
+          color: 'primary'
         }}
-        defaultExpanded
+        collapsedLeftChipProps={{
+          avatar: <Avatar>H</Avatar>,
+          label: title,
+          variant: 'outlined',
+          color: 'primary'
+        }}
+        rightChipProps={{
+          avatar: <Avatar>P</Avatar>,
+          label: prior.toFixed(4),
+          variant: 'outlined',
+          color: 'primary'
+        }}
       >
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-        >
-          <Box
-            sx={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'space-between'
-            }}
-          >
-            {expanded ?
-              <Chip
-                label='Hypothesis'
-                color='primary'
-              />
-              :
-              <Chip
-                avatar={<Avatar>H</Avatar>}
-                label={title}
-                variant='outlined'
-                color='primary'
-              />
-            }
-            <Chip
-              avatar={<Avatar>P</Avatar>}
-              label={prior.toFixed(4)}
-              variant='outlined'
-              color='primary'
-            />
-          </Box>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Card>
-            <CardContent>
-              <TitlePrompt />
-              <PriorPrompt />
-            </CardContent>
-          </Card >
-        </AccordionDetails>
-      </Accordion>
+        <Card>
+          <CardContent>
+            <TitlePrompt />
+            <PriorPrompt />
+          </CardContent>
+        </Card >
+      </Section >
     </>
   )
 }

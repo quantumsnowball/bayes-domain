@@ -1,5 +1,6 @@
 import {
   AppBar,
+  Box,
   IconButton,
   Toolbar,
   Typography,
@@ -12,12 +13,26 @@ import { useState } from "react"
 import MenuDrawer from "../MenuDrawer"
 import { useDispatch } from "react-redux"
 import { themeActions } from "../../redux/slices/themeSlice"
+import EditIcon from '@mui/icons-material/Edit'
+import SaveAsIcon from '@mui/icons-material/SaveAs'
 
 
 const MenuBar = () => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const EditTitleButton = () =>
+    <IconButton
+      sx={{ color: '#fff' }}>
+      <EditIcon />
+    </IconButton>
+
+  const SaveAsButton = () =>
+    <IconButton
+      sx={{ color: '#fff' }}>
+      <SaveAsIcon />
+    </IconButton>
 
   return (
     <>
@@ -33,12 +48,16 @@ const MenuBar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            component="div"
-            sx={{ flexGrow: 1, cursor: 'pointer' }}
-          >
-            Bayes Theorem
-          </Typography>
+          <Box sx={{ flexGrow: 1 }}>
+            <EditTitleButton />
+            <Typography
+              component="span"
+              sx={{ cursor: 'pointer' }}
+            >
+              Untitled
+            </Typography>
+            <SaveAsButton />
+          </Box>
           <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
             {theme.palette.mode === 'light' ?
               <LightModeIcon sx={{ color: '#fff' }} /> : <DarkModeIcon />}

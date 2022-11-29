@@ -5,31 +5,19 @@ import {
 } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from '../../../../redux/store'
-import { useEffect, useState } from "react"
 import TitlePrompt from "./TitlePrompt"
 import PriorPrompt from "./PriorPrompt"
 import PosteriorShow from "./PosteriorShow"
-import { Evidence } from "../../../../types/evidence"
 import { Section } from "../share/Section"
 
 
 function HypothesisCard() {
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
-  const evidence = useSelector((s: RootState) => s.content.evidence)
-  const [posteriorLocal, setPosteriorLocal] = useState(prior)
-
-
-  useEffect(() => {
-    const posterior = evidence.reduce(
-      (a: number, e: Evidence) => a * e.likelihood / e.normalizer,
-      prior)
-    setPosteriorLocal(posterior)
-  }, [prior, evidence])
 
   return (
     <>
-      <PosteriorShow {...{ posteriorLocal }} />
+      <PosteriorShow />
       <Section
         expandedLeftChipProps={{
           label: 'Hypothesis',

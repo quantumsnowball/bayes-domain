@@ -1,5 +1,5 @@
-import { Avatar, Button, } from "@mui/material"
-import ClearIcon from '@mui/icons-material/Clear'
+import { Avatar, IconButton, } from "@mui/material"
+import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import TitlePrompt from "./TitlePrompt"
@@ -39,16 +39,15 @@ function EvidenceCard({ i }: EvidenceCardProps) {
         variant: 'outlined'
       }}
       expandedActionComponent={
-        <Button
+        <IconButton
           color="error"
           size='small'
-          startIcon={<ClearIcon />}
           onClick={e => {
             e.stopPropagation()
             dispatch(contentActions.removeEvidence(i))
           }}>
-          Remove
-        </Button>
+          <DeleteIcon />
+        </IconButton>
       }
     >
       <TitlePrompt i={i} />

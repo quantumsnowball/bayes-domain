@@ -7,7 +7,6 @@ import {
   Chip,
   ChipProps
 } from "@mui/material";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { FC, ReactElement, useState } from "react";
 
 
@@ -37,7 +36,7 @@ export const Section: FC<SectionProps> = ({
       onChange={(_, isExpanded) => setExpanded(isExpanded)}
       {...otherProps}
     >
-      <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+      <AccordionSummary  >
         <Box
           sx={{
             flex: 1,

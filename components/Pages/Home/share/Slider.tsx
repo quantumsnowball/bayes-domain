@@ -1,13 +1,7 @@
 import { Slider, SliderProps } from "@mui/material"
 
 
-type ProbSliderProps = SliderProps & {
-  onDragging: (value: number) => void
-}
-
-export function ProbSlider(props: ProbSliderProps) {
-  const { onDragging, ...sliderProps } = props
-
+export function NormalSlider(props: SliderProps) {
   const presets: SliderProps = {
     min: 0.0,
     max: 1.0,
@@ -15,15 +9,29 @@ export function ProbSlider(props: ProbSliderProps) {
     valueLabelDisplay: 'on',
     defaultValue: 0.5,
     valueLabelFormat: (value: number) => (value * 100).toFixed(2) + '%',
+  }
+
+  return (
+    <Slider {...{ ...presets, ...props }} />
+  )
+}
+
+type ProbSliderProps = SliderProps & {
+  onDragging: (value: number) => void
+}
+
+export function ProbSlider(props: ProbSliderProps) {
+  const { onDragging, ...otherProps } = props
+
+  const presets: SliderProps = {
     onChange: (event, value) => {
       if (!event.target) return
       if (Array.isArray(value)) return
       onDragging(value)
     }
-
   }
   return (
-    <Slider {...{ ...presets, ...sliderProps }} />
+    <NormalSlider {...{ ...presets, ...otherProps }} />
   )
 }
 

@@ -7,7 +7,8 @@ import {
 } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
-import { ProbSlider } from "../share/Slider"
+import { NormalSlider, ProbSlider } from "../share/Slider"
+import { NormalTextField } from "../share/TextField"
 
 
 interface PosteriorShowProps {
@@ -27,28 +28,16 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
         p: 1, pt: 4,
         bgcolor: posteriorLocal > 1 ? 'red' : null
       }}>
-      <ProbSlider value={posteriorLocal} />
-      <TextField
+      <NormalSlider value={posteriorLocal} />
+      <NormalTextField
         disabled
-        fullWidth
-        variant="outlined"
-        color='error'
         label='How does probability change after updating by evidence?'
         helperText={`After ${evidence.length} piece${evidence.length > 1 ? "s" : ""} of evidence, `
           + `the hypothesis '${title}' is true about ${(posteriorLocal * 100).toFixed(2)}% of time.`}
-        InputProps={{
-          startAdornment:
-            <InputAdornment position="start" >
-              <Chip label=' P ( H | E ) ' variant='filled' color='error' />
-            </InputAdornment>,
-          endAdornment:
-            <InputAdornment position="end" >
-              <Chip label='Posterior' variant='filled' color='error' />
-            </InputAdornment>,
-        }}
+        startChipProps={{ label: '=P ( H | E ) ', variant: 'filled', color: 'error' }}
+        endChipProps={{ label: 'Posterior', variant: 'filled', color: 'error' }}
         value={posteriorLocal.toFixed(4)}
-      >
-      </TextField>
+      />
     </Paper>
   )
 }

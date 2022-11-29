@@ -16,11 +16,11 @@ function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
   const title = useSelector((s: RootState) => s.content.evidence[i].title)
   const [likelihood, setLikelihood] = [
     useSelector((s: RootState) => s.content.evidence[i].likelihood),
-    (val: number) => dispatch(contentActions.setEvidenceLikelihood({ i, likelihood: val }))
+    (val: number) => dispatch(contentActions.setEvidenceLikelihood({ i, val }))
   ]
   const [likelihoodText, setLikelihoodText] = [
     useSelector((s: RootState) => s.content.evidence[i].likelihoodText),
-    (txt: string) => dispatch(contentActions.setEvidenceLikelihoodText({ i, likelihoodText: txt }))
+    (txt: string) => dispatch(contentActions.setEvidenceLikelihoodText({ i, txt }))
   ]
   const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(likelihood)

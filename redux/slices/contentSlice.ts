@@ -23,20 +23,20 @@ const contentSlice = createSlice({
     setHypothesisPriorText: (s, a: PayloadAction<string>) => {
       s.hypothesis.priorText = a.payload
     },
-    setEvidenceTitle: (s, a: PayloadAction<{ i: number, title: string }>) => {
-      s.evidence[a.payload.i].title = a.payload.title
+    setEvidenceTitle: (s, a: PayloadAction<{ i: number, txt: string }>) => {
+      s.evidence[a.payload.i].title = a.payload.txt
     },
-    setEvidenceLikelihood: (s, a: PayloadAction<{ i: number, likelihood: number }>) => {
-      s.evidence[a.payload.i].likelihood = a.payload.likelihood
+    setEvidenceLikelihood: (s, a: PayloadAction<{ i: number, val: number }>) => {
+      s.evidence[a.payload.i].likelihood = a.payload.val
     },
-    setEvidenceLikelihoodText: (s, a: PayloadAction<{ i: number, likelihoodText: string }>) => {
-      s.evidence[a.payload.i].likelihoodText = a.payload.likelihoodText
+    setEvidenceLikelihoodText: (s, a: PayloadAction<{ i: number, txt: string }>) => {
+      s.evidence[a.payload.i].likelihoodText = a.payload.txt
     },
-    setEvidenceNormalizer: (s, a: PayloadAction<{ i: number, normalizer: number }>) => {
-      s.evidence[a.payload.i].normalizer = a.payload.normalizer
+    setEvidenceNormalizer: (s, a: PayloadAction<{ i: number, val: number }>) => {
+      s.evidence[a.payload.i].normalizer = a.payload.val
     },
-    setEvidenceNormalizerText: (s, a: PayloadAction<{ i: number, normalizerText: string }>) => {
-      s.evidence[a.payload.i].normalizerText = a.payload.normalizerText
+    setEvidenceNormalizerText: (s, a: PayloadAction<{ i: number, txt: string }>) => {
+      s.evidence[a.payload.i].normalizerText = a.payload.txt
     },
     addEvidence: (s, a: PayloadAction<Evidence>) => {
       s.evidence.push(a.payload)

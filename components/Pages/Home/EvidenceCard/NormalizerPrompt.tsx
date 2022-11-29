@@ -17,11 +17,11 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
   const title = useSelector((s: RootState) => s.content.evidence[i].title)
   const [normalizer, setNormalizer] = [
     useSelector((s: RootState) => s.content.evidence[i].normalizer),
-    (val: number) => dispatch(contentActions.setEvidenceNormalizer({ i, normalizer: val }))
+    (val: number) => dispatch(contentActions.setEvidenceNormalizer({ i, val }))
   ]
   const [normalizerText, setNormalizerText] = [
     useSelector((s: RootState) => s.content.evidence[i].normalizerText),
-    (txt: string) => dispatch(contentActions.setEvidenceNormalizerText({ i, normalizerText: txt }))
+    (txt: string) => dispatch(contentActions.setEvidenceNormalizerText({ i, txt }))
   ]
   const [valSync, setValSync] = useState(normalizer)
 

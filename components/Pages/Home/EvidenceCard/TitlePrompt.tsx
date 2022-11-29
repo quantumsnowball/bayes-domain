@@ -19,7 +19,7 @@ function TitlePrompt({ i }: TitlePromptProps) {
   const dispatch = useDispatch()
   const [title, setTitle] = [
     useSelector((s: RootState) => s.content.evidence[i].title),
-    (txt: string) => dispatch(contentActions.setEvidenceTitle({ i, title: txt }))
+    (txt: string) => dispatch(contentActions.setEvidenceTitle({ i, txt }))
   ]
 
   return (

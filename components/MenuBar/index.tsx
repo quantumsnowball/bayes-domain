@@ -15,11 +15,18 @@ import { useDispatch } from "react-redux"
 import { themeActions } from "../../redux/slices/themeSlice"
 import EditIcon from '@mui/icons-material/Edit'
 import SaveAsIcon from '@mui/icons-material/SaveAs'
+import { useSelector } from "react-redux"
+import { RootState } from "../../redux/store"
+import { contentActions } from "../../redux/slices/contentSlice"
 
 
 const MenuBar = () => {
   const dispatch = useDispatch()
   const theme = useTheme()
+  const [title, setTitle] = [
+    useSelector((s: RootState) => s.content.title),
+    (txt: string) => dispatch(contentActions.setTitle(txt))
+  ]
   const [menuOpen, setMenuOpen] = useState(false)
 
   const MenuButton = () =>
@@ -37,7 +44,9 @@ const MenuBar = () => {
   const TitleSection = () => {
     const EditTitleButton = () =>
       <IconButton
-        sx={{ color: '#fff' }}>
+        onClick={() => setTitle('hello')}
+        sx={{ color: '#fff' }}
+      >
         <EditIcon />
       </IconButton>
 
@@ -54,7 +63,7 @@ const MenuBar = () => {
           component="span"
           sx={{ cursor: 'pointer' }}
         >
-          Untitled
+          {title}
         </Typography>
         <SaveAsButton />
       </Box>

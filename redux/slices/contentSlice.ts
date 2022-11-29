@@ -6,6 +6,7 @@ import { Hypothesis } from '../../types/hypothesis'
 const contentSlice = createSlice({
   name: 'content',
   initialState: {
+    title: 'Untitled',
     hypothesis: {
       title: 'Untitled Hypothesis',
       prior: 0.5,
@@ -14,6 +15,9 @@ const contentSlice = createSlice({
     evidence: [] as Evidence[],
   },
   reducers: {
+    setTitle: (s, a: PayloadAction<string>) => {
+      s.title = a.payload
+    },
     setHypothesisTitle: (s, a: PayloadAction<string>) => {
       s.hypothesis.title = a.payload
     },

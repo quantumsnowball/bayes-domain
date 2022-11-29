@@ -26,12 +26,8 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
       sx={{ p: 1 }}>
       <ProbSlider
         value={priorLocal}
-        onChange={(event, value) => {
-          if (!event.target) return
-          if (Array.isArray(value)) return
-          setPriorLocal(value)
-        }}
-        onChangeCommitted={e => {
+        onDragging={value => setPriorLocal(value)}
+        onChangeCommitted={_ => {
           dispatch(contentActions.setHypothesisPriorText(priorLocal.toFixed(4)))
           dispatch(contentActions.setHypothesisPrior(priorLocal))
         }}

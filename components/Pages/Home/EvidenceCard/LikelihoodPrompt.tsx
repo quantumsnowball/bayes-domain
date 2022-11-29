@@ -17,7 +17,7 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
   const likelihood = useSelector((s: RootState) => s.content.evidence[index].likelihood)
   const likelihoodText = useSelector((s: RootState) => s.content.evidence[index].likelihoodText)
   const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
-  const [likelihoodLocal, setLikelihoodLocal] = useState(likelihood)
+  const [valSync, setValSync] = useState(likelihood)
 
   return (
     <Paper
@@ -26,20 +26,16 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
       sx={{ p: 1 }}
     >
       <ProbSlider
-        value={likelihoodLocal}
-        onChange={(event, value) => {
-          if (!event.target) return
-          if (Array.isArray(value)) return
-          setLikelihoodLocal(value)
-        }}
-        onChangeCommitted={e => {
+        value={valSync}
+        onDragging={value => setValSync(value)}
+        onChangeCommitted={_ => {
           dispatch(contentActions.setEvidenceLikelihood({
             i: index,
-            likelihood: likelihoodLocal
+            likelihood: valSync
           }))
           dispatch(contentActions.setEvidenceLikelihoodText({
             i: index,
-            likelihoodText: likelihoodLocal.toFixed(4)
+            likelihoodText: valSync.toFixed(4)
           }))
         }}
       />
@@ -55,7 +51,7 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
             likelihoodText: e.target.value
           }))
           const numericValue = parseFloat(eval(e.target.value))
-          setLikelihoodLocal(numericValue)
+          setValSync(numericValue)
           dispatch(contentActions.setEvidenceLikelihood({
             i: index,
             likelihood: numericValue

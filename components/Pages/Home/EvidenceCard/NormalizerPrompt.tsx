@@ -17,7 +17,7 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
   const title = useSelector((s: RootState) => s.content.evidence[index].title)
   const normalizer = useSelector((s: RootState) => s.content.evidence[index].normalizer)
   const normalizerText = useSelector((s: RootState) => s.content.evidence[index].normalizerText)
-  const [normalizerLocal, setNormalizerLocal] = useState(normalizer)
+  const [valSync, setValSync] = useState(normalizer)
 
   return (
     <Paper
@@ -26,20 +26,16 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
       sx={{ p: 1 }}
     >
       <ProbSlider
-        value={normalizerLocal}
-        onChange={(event, value) => {
-          if (!event.target) return
-          if (Array.isArray(value)) return
-          setNormalizerLocal(value)
-        }}
-        onChangeCommitted={e => {
+        value={valSync}
+        onDragging={value => setValSync(value)}
+        onChangeCommitted={_ => {
           dispatch(contentActions.setEvidenceNormalizer({
             i: index,
-            normalizer: normalizerLocal
+            normalizer: valSync
           }))
           dispatch(contentActions.setEvidenceNormalizerText({
             i: index,
-            normalizerText: normalizerLocal.toFixed(4)
+            normalizerText: valSync.toFixed(4)
           }))
         }}
       />
@@ -55,7 +51,7 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
             normalizerText: e.target.value
           }))
           const numericValue = parseFloat(eval(e.target.value))
-          setNormalizerLocal(numericValue)
+          setValSync(numericValue)
           dispatch(contentActions.setEvidenceNormalizer({
             i: index,
             normalizer: numericValue

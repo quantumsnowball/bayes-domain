@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
+import { validateProb } from "../share/math"
 import { ProbSlider } from "../share/Slider"
 import { ProbTextField } from "../share/TextField"
 
@@ -48,7 +49,7 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
         value={normalizerText}
         onTyping={e => {
           setNormalizerText(e.target.value)
-          const numericValue = parseFloat(eval(e.target.value))
+          const numericValue = validateProb(parseFloat(eval(e.target.value)))
           setValSync(numericValue)
           setNormalizer(numericValue)
         }}

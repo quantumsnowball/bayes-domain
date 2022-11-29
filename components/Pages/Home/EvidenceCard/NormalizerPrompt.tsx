@@ -23,6 +23,7 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
     useSelector((s: RootState) => s.content.evidence[i].normalizerText),
     (txt: string) => dispatch(contentActions.setEvidenceNormalizerText({ i, txt }))
   ]
+  const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(normalizer)
 
   return (
@@ -40,9 +41,9 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
         }}
       />
       <ProbTextField
-        label='Probability of seeing this evidence in general?'
-        helperText={`In general, your expect to see '${title}' about ${(normalizer * 100).toFixed(2)}% of time.`}
-        startChipProps={{ label: ' P ( E ) ', color: 'secondary' }}
+        label='Probability of seeing this evidence if hypothesis is false?'
+        helperText={`Even if hypothesis '${hypothesisTitle}' is false, your expect '${title}' is STILL true about ${(normalizer * 100).toFixed(2)}% of time.`}
+        startChipProps={{ label: ' P ( E | H\' ) ', color: 'secondary' }}
         endChipProps={{ label: 'Normalizer', color: 'secondary' }}
         value={normalizerText}
         onTyping={e => {

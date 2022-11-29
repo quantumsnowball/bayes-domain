@@ -8,7 +8,7 @@ type ProbTextFieldProps = TextFieldProps & {
   onTyping: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 }
 
-function ProbTextField(props: ProbTextFieldProps) {
+export function ProbTextField(props: ProbTextFieldProps) {
   const [evalError, setEvalError] = useState(false)
 
   const {
@@ -52,4 +52,3 @@ function ProbTextField(props: ProbTextFieldProps) {
   return <TextField {...{ ...presets, ...textFieldProps }} />
 }
 
-export default ProbTextField

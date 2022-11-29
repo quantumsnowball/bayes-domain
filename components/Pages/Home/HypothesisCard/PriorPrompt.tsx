@@ -5,8 +5,8 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
-import ProbSlider from "../share/ProbSlider"
-import ProbTextField from "../share/ProbTextField"
+import { ProbSlider } from "../share/Slider"
+import { ProbTextField } from "../share/TextField"
 
 
 function PriorPrompt() {

@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
-import ProbSlider from "../share/ProbSlider"
-import PropTextField from "../share/ProbTextField"
+import { ProbSlider } from "../share/Slider"
+import { ProbTextField } from "../share/TextField"
 
 
 interface NormalizerPromptProps {
@@ -39,7 +39,7 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
           setNormalizerText(valSync.toFixed(4))
         }}
       />
-      <PropTextField
+      <ProbTextField
         label='Probability of seeing this evidence in general?'
         helperText={`In general, your expect to see '${title}' about ${(normalizer * 100).toFixed(2)}% of time.`}
         startChipProps={{ label: ' P ( E ) ', color: 'secondary' }}

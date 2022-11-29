@@ -5,7 +5,7 @@ type ProbSliderProps = SliderProps & {
   onDragging: (value: number) => void
 }
 
-function ProbSlider(props: ProbSliderProps) {
+export function ProbSlider(props: ProbSliderProps) {
   const { onDragging, ...sliderProps } = props
 
   const presets: SliderProps = {
@@ -27,4 +27,3 @@ function ProbSlider(props: ProbSliderProps) {
   )
 }
 
-export default ProbSlider

@@ -7,7 +7,7 @@ import {
 } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
-import ProbSlider from "../share/ProbSlider"
+import { ProbSlider } from "../share/Slider"
 
 
 interface PosteriorShowProps {

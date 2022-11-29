@@ -15,8 +15,14 @@ interface NormalizerPromptProps {
 function NormalizerPrompt({ i }: NormalizerPromptProps) {
   const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.evidence[i].title)
-  const normalizer = useSelector((s: RootState) => s.content.evidence[i].normalizer)
-  const normalizerText = useSelector((s: RootState) => s.content.evidence[i].normalizerText)
+  const [normalizer, setNormalizer] = [
+    useSelector((s: RootState) => s.content.evidence[i].normalizer),
+    (val: number) => dispatch(contentActions.setEvidenceNormalizer({ i, normalizer: val }))
+  ]
+  const [normalizerText, setNormalizerText] = [
+    useSelector((s: RootState) => s.content.evidence[i].normalizerText),
+    (txt: string) => dispatch(contentActions.setEvidenceNormalizerText({ i, normalizerText: txt }))
+  ]
   const [valSync, setValSync] = useState(normalizer)
 
   return (
@@ -29,12 +35,8 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
         value={valSync}
         onDragging={value => setValSync(value)}
         onChangeCommitted={_ => {
-          dispatch(contentActions.setEvidenceNormalizer({
-            i, normalizer: valSync
-          }))
-          dispatch(contentActions.setEvidenceNormalizerText({
-            i, normalizerText: valSync.toFixed(4)
-          }))
+          setNormalizer(valSync)
+          setNormalizerText(valSync.toFixed(4))
         }}
       />
       <PropTextField
@@ -44,14 +46,10 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
         endChipProps={{ label: 'Normalizer', color: 'secondary' }}
         value={normalizerText}
         onTyping={e => {
-          dispatch(contentActions.setEvidenceNormalizerText({
-            i, normalizerText: e.target.value
-          }))
+          setNormalizerText(e.target.value)
           const numericValue = parseFloat(eval(e.target.value))
           setValSync(numericValue)
-          dispatch(contentActions.setEvidenceNormalizer({
-            i, normalizer: numericValue
-          }))
+          setNormalizer(numericValue)
         }}
       />
     </Paper>

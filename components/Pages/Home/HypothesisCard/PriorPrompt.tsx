@@ -11,8 +11,14 @@ import ProbTextField from "../share/ProbTextField"
 
 function PriorPrompt() {
   const dispatch = useDispatch()
-  const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
-  const priorText = useSelector((s: RootState) => s.content.hypothesis.priorText)
+  const [prior, setPrior] = [
+    useSelector((s: RootState) => s.content.hypothesis.prior),
+    (val: number) => dispatch(contentActions.setHypothesisPrior(val))
+  ]
+  const [priorText, setPriorText] = [
+    useSelector((s: RootState) => s.content.hypothesis.priorText),
+    (txt: string) => dispatch(contentActions.setHypothesisPriorText(txt))
+  ]
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(prior)
 
@@ -24,8 +30,8 @@ function PriorPrompt() {
         value={valSync}
         onDragging={value => setValSync(value)}
         onChangeCommitted={_ => {
-          dispatch(contentActions.setHypothesisPriorText(valSync.toFixed(4)))
-          dispatch(contentActions.setHypothesisPrior(valSync))
+          setPriorText(valSync.toFixed(4))
+          setPrior(valSync)
         }}
       />
       <ProbTextField
@@ -35,10 +41,10 @@ function PriorPrompt() {
         endChipProps={{ label: 'Prior', color: 'primary' }}
         value={priorText}
         onTyping={e => {
-          dispatch(contentActions.setHypothesisPriorText(e.target.value))
+          setPriorText(e.target.value)
           const numericValue = parseFloat(eval(e.target.value))
           setValSync(numericValue)
-          dispatch(contentActions.setHypothesisPrior(numericValue))
+          setPrior(numericValue)
         }}
       />
     </Paper >

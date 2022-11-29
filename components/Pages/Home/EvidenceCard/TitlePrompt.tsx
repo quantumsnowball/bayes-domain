@@ -16,7 +16,10 @@ interface TitlePromptProps {
 
 function TitlePrompt({ i }: TitlePromptProps) {
   const dispatch = useDispatch()
-  const title = useSelector((s: RootState) => s.content.evidence[i].title)
+  const [title, setTitle] = [
+    useSelector((s: RootState) => s.content.evidence[i].title),
+    (txt: string) => dispatch(contentActions.setEvidenceTitle({ i, title: txt }))
+  ]
 
   return (
     <Paper
@@ -41,7 +44,7 @@ function TitlePrompt({ i }: TitlePromptProps) {
             </InputAdornment>,
         }}
         value={title}
-        onChange={e => dispatch(contentActions.setEvidenceTitle({ i: i, title: e.target.value }))}
+        onChange={e => setTitle(e.target.value)}
         onFocus={e => e.target.select()}
       >
       </TextField>

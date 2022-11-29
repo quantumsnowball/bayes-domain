@@ -14,8 +14,14 @@ interface LikelihoodPromptProps {
 function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
   const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.evidence[i].title)
-  const likelihood = useSelector((s: RootState) => s.content.evidence[i].likelihood)
-  const likelihoodText = useSelector((s: RootState) => s.content.evidence[i].likelihoodText)
+  const [likelihood, setLikelihood] = [
+    useSelector((s: RootState) => s.content.evidence[i].likelihood),
+    (val: number) => dispatch(contentActions.setEvidenceLikelihood({ i, likelihood: val }))
+  ]
+  const [likelihoodText, setLikelihoodText] = [
+    useSelector((s: RootState) => s.content.evidence[i].likelihoodText),
+    (txt: string) => dispatch(contentActions.setEvidenceLikelihoodText({ i, likelihoodText: txt }))
+  ]
   const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(likelihood)
 
@@ -29,10 +35,8 @@ function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
         value={valSync}
         onDragging={value => setValSync(value)}
         onChangeCommitted={_ => {
-          dispatch(contentActions.setEvidenceLikelihood({ i, likelihood: valSync }))
-          dispatch(contentActions.setEvidenceLikelihoodText({
-            i, likelihoodText: valSync.toFixed(4)
-          }))
+          setLikelihood(valSync)
+          setLikelihoodText(valSync.toFixed(4))
         }}
       />
       <ProbTextField
@@ -42,14 +46,10 @@ function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
         endChipProps={{ label: 'Likelihood', color: 'secondary' }}
         value={likelihoodText}
         onTyping={e => {
-          dispatch(contentActions.setEvidenceLikelihoodText({
-            i, likelihoodText: e.target.value
-          }))
+          setLikelihoodText(e.target.value)
           const numericValue = parseFloat(eval(e.target.value))
           setValSync(numericValue)
-          dispatch(contentActions.setEvidenceLikelihood({
-            i, likelihood: numericValue
-          }))
+          setLikelihood(numericValue)
         }}
       />
     </Paper>

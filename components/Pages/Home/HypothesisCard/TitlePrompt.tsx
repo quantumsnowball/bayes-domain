@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from "react-redux"
 
 function TitlePrompt() {
   const dispatch = useDispatch()
-  const title = useSelector((s: RootState) => s.content.hypothesis.title)
+  const [title, setTitle] = [
+    useSelector((s: RootState) => s.content.hypothesis.title),
+    (txt: string) => dispatch(contentActions.setHypothesisTitle(txt))
+  ]
 
   return (
     <Paper
@@ -35,7 +38,7 @@ function TitlePrompt() {
             </InputAdornment>,
         }}
         value={title}
-        onChange={e => dispatch(contentActions.setHypothesisTitle(e.target.value))}
+        onChange={e => setTitle(e.target.value)}
         onFocus={e => e.target.select()}
       >
       </TextField>

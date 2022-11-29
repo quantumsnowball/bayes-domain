@@ -2,19 +2,15 @@ import { Chip, ChipProps, InputAdornment, TextField, TextFieldProps } from "@mui
 import { ChangeEventHandler, useState } from "react"
 
 
-type ProbTextFieldProps = TextFieldProps & {
+type NormalTextFieldProps = TextFieldProps & {
   startChipProps: ChipProps
   endChipProps: ChipProps
-  onTyping: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
 }
 
-export function ProbTextField(props: ProbTextFieldProps) {
-  const [evalError, setEvalError] = useState(false)
-
+export function NormalTextField(props: NormalTextFieldProps) {
   const {
     startChipProps,
     endChipProps,
-    onTyping,
     ...textFieldProps
   } = props
 
@@ -38,6 +34,22 @@ export function ProbTextField(props: ProbTextFieldProps) {
           }} />
         </InputAdornment>,
     },
+  }
+
+  return <TextField {...{ ...presets, ...textFieldProps }} />
+}
+
+
+type ProbTextFieldProps = NormalTextFieldProps & {
+  onTyping: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+}
+
+export function ProbTextField(props: ProbTextFieldProps) {
+  const [evalError, setEvalError] = useState(false)
+
+  const { onTyping, ...normalTextFieldProps } = props
+
+  const defaults: TextFieldProps = {
     error: evalError,
     onChange: e => {
       try {
@@ -48,7 +60,6 @@ export function ProbTextField(props: ProbTextFieldProps) {
       }
     }
   }
-
-  return <TextField {...{ ...presets, ...textFieldProps }} />
+  return <NormalTextField {...{ ...defaults, ...normalTextFieldProps }} />
 }
 

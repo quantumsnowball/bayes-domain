@@ -7,6 +7,7 @@ import {
 import { RootState } from '../../../../redux/store'
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { useDispatch, useSelector } from "react-redux"
+import { NormalTextField } from "../share/TextField"
 
 
 function TitlePrompt() {
@@ -20,28 +21,16 @@ function TitlePrompt() {
     <Paper
       elevation={1}
       variant='outlined'
-      sx={{ p: 1 }}>
-      <TextField
-        fullWidth
-        variant="outlined"
-        color='primary'
+      sx={{ p: 1 }}
+    >
+      <NormalTextField
         label='What is your Hypothesis? Please make a prediction.'
         helperText={`Your hypothesis is '${title}'.`}
-        InputProps={{
-          startAdornment:
-            <InputAdornment position="start" >
-              <Chip label=' H ' variant='outlined' color='primary' />
-            </InputAdornment>,
-          endAdornment:
-            <InputAdornment position="end" >
-              <Chip label='Hypothesis' variant='outlined' color='info' />
-            </InputAdornment>,
-        }}
+        startChipProps={{ label: ' H ', variant: 'outlined', color: 'primary' }}
+        endChipProps={{ label: 'Hypothesis', variant: 'outlined', color: 'primary' }}
         value={title}
         onChange={e => setTitle(e.target.value)}
-        onFocus={e => e.target.select()}
-      >
-      </TextField>
+      />
     </Paper>
   )
 }

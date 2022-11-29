@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
+import { NormalTextField } from "../share/TextField"
 
 
 interface TitlePromptProps {
@@ -27,27 +28,14 @@ function TitlePrompt({ i }: TitlePromptProps) {
       variant='outlined'
       sx={{ p: 1 }}
     >
-      <TextField
-        fullWidth
-        variant="outlined"
-        color='secondary'
+      <NormalTextField
         label='What is your Evidence? Describe what you see.'
         helperText={`Using '${title}' as evidence to support the hypothesis.`}
-        InputProps={{
-          startAdornment:
-            <InputAdornment position="start" >
-              <Chip label='E' variant='outlined' color='secondary' />
-            </InputAdornment>,
-          endAdornment:
-            <InputAdornment position="end" >
-              <Chip label='Evidence' variant='outlined' color='secondary' />
-            </InputAdornment>,
-        }}
+        startChipProps={{ label: 'E', variant: 'outlined', color: 'secondary' }}
+        endChipProps={{ label: 'Evidence', variant: 'outlined', color: 'secondary' }}
         value={title}
         onChange={e => setTitle(e.target.value)}
-        onFocus={e => e.target.select()}
-      >
-      </TextField>
+      />
     </Paper>
   )
 }

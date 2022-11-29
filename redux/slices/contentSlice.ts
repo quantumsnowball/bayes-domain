@@ -4,7 +4,7 @@ import { Hypothesis } from '../../types/hypothesis'
 
 
 const contentSlice = createSlice({
-  name: 'layout',
+  name: 'content',
   initialState: {
     hypothesis: {
       title: 'Untitled Hypothesis',

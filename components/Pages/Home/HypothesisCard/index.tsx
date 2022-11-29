@@ -13,7 +13,6 @@ function HypothesisCard() {
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
   const evidence = useSelector((s: RootState) => s.content.evidence)
-  const [priorLocal, setPriorLocal] = useState(prior)
   const [posteriorLocal, setPosteriorLocal] = useState(prior)
   const [expanded, setExpanded] = useState(true)
 
@@ -75,7 +74,7 @@ function HypothesisCard() {
           >
             <CardContent>
               <TitlePrompt />
-              <PriorPrompt {...{ priorLocal, setPriorLocal }} />
+              <PriorPrompt />
             </CardContent>
           </Card >
         </AccordionDetails>

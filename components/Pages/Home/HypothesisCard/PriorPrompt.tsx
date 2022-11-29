@@ -1,7 +1,7 @@
 import {
   Paper,
 } from "@mui/material"
-import { Dispatch, SetStateAction } from "react"
+import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
@@ -9,27 +9,23 @@ import ProbSlider from "../share/ProbSlider"
 import ProbTextField from "../share/ProbTextField"
 
 
-interface PriorPromptProps {
-  priorLocal: number,
-  setPriorLocal: Dispatch<SetStateAction<number>>
-}
-
-function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
+function PriorPrompt() {
   const dispatch = useDispatch()
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
   const priorText = useSelector((s: RootState) => s.content.hypothesis.priorText)
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
+  const [valSync, setValSync] = useState(prior)
 
   return (
     <Paper
       elevation={1}
       sx={{ p: 1 }}>
       <ProbSlider
-        value={priorLocal}
-        onDragging={value => setPriorLocal(value)}
+        value={valSync}
+        onDragging={value => setValSync(value)}
         onChangeCommitted={_ => {
-          dispatch(contentActions.setHypothesisPriorText(priorLocal.toFixed(4)))
-          dispatch(contentActions.setHypothesisPrior(priorLocal))
+          dispatch(contentActions.setHypothesisPriorText(valSync.toFixed(4)))
+          dispatch(contentActions.setHypothesisPrior(valSync))
         }}
       />
       <ProbTextField
@@ -41,7 +37,7 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
         onTyping={e => {
           dispatch(contentActions.setHypothesisPriorText(e.target.value))
           const numericValue = parseFloat(eval(e.target.value))
-          setPriorLocal(numericValue)
+          setValSync(numericValue)
           dispatch(contentActions.setHypothesisPrior(numericValue))
         }}
       />

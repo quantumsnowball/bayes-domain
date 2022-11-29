@@ -22,46 +22,59 @@ const MenuBar = () => {
   const theme = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
 
-  const EditTitleButton = () =>
+  const MenuButton = () =>
     <IconButton
-      sx={{ color: '#fff' }}>
-      <EditIcon />
+      size="large"
+      edge="start"
+      color="inherit"
+      aria-label="menu"
+      sx={{ mr: 2 }}
+      onClick={() => setMenuOpen(!menuOpen)}
+    >
+      <MenuIcon />
     </IconButton>
 
-  const SaveAsButton = () =>
-    <IconButton
-      sx={{ color: '#fff' }}>
-      <SaveAsIcon />
+  const TitleSection = () => {
+    const EditTitleButton = () =>
+      <IconButton
+        sx={{ color: '#fff' }}>
+        <EditIcon />
+      </IconButton>
+
+    const SaveAsButton = () =>
+      <IconButton
+        sx={{ color: '#fff' }}>
+        <SaveAsIcon />
+      </IconButton>
+
+    return (
+      <Box sx={{ flexGrow: 1 }}>
+        <EditTitleButton />
+        <Typography
+          component="span"
+          sx={{ cursor: 'pointer' }}
+        >
+          Untitled
+        </Typography>
+        <SaveAsButton />
+      </Box>
+    )
+  }
+
+  const ThemeModeButton = () =>
+    <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
+      {theme.palette.mode === 'light' ?
+        <LightModeIcon sx={{ color: '#fff' }} /> : <DarkModeIcon />}
     </IconButton>
+
 
   return (
     <>
       <AppBar position='static'>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box sx={{ flexGrow: 1 }}>
-            <EditTitleButton />
-            <Typography
-              component="span"
-              sx={{ cursor: 'pointer' }}
-            >
-              Untitled
-            </Typography>
-            <SaveAsButton />
-          </Box>
-          <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
-            {theme.palette.mode === 'light' ?
-              <LightModeIcon sx={{ color: '#fff' }} /> : <DarkModeIcon />}
-          </IconButton>
+          <MenuButton />
+          <TitleSection />
+          <ThemeModeButton />
         </Toolbar>
       </AppBar>
       <MenuDrawer {...{ menuOpen, setMenuOpen }} />

@@ -3,7 +3,6 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  useMediaQuery,
   useTheme
 } from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu'
@@ -18,7 +17,6 @@ import { themeActions } from "../../redux/slices/themeSlice"
 const MenuBar = () => {
   const dispatch = useDispatch()
   const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (

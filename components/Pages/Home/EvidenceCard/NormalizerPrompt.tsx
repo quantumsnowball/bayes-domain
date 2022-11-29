@@ -1,8 +1,4 @@
-import {
-  Chip,
-  InputAdornment,
-  Paper,
-} from "@mui/material"
+import { Paper, } from "@mui/material"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
@@ -22,7 +18,6 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
   const normalizer = useSelector((s: RootState) => s.content.evidence[index].normalizer)
   const normalizerText = useSelector((s: RootState) => s.content.evidence[index].normalizerText)
   const [normalizerLocal, setNormalizerLocal] = useState(normalizer)
-  const [evalError, setEvalError] = useState(false)
 
   return (
     <Paper
@@ -49,29 +44,23 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
         }}
       />
       <PropTextField
-        error={evalError}
         label='Probability of seeing this evidence in general?'
         helperText={`In general, your expect to see '${title}' about ${(normalizer * 100).toFixed(2)}% of time.`}
-        value={normalizerText}
-        onChange={e => {
-          try {
-            dispatch(contentActions.setEvidenceNormalizerText({
-              i: index,
-              normalizerText: e.target.value
-            }))
-            const numericValue = parseFloat(eval(e.target.value))
-            setNormalizerLocal(numericValue)
-            dispatch(contentActions.setEvidenceNormalizer({
-              i: index,
-              normalizer: numericValue
-            }))
-            setEvalError(false)
-          } catch (error) {
-            setEvalError(true)
-          }
-        }}
         startChipProps={{ label: ' P ( E ) ', color: 'secondary' }}
         endChipProps={{ label: 'Normalizer', color: 'secondary' }}
+        value={normalizerText}
+        onTyping={e => {
+          dispatch(contentActions.setEvidenceNormalizerText({
+            i: index,
+            normalizerText: e.target.value
+          }))
+          const numericValue = parseFloat(eval(e.target.value))
+          setNormalizerLocal(numericValue)
+          dispatch(contentActions.setEvidenceNormalizer({
+            i: index,
+            normalizer: numericValue
+          }))
+        }}
       />
     </Paper>
   )

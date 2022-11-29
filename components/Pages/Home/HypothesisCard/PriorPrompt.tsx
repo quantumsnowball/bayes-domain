@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
 import ProbSlider from "../share/ProbSlider"
+import ProbTextField from "../share/ProbTextField"
 
 
 interface PriorPromptProps {
@@ -39,23 +40,10 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
           dispatch(contentActions.setHypothesisPrior(priorLocal))
         }}
       />
-      <TextField
-        fullWidth
+      <ProbTextField
         error={evalError}
-        variant="outlined"
-        color='primary'
         label='What is the prior probability of your hypothesis?'
         helperText={`Your expect '${title}' is true about ${(prior * 100).toFixed(2)}% of time.`}
-        InputProps={{
-          startAdornment:
-            <InputAdornment position="start" >
-              <Chip label=' P ( H ) ' variant='outlined' color='primary' />
-            </InputAdornment>,
-          endAdornment:
-            <InputAdornment position="end" >
-              <Chip label='Prior' variant='outlined' color='primary' />
-            </InputAdornment>,
-        }}
         value={priorText}
         onChange={e => {
           try {
@@ -68,9 +56,9 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
             setEvalError(true)
           }
         }}
-        onFocus={e => e.target.select()}
-      >
-      </TextField>
+        startChipProps={{ label: ' P ( H ) ', color: 'primary' }}
+        endChipProps={{ label: 'Prior', color: 'primary' }}
+      />
     </Paper >
   )
 }

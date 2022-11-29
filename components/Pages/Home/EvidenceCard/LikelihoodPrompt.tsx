@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
 import ProbSlider from "../share/ProbSlider"
+import ProbTextField from "../share/ProbTextField"
 
 
 interface LikelihoodPromptProps {
@@ -43,23 +44,10 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
           }))
         }}
       />
-      <TextField
-        fullWidth
+      <ProbTextField
         error={evalError}
-        variant="outlined"
-        color='secondary'
         label='Probability of seeing this evidence if hypothesis is true?'
         helperText={`If hypothesis '${hypothesisTitle}' is true, your expect '${title}' is also true about ${(likelihood * 100).toFixed(2)}% of time.`}
-        InputProps={{
-          startAdornment:
-            <InputAdornment position="start" >
-              <Chip label=' P ( E | H ) ' variant='outlined' color='secondary' />
-            </InputAdornment>,
-          endAdornment:
-            <InputAdornment position="end" >
-              <Chip label='Likelihood' variant='outlined' color='secondary' />
-            </InputAdornment>,
-        }}
         value={likelihoodText}
         onChange={e => {
           try {
@@ -78,9 +66,9 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
             setEvalError(true)
           }
         }}
-        onFocus={e => e.target.select()}
-      >
-      </TextField>
+        startChipProps={{ label: ' P ( E | H ) ', color: 'secondary' }}
+        endChipProps={{ label: 'Likelihood', color: 'secondary' }}
+      />
     </Paper>
   )
 }

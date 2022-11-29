@@ -2,7 +2,6 @@ import {
   Chip,
   InputAdornment,
   Paper,
-  TextField
 } from "@mui/material"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
@@ -10,6 +9,7 @@ import { useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
 import ProbSlider from "../share/ProbSlider"
+import PropTextField from "../share/ProbTextField"
 
 
 interface NormalizerPromptProps {
@@ -48,23 +48,10 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
           }))
         }}
       />
-      <TextField
-        fullWidth
+      <PropTextField
         error={evalError}
-        variant="outlined"
-        color='secondary'
         label='Probability of seeing this evidence in general?'
         helperText={`In general, your expect to see '${title}' about ${(normalizer * 100).toFixed(2)}% of time.`}
-        InputProps={{
-          startAdornment:
-            <InputAdornment position="start" >
-              <Chip label=' P ( E ) ' variant='outlined' color='secondary' />
-            </InputAdornment>,
-          endAdornment:
-            <InputAdornment position="end" >
-              <Chip label='Normalizer' variant='outlined' color='secondary' />
-            </InputAdornment>,
-        }}
         value={normalizerText}
         onChange={e => {
           try {
@@ -83,9 +70,9 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
             setEvalError(true)
           }
         }}
-        onFocus={e => e.target.select()}
-      >
-      </TextField>
+        startChipProps={{ label: ' P ( E ) ', color: 'secondary' }}
+        endChipProps={{ label: 'Normalizer', color: 'secondary' }}
+      />
     </Paper>
   )
 }

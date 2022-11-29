@@ -8,18 +8,20 @@ import {
   ChipProps
 } from "@mui/material";
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { FC, useState } from "react";
+import { FC, ReactElement, useState } from "react";
 
 
 type SectionProps = AccordionProps & {
   collapsedLeftChipProps: ChipProps
   expandedLeftChipProps: ChipProps
+  expandedActionComponent?: ReactElement | null
   rightChipProps: ChipProps
 }
 
 export const Section: FC<SectionProps> = ({
   collapsedLeftChipProps,
   expandedLeftChipProps,
+  expandedActionComponent = null,
   rightChipProps,
   children,
   ...otherProps
@@ -44,7 +46,10 @@ export const Section: FC<SectionProps> = ({
           }}
         >
           {expanded ?
-            <Chip {...expandedLeftChipProps} />
+            <>
+              <Chip {...expandedLeftChipProps} />
+              {expandedActionComponent}
+            </>
             :
             <Chip {...collapsedLeftChipProps} />
           }

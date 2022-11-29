@@ -1,9 +1,5 @@
-import {
-  Avatar,
-  Box,
-  Button,
-} from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete'
+import { Avatar, Button, } from "@mui/material"
+import ClearIcon from '@mui/icons-material/Clear'
 import { useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import TitlePrompt from "./TitlePrompt"
@@ -42,19 +38,19 @@ function EvidenceCard({ i }: EvidenceCardProps) {
         label: (likelihood / normalizer).toFixed(4),
         variant: 'outlined'
       }}
-    >
-      <Box sx={{ display: 'flex' }}>
-        <Box sx={{ flexGrow: 1 }} />
+      expandedActionComponent={
         <Button
           color="error"
-          startIcon={<DeleteIcon />}
+          size='small'
+          startIcon={<ClearIcon />}
           onClick={e => {
             e.stopPropagation()
             dispatch(contentActions.removeEvidence(i))
           }}>
-          DELETE
+          Remove
         </Button>
-      </Box>
+      }
+    >
       <TitlePrompt i={i} />
       <LikelihoodPrompt i={i} />
       <NormalizerPrompt i={i} />

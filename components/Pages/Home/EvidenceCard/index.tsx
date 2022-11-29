@@ -5,7 +5,7 @@ import {
   Avatar,
   Box,
   Button,
-  Card, CardActions, CardContent, Chip, Typography,
+  Card, CardActions, CardContent, Chip,
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from "react-redux"
@@ -20,15 +20,15 @@ import { RootState } from "../../../../redux/store"
 
 
 interface EvidenceCardProps {
-  index: number
+  i: number
 }
 
 
-function EvidenceCard({ index }: EvidenceCardProps) {
+function EvidenceCard({ i }: EvidenceCardProps) {
   const dispatch = useDispatch()
-  const title = useSelector((s: RootState) => s.content.evidence[index].title)
-  const likelihood = useSelector((s: RootState) => s.content.evidence[index].likelihood)
-  const normalizer = useSelector((s: RootState) => s.content.evidence[index].normalizer)
+  const title = useSelector((s: RootState) => s.content.evidence[i].title)
+  const likelihood = useSelector((s: RootState) => s.content.evidence[i].likelihood)
+  const normalizer = useSelector((s: RootState) => s.content.evidence[i].normalizer)
   const [expanded, setExpanded] = useState(false)
 
   return (
@@ -53,12 +53,12 @@ function EvidenceCard({ index }: EvidenceCardProps) {
         >
           {(expanded) ?
             <Chip
-              label={`Evidence ${index + 1}`}
+              label={`Evidence ${i + 1}`}
               color='secondary'
             />
             :
             <Chip
-              avatar={<Avatar>E{index + 1}</Avatar>}
+              avatar={<Avatar>E{i + 1}</Avatar>}
               label={title}
               variant='outlined'
               color='secondary'
@@ -76,9 +76,9 @@ function EvidenceCard({ index }: EvidenceCardProps) {
           variant='outlined'
         >
           <CardContent >
-            <TitlePrompt {...{ index }} />
-            <LikelihoodPrompt {...{ index }} />
-            <NormalizerPrompt {...{ index }} />
+            <TitlePrompt i={i} />
+            <LikelihoodPrompt i={i} />
+            <NormalizerPrompt i={i} />
           </CardContent>
           <CardActions disableSpacing>
             <Box sx={{ flexGrow: 1 }} />
@@ -87,7 +87,7 @@ function EvidenceCard({ index }: EvidenceCardProps) {
               startIcon={<DeleteIcon />}
               onClick={e => {
                 e.stopPropagation()
-                dispatch(contentActions.removeEvidence(index))
+                dispatch(contentActions.removeEvidence(i))
               }}>
               DELETE
             </Button>

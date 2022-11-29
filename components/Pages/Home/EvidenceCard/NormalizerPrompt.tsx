@@ -9,14 +9,14 @@ import PropTextField from "../share/ProbTextField"
 
 
 interface NormalizerPromptProps {
-  index: number
+  i: number
 }
 
-function NormalizerPrompt({ index }: NormalizerPromptProps) {
+function NormalizerPrompt({ i }: NormalizerPromptProps) {
   const dispatch = useDispatch()
-  const title = useSelector((s: RootState) => s.content.evidence[index].title)
-  const normalizer = useSelector((s: RootState) => s.content.evidence[index].normalizer)
-  const normalizerText = useSelector((s: RootState) => s.content.evidence[index].normalizerText)
+  const title = useSelector((s: RootState) => s.content.evidence[i].title)
+  const normalizer = useSelector((s: RootState) => s.content.evidence[i].normalizer)
+  const normalizerText = useSelector((s: RootState) => s.content.evidence[i].normalizerText)
   const [valSync, setValSync] = useState(normalizer)
 
   return (
@@ -30,12 +30,10 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
         onDragging={value => setValSync(value)}
         onChangeCommitted={_ => {
           dispatch(contentActions.setEvidenceNormalizer({
-            i: index,
-            normalizer: valSync
+            i, normalizer: valSync
           }))
           dispatch(contentActions.setEvidenceNormalizerText({
-            i: index,
-            normalizerText: valSync.toFixed(4)
+            i, normalizerText: valSync.toFixed(4)
           }))
         }}
       />
@@ -47,14 +45,12 @@ function NormalizerPrompt({ index }: NormalizerPromptProps) {
         value={normalizerText}
         onTyping={e => {
           dispatch(contentActions.setEvidenceNormalizerText({
-            i: index,
-            normalizerText: e.target.value
+            i, normalizerText: e.target.value
           }))
           const numericValue = parseFloat(eval(e.target.value))
           setValSync(numericValue)
           dispatch(contentActions.setEvidenceNormalizer({
-            i: index,
-            normalizer: numericValue
+            i, normalizer: numericValue
           }))
         }}
       />

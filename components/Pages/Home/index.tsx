@@ -22,7 +22,7 @@ function Home() {
       <HypothesisCard />
       {
         evidenceItems.map((item: Evidence, i: number) =>
-          <EvidenceCard key={item.uuid} index={i} />)
+          <EvidenceCard key={item.uuid} i={i} />)
       }
       <Button
         variant='contained'

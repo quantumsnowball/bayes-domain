@@ -8,14 +8,14 @@ import ProbTextField from "../share/ProbTextField"
 
 
 interface LikelihoodPromptProps {
-  index: number
+  i: number
 }
 
-function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
+function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
   const dispatch = useDispatch()
-  const title = useSelector((s: RootState) => s.content.evidence[index].title)
-  const likelihood = useSelector((s: RootState) => s.content.evidence[index].likelihood)
-  const likelihoodText = useSelector((s: RootState) => s.content.evidence[index].likelihoodText)
+  const title = useSelector((s: RootState) => s.content.evidence[i].title)
+  const likelihood = useSelector((s: RootState) => s.content.evidence[i].likelihood)
+  const likelihoodText = useSelector((s: RootState) => s.content.evidence[i].likelihoodText)
   const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(likelihood)
 
@@ -29,13 +29,9 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
         value={valSync}
         onDragging={value => setValSync(value)}
         onChangeCommitted={_ => {
-          dispatch(contentActions.setEvidenceLikelihood({
-            i: index,
-            likelihood: valSync
-          }))
+          dispatch(contentActions.setEvidenceLikelihood({ i, likelihood: valSync }))
           dispatch(contentActions.setEvidenceLikelihoodText({
-            i: index,
-            likelihoodText: valSync.toFixed(4)
+            i, likelihoodText: valSync.toFixed(4)
           }))
         }}
       />
@@ -47,14 +43,12 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
         value={likelihoodText}
         onTyping={e => {
           dispatch(contentActions.setEvidenceLikelihoodText({
-            i: index,
-            likelihoodText: e.target.value
+            i, likelihoodText: e.target.value
           }))
           const numericValue = parseFloat(eval(e.target.value))
           setValSync(numericValue)
           dispatch(contentActions.setEvidenceLikelihood({
-            i: index,
-            likelihood: numericValue
+            i, likelihood: numericValue
           }))
         }}
       />

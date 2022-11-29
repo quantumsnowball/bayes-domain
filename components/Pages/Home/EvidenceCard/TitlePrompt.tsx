@@ -11,12 +11,12 @@ import { RootState } from "../../../../redux/store"
 
 
 interface TitlePromptProps {
-  index: number
+  i: number
 }
 
-function TitlePrompt({ index }: TitlePromptProps) {
+function TitlePrompt({ i }: TitlePromptProps) {
   const dispatch = useDispatch()
-  const title = useSelector((s: RootState) => s.content.evidence[index].title)
+  const title = useSelector((s: RootState) => s.content.evidence[i].title)
 
   return (
     <Paper
@@ -41,7 +41,7 @@ function TitlePrompt({ index }: TitlePromptProps) {
             </InputAdornment>,
         }}
         value={title}
-        onChange={e => dispatch(contentActions.setEvidenceTitle({ i: index, title: e.target.value }))}
+        onChange={e => dispatch(contentActions.setEvidenceTitle({ i: i, title: e.target.value }))}
         onFocus={e => e.target.select()}
       >
       </TextField>

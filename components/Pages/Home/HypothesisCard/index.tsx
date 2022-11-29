@@ -1,8 +1,4 @@
-import {
-  Avatar,
-  Card,
-  CardContent,
-} from "@mui/material"
+import { Avatar, } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from '../../../../redux/store'
 import TitlePrompt from "./TitlePrompt"
@@ -33,12 +29,8 @@ function HypothesisCard() {
         color: 'primary'
       }}
     >
-      <Card>
-        <CardContent>
-          <TitlePrompt />
-          <PriorPrompt />
-        </CardContent>
-      </Card >
+      <TitlePrompt />
+      <PriorPrompt />
     </Section >
   )
 }

@@ -2,7 +2,6 @@ import {
   Avatar,
   Box,
   Button,
-  Card, CardActions, CardContent,
 } from "@mui/material"
 import DeleteIcon from '@mui/icons-material/Delete'
 import { useDispatch } from "react-redux"
@@ -44,25 +43,21 @@ function EvidenceCard({ i }: EvidenceCardProps) {
         variant: 'outlined'
       }}
     >
-      <Card variant='outlined' >
-        <CardContent >
-          <TitlePrompt i={i} />
-          <LikelihoodPrompt i={i} />
-          <NormalizerPrompt i={i} />
-        </CardContent>
-        <CardActions disableSpacing>
-          <Box sx={{ flexGrow: 1 }} />
-          <Button
-            color="error"
-            startIcon={<DeleteIcon />}
-            onClick={e => {
-              e.stopPropagation()
-              dispatch(contentActions.removeEvidence(i))
-            }}>
-            DELETE
-          </Button>
-        </CardActions>
-      </Card>
+      <Box sx={{ display: 'flex' }}>
+        <Box sx={{ flexGrow: 1 }} />
+        <Button
+          color="error"
+          startIcon={<DeleteIcon />}
+          onClick={e => {
+            e.stopPropagation()
+            dispatch(contentActions.removeEvidence(i))
+          }}>
+          DELETE
+        </Button>
+      </Box>
+      <TitlePrompt i={i} />
+      <LikelihoodPrompt i={i} />
+      <NormalizerPrompt i={i} />
     </Section>
   )
 }

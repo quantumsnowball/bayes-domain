@@ -69,9 +69,7 @@ function HypothesisCard() {
           </Box>
         </AccordionSummary>
         <AccordionDetails>
-          <Card
-            elevation={Math.round(24 * posteriorLocal)}
-          >
+          <Card>
             <CardContent>
               <TitlePrompt />
               <PriorPrompt />

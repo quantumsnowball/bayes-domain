@@ -7,10 +7,10 @@ import SpaIcon from '@mui/icons-material/Spa'
 import WbTwilightIcon from '@mui/icons-material/WbTwilight'
 import WavesIcon from '@mui/icons-material/Waves'
 import { useDispatch } from 'react-redux'
-import { layoutActions } from '../../redux/slices/layoutSlice'
+import { layoutActions } from '../../../redux/slices/layoutSlice'
 import { useSelector } from 'react-redux'
-import { RootState } from '../../redux/store'
-import { themeActions } from '../../redux/slices/themeSlice'
+import { RootState } from '../../../redux/store'
+import { themeActions } from '../../../redux/slices/themeSlice'
 import { MenuButton, MenuButtonGrouper } from './common'
 
 

@@ -8,7 +8,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'
 import { useState } from "react"
-import MenuDrawer from "../MenuDrawer"
+import MenuDrawer from "./MenuDrawer"
 import { useDispatch } from "react-redux"
 import { themeActions } from "../../redux/slices/themeSlice"
 import TitleSection from "./TitleSection"

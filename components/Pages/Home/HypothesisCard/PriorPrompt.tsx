@@ -2,13 +2,13 @@ import {
   Chip,
   InputAdornment,
   Paper,
-  Slider,
   TextField,
 } from "@mui/material"
 import { Dispatch, SetStateAction, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
+import ProbSlider from "../share/ProbSlider"
 
 
 interface PriorPromptProps {
@@ -27,14 +27,8 @@ function PriorPrompt({ priorLocal, setPriorLocal }: PriorPromptProps) {
     <Paper
       elevation={1}
       sx={{ p: 1 }}>
-      <Slider
-        defaultValue={0.5}
+      <ProbSlider
         value={priorLocal}
-        valueLabelFormat={value => (value * 100).toFixed(2) + '%'}
-        min={0.0}
-        max={1.0}
-        step={0.0001}
-        valueLabelDisplay='on'
         onChange={(event, value) => {
           if (!event.target) return
           if (Array.isArray(value)) return

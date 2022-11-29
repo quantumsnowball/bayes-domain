@@ -1,8 +1,9 @@
-import { Chip, InputAdornment, Paper, Slider, TextField, Typography } from "@mui/material"
+import { Chip, InputAdornment, Paper, TextField } from "@mui/material"
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
+import ProbSlider from "../share/ProbSlider"
 
 
 interface LikelihoodPromptProps {
@@ -24,14 +25,8 @@ function LikelihoodPrompt({ index }: LikelihoodPromptProps) {
       variant='outlined'
       sx={{ p: 1 }}
     >
-      <Slider
-        defaultValue={0.5}
+      <ProbSlider
         value={likelihoodLocal}
-        valueLabelFormat={value => (value * 100).toFixed(2) + '%'}
-        min={0.0}
-        max={1.0}
-        step={0.0001}
-        valueLabelDisplay='on'
         onChange={(event, value) => {
           if (!event.target) return
           if (Array.isArray(value)) return

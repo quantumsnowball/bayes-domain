@@ -7,6 +7,7 @@ import {
 } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
+import ProbSlider from "../share/ProbSlider"
 
 
 interface PosteriorShowProps {
@@ -26,15 +27,7 @@ function PosteriorShow({ posteriorLocal }: PosteriorShowProps) {
         p: 1, pt: 4,
         bgcolor: posteriorLocal > 1 ? 'red' : null
       }}>
-      <Slider
-        defaultValue={0.5}
-        value={posteriorLocal}
-        valueLabelFormat={value => (value * 100).toFixed(2) + '%'}
-        min={0.0}
-        max={1.0}
-        step={0.0001}
-        valueLabelDisplay='on'
-      />
+      <ProbSlider value={posteriorLocal} />
       <TextField
         disabled
         fullWidth

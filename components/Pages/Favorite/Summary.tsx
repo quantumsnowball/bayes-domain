@@ -8,7 +8,7 @@ import { favoriteActions } from "../../../redux/slices/favoriteSlice"
 import { contentActions } from "../../../redux/slices/contentSlice"
 import { Box } from "@mui/system"
 import { Evidence } from "../../../types/evidence"
-import { calPosterior } from "../utils"
+import { calPosterior, genPosteriorProbTag } from "../utils"
 
 
 interface SummaryProps {
@@ -22,36 +22,47 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const theme = useTheme()
 
   const TitleRow = () => {
-    const posterior = calPosterior(content.evidence, content.hypothesis.prior)
-
     return (
       <Paper
         elevation={1}
         variant='outlined'
-        sx={{ p: 1 }}
+        sx={{ p: 1, textAlign: 'center' }}
       >
-        <Box
-          sx={{
-            flex: 1,
-            display: 'flex',
-            justifyContent: 'space-between'
-          }}
-        >
-          <Typography variant='h5'>
-            {content.title}
-          </Typography>
-          <Chip
-            avatar={
-              <Avatar sx={{ bgcolor: theme.palette.error.main }}>
-                <span style={{ color: 'white' }}>P</span>
-              </Avatar>
-            }
-            label={posterior.toFixed(4)}
-            variant='outlined'
-            color='error'
-          />
-        </Box >
+        <Typography variant='h5'>
+          {content.title}
+        </Typography>
       </Paper>
+    )
+  }
+  const PosteriorRow = () => {
+    const posterior = calPosterior(content.evidence, content.hypothesis.prior)
+
+    const SharpAvatar = (name: string) =>
+      <Avatar sx={{ bgcolor: theme.palette.error.main }}>
+        <span style={{ color: 'white' }}>{name}</span>
+      </Avatar>
+
+    return (
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}
+      >
+        <Chip
+          avatar={SharpAvatar('P')}
+          label={genPosteriorProbTag(content.evidence.length)}
+          variant='outlined'
+          color='error'
+        />
+        <Chip
+          avatar={SharpAvatar('P')}
+          label={posterior.toFixed(4)}
+          variant='outlined'
+          color='error'
+        />
+      </Box >
     )
   }
 
@@ -145,6 +156,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
       }}
     >
       <TitleRow />
+      <PosteriorRow />
       <HypothesisRow />
       {
         Object.values(content.evidence).map((ev, i) =>

@@ -10,6 +10,7 @@ import { Box } from "@mui/system"
 import { Evidence } from "../../../../types/evidence"
 import { calPosterior, genPosteriorProbTag, SharpAvatar } from "../../utils"
 import { TitleRow } from "./Title"
+import { PosteriorRow } from "./Posterior"
 
 
 interface SummaryProps {
@@ -20,33 +21,6 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const dispatch = useDispatch()
   const removeFavorite = (title: string) => dispatch(favoriteActions.removeItem(title))
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
-
-  const PosteriorRow = () => {
-    const posterior = calPosterior(content.evidence, content.hypothesis.prior)
-
-    return (
-      <Box
-        sx={{
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'space-between'
-        }}
-      >
-        <Chip
-          avatar={SharpAvatar('P')}
-          label={genPosteriorProbTag(content.evidence.length)}
-          variant='outlined'
-          color='error'
-        />
-        <Chip
-          avatar={SharpAvatar('P')}
-          label={posterior.toFixed(4)}
-          variant='outlined'
-          color='error'
-        />
-      </Box >
-    )
-  }
 
   const HypothesisRow = () =>
     <Box
@@ -138,7 +112,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
       }}
     >
       <TitleRow {...{ content }} />
-      <PosteriorRow />
+      <PosteriorRow {...{ content }} />
       <HypothesisRow />
       {
         Object.values(content.evidence).map((ev, i) =>

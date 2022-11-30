@@ -1,13 +1,12 @@
-import { Avatar, IconButton, } from "@mui/material"
-import DeleteIcon from '@mui/icons-material/Delete'
-import { useDispatch } from "react-redux"
-import { contentActions } from "../../../../redux/slices/contentSlice"
+import { Avatar } from "@mui/material"
 import TitlePrompt from "./TitlePrompt"
 import LikelihoodPrompt from "./LikelihoodPrompt"
 import NormalizerPrompt from "./NormalizerPrompt"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { Section } from "../share/Section"
+import { DoubleTapDeleteButton } from "./Button"
+
 
 
 interface EvidenceCardProps {
@@ -16,7 +15,6 @@ interface EvidenceCardProps {
 
 
 function EvidenceCard({ i }: EvidenceCardProps) {
-  const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.evidence[i].title)
   const likelihood = useSelector((s: RootState) => s.content.evidence[i].likelihood)
   const normalizer = useSelector((s: RootState) => s.content.evidence[i].normalizer)
@@ -42,15 +40,7 @@ function EvidenceCard({ i }: EvidenceCardProps) {
         variant: 'outlined'
       }}
       expandedActionComponent={
-        <IconButton
-          color="error"
-          size='small'
-          onClick={e => {
-            e.stopPropagation()
-            dispatch(contentActions.removeEvidence(i))
-          }}>
-          <DeleteIcon />
-        </IconButton>
+        <DoubleTapDeleteButton {...{ i }} />
       }
     >
       <TitlePrompt i={i} />

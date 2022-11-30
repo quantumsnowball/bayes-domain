@@ -1,14 +1,14 @@
-import { Avatar, Chip, IconButton, Paper, Typography, useTheme } from "@mui/material"
+import { Avatar, Chip, IconButton, Paper, Typography } from "@mui/material"
 import { FC } from "react"
-import { Content } from "../../../types"
+import { Content } from "../../../../types"
 import DeleteIcon from '@mui/icons-material/Delete'
 import DownloadIcon from '@mui/icons-material/Download'
 import { useDispatch } from "react-redux"
-import { favoriteActions } from "../../../redux/slices/favoriteSlice"
-import { contentActions } from "../../../redux/slices/contentSlice"
+import { favoriteActions } from "../../../../redux/slices/favoriteSlice"
+import { contentActions } from "../../../../redux/slices/contentSlice"
 import { Box } from "@mui/system"
-import { Evidence } from "../../../types/evidence"
-import { calPosterior, genPosteriorProbTag, SharpAvatar } from "../utils"
+import { Evidence } from "../../../../types/evidence"
+import { calPosterior, genPosteriorProbTag, SharpAvatar } from "../../utils"
 
 
 interface SummaryProps {

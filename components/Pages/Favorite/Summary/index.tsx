@@ -9,6 +9,7 @@ import { contentActions } from "../../../../redux/slices/contentSlice"
 import { Box } from "@mui/system"
 import { Evidence } from "../../../../types/evidence"
 import { calPosterior, genPosteriorProbTag, SharpAvatar } from "../../utils"
+import { TitleRow } from "./Title"
 
 
 interface SummaryProps {
@@ -20,19 +21,6 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const removeFavorite = (title: string) => dispatch(favoriteActions.removeItem(title))
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
 
-  const TitleRow = () => {
-    return (
-      <Paper
-        elevation={1}
-        variant='outlined'
-        sx={{ p: 1, textAlign: 'center' }}
-      >
-        <Typography variant='h5'>
-          {content.title}
-        </Typography>
-      </Paper>
-    )
-  }
   const PosteriorRow = () => {
     const posterior = calPosterior(content.evidence, content.hypothesis.prior)
 
@@ -149,7 +137,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
         textAlign: 'left'
       }}
     >
-      <TitleRow />
+      <TitleRow {...{ content }} />
       <PosteriorRow />
       <HypothesisRow />
       {

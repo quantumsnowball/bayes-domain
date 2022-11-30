@@ -28,7 +28,7 @@ function TitleSection() {
   const SaveAsButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
-      onClick={() => setOverwriteAlertOpen(true)}
+      onClick={() => setSavedAlertOpen(true)}
     >
       <SaveAsIcon />
     </IconButton>

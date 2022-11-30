@@ -25,7 +25,7 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
 
     >
       <Alert
-        variant='filled'
+        sx={{ py: 2, width: '100%' }}
         onClick={() => setSavedAlertOpen(false)}
       >
         Worksheet saved as '{title}' successfully.
@@ -55,14 +55,17 @@ export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: Ov
       sx={{ mt: 8 }}
     >
       <Alert
-        variant='filled'
-        color='info'
+        color='warning'
+        sx={{ py: 2, width: '100%' }}
         onClick={() => setOverwriteAlertOpen(false)}
         action={
           <Button
             size='small'
+            color='warning'
+            variant='outlined'
             onClick={e => {
               alert('TODO: save to state')
+              setOverwriteAlertOpen(false)
               e.stopPropagation()
             }}
           >

@@ -5,7 +5,7 @@ import { NormalSlider } from "./share/Slider"
 import { NormalTextField } from "./share/TextField"
 import { useEffect, useState } from "react"
 import { Section } from "./share/Section"
-import { calPosterior, genPosteriorProbTag } from "../utils"
+import { calPosterior, genPosteriorProbTag, SharpAvatar } from "../utils"
 
 
 function PosteriorShow() {
@@ -13,7 +13,6 @@ function PosteriorShow() {
   const prior = useSelector((s: RootState) => s.content.hypothesis.prior)
   const evidence = useSelector((s: RootState) => s.content.evidence)
   const [posteriorLocal, setPosteriorLocal] = useState(prior)
-  const theme = useTheme()
 
   useEffect(() => {
     const posterior = calPosterior(evidence, prior)
@@ -21,11 +20,6 @@ function PosteriorShow() {
   }, [prior, evidence])
 
   const tag = genPosteriorProbTag(evidence.length)
-
-  const SharpAvatar = (name: string) =>
-    <Avatar sx={{ bgcolor: theme.palette.error.main }}>
-      <span style={{ color: 'white' }}>{name}</span>
-    </Avatar>
 
   return (
     <Section

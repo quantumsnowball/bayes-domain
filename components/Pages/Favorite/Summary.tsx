@@ -8,7 +8,7 @@ import { favoriteActions } from "../../../redux/slices/favoriteSlice"
 import { contentActions } from "../../../redux/slices/contentSlice"
 import { Box } from "@mui/system"
 import { Evidence } from "../../../types/evidence"
-import { calPosterior, genPosteriorProbTag } from "../utils"
+import { calPosterior, genPosteriorProbTag, SharpAvatar } from "../utils"
 
 
 interface SummaryProps {
@@ -19,7 +19,6 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const dispatch = useDispatch()
   const removeFavorite = (title: string) => dispatch(favoriteActions.removeItem(title))
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
-  const theme = useTheme()
 
   const TitleRow = () => {
     return (
@@ -36,11 +35,6 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   }
   const PosteriorRow = () => {
     const posterior = calPosterior(content.evidence, content.hypothesis.prior)
-
-    const SharpAvatar = (name: string) =>
-      <Avatar sx={{ bgcolor: theme.palette.error.main }}>
-        <span style={{ color: 'white' }}>{name}</span>
-      </Avatar>
 
     return (
       <Box

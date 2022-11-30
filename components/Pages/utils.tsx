@@ -1,3 +1,4 @@
+import { Avatar, useTheme } from "@mui/material";
 import { Evidence } from "../../types/evidence";
 
 
@@ -20,6 +21,15 @@ export const genPosteriorProbTag = (len: number): string =>
     '( H )' : len == 1 ?
       '( H | E1 )' : len == 2 ?
         '( H | E1,E2 )' :
-        `( H | E1,... E${len})`
+        `( H | E1,... E${len})`;
 
+
+export const SharpAvatar = (name: string) => {
+  const theme = useTheme()
+  return (
+    <Avatar sx={{ bgcolor: theme.palette.error.main }}>
+      <span style={{ color: 'white' }}> {name} </span>
+    </Avatar>
+  )
+}
 

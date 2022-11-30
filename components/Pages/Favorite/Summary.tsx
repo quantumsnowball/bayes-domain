@@ -1,4 +1,4 @@
-import { IconButton, Paper, Typography } from "@mui/material"
+import { Avatar, Chip, IconButton, Paper, Typography } from "@mui/material"
 import { FC } from "react"
 import { Content } from "../../../types"
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -19,16 +19,40 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
 
   const TitleRow = () =>
-    <Typography
-      variant='h5'
+    <Box
+      sx={{
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}
     >
-      {content.title}
-    </Typography>
+      <Typography variant='h5'>
+        {content.title}
+      </Typography>
+      <Chip />
+    </Box>
 
   const HypothesisRow = () =>
-    <Typography>
-      Hypothesis: {content.hypothesis.title}
-    </Typography>
+    <Box
+      sx={{
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}
+    >
+      <Chip
+        avatar={<Avatar>H</Avatar>}
+        label={content.hypothesis.title}
+        variant='outlined'
+        color='primary'
+      />
+      <Chip
+        avatar={<Avatar>P</Avatar>}
+        label={content.hypothesis.prior.toFixed(4)}
+        variant='outlined'
+        color='primary'
+      />
+    </Box>
 
   const EvidenceRows = () =>
     <>

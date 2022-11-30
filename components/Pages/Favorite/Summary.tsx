@@ -1,4 +1,4 @@
-import { Avatar, Chip, IconButton, Paper, Typography } from "@mui/material"
+import { Avatar, Chip, IconButton, Paper, Typography, useTheme } from "@mui/material"
 import { FC } from "react"
 import { Content } from "../../../types"
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -18,26 +18,50 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const dispatch = useDispatch()
   const removeFavorite = (title: string) => dispatch(favoriteActions.removeItem(title))
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
+  const theme = useTheme()
 
-  const TitleRow = () =>
-    <Paper
-      elevation={1}
-      variant='outlined'
-      sx={{ p: 1 }}
-    >
-      <Box
-        sx={{
-          flex: 1,
-          display: 'flex',
-          justifyContent: 'space-between'
-        }}
+  const TitleRow = () => {
+    const posterior = content.evidence.reduce(
+      (p_H: number, ev: Evidence) => {
+        const p_H_null = 1 - p_H
+        const p_E_given_H = ev.likelihood
+        const p_E_given_H_null = ev.normalizer
+        const p_E = (p_H * p_E_given_H + p_H_null * p_E_given_H_null)
+        const p_H_given_E = p_E_given_H / p_E * p_H
+        return p_H_given_E
+      },
+      content.hypothesis.prior)
+
+    return (
+      <Paper
+        elevation={1}
+        variant='outlined'
+        sx={{ p: 1 }}
       >
-        <Typography variant='h5'>
-          {content.title}
-        </Typography>
-        <Chip />
-      </Box >
-    </Paper>
+        <Box
+          sx={{
+            flex: 1,
+            display: 'flex',
+            justifyContent: 'space-between'
+          }}
+        >
+          <Typography variant='h5'>
+            {content.title}
+          </Typography>
+          <Chip
+            avatar={
+              <Avatar sx={{ bgcolor: theme.palette.error.main }}>
+                <span style={{ color: 'white' }}>P</span>
+              </Avatar>
+            }
+            label={posterior.toFixed(4)}
+            variant='outlined'
+            color='error'
+          />
+        </Box >
+      </Paper>
+    )
+  }
 
   const HypothesisRow = () =>
     <Box

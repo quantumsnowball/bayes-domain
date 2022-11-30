@@ -8,13 +8,15 @@ import storage from 'redux-persist/lib/storage'
 import { themeReducer } from './slices/themeSlice'
 import { layoutReducer } from './slices/layoutSlice'
 import { contentReducer } from './slices/contentSlice'
+import { favoriteReducer } from './slices/favoriteSlice'
 
 
 // reducers
 const rootReducer = combineReducers({
   theme: themeReducer,
   layout: layoutReducer,
-  content: contentReducer
+  content: contentReducer,
+  favorite: favoriteReducer
 })
 
 // store

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Content } from '../../types'
 import { Evidence } from '../../types/evidence'
 import { Hypothesis } from '../../types/hypothesis'
 
@@ -13,7 +14,7 @@ const contentSlice = createSlice({
       priorText: '1/2',
     } as Hypothesis,
     evidence: [] as Evidence[],
-  },
+  } as Content,
   reducers: {
     setTitle: (s, a: PayloadAction<string>) => {
       s.title = a.payload

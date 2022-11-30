@@ -1,4 +1,7 @@
-import { Alert, Box, Button, IconButton, Snackbar } from "@mui/material"
+import {
+  Box,
+  Button,
+} from "@mui/material"
 import { FC, useState } from "react"
 import { useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
@@ -11,6 +14,7 @@ import DownloadIcon from '@mui/icons-material/Download'
 export const OperationRow: FC<{ content: Content }> = ({ content }) => {
   const dispatch = useDispatch()
   const [deleteButtonExtended, setDeleteButtonExtended] = useState(false)
+  const [restoreButtonExtended, setRestoreButtonExtended] = useState(false)
   const removeFavorite = (title: string) => dispatch(favoriteActions.removeItem(title))
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
 
@@ -19,10 +23,11 @@ export const OperationRow: FC<{ content: Content }> = ({ content }) => {
       sx={{
         display: 'flex',
         flexFlow: 'row nowrap',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       }}
       onClick={() => {
         setDeleteButtonExtended(false)
+        setRestoreButtonExtended(false)
       }}
     >
       <Button
@@ -38,15 +43,19 @@ export const OperationRow: FC<{ content: Content }> = ({ content }) => {
         }}>
         {deleteButtonExtended ? 'confirm delete' : ''}
       </Button>
-      <IconButton
+      <Button
         color="primary"
-        size='small'
+        endIcon={<DownloadIcon />}
         onClick={e => {
+          if (!restoreButtonExtended) {
+            setRestoreButtonExtended(true)
+            e.stopPropagation()
+            return
+          }
           setContent(content)
-          e.stopPropagation()
         }}>
-        <DownloadIcon />
-      </IconButton>
+        {restoreButtonExtended ? 'confirm restore' : ''}
+      </Button>
     </Box>
   )
 }

@@ -15,3 +15,11 @@ export const calPosterior = (evidence: Evidence[], prior: number): number =>
   )
 
 
+export const genPosteriorProbTag = (len: number): string =>
+  len == 0 ?
+    '( H )' : len == 1 ?
+      '( H | E1 )' : len == 2 ?
+        '( H | E1,E2 )' :
+        `( H | E1,... E${len})`
+
+

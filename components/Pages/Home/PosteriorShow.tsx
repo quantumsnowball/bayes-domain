@@ -4,9 +4,8 @@ import { RootState } from "../../../redux/store"
 import { NormalSlider } from "./share/Slider"
 import { NormalTextField } from "./share/TextField"
 import { useEffect, useState } from "react"
-import { Evidence } from "../../../types/evidence"
 import { Section } from "./share/Section"
-import { calPosterior } from "../utils"
+import { calPosterior, genPosteriorProbTag } from "../utils"
 
 
 function PosteriorShow() {
@@ -21,11 +20,7 @@ function PosteriorShow() {
     setPosteriorLocal(posterior)
   }, [prior, evidence])
 
-  const tag = evidence.length == 0 ?
-    '( H )' : evidence.length == 1 ?
-      '( H | E1 )' : evidence.length == 2 ?
-        '( H | E1,E2 )' :
-        `( H | E1,... E${evidence.length})`
+  const tag = genPosteriorProbTag(evidence.length)
 
   const SharpAvatar = (name: string) =>
     <Avatar sx={{ bgcolor: theme.palette.error.main }}>

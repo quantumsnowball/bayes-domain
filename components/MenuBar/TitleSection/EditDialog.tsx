@@ -7,7 +7,10 @@ import {
   DialogTitle,
   TextField
 } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { contentActions } from "../../../redux/slices/contentSlice";
+import { RootState } from "../../../redux/store";
 
 
 interface EditDialogProps {
@@ -16,8 +19,19 @@ interface EditDialogProps {
 }
 
 function EditDialog({ editOpen, setEditOpen }: EditDialogProps) {
+  const dispatch = useDispatch()
+  const [title, setTitle] = [
+    useSelector((s: RootState) => s.content.title),
+    (txt: string) => dispatch(contentActions.setTitle(txt))
+  ]
+  const [titleLocal, setTitleLocal] = useState(title)
 
   const handleClose = () => setEditOpen(false)
+
+  const handleSubmit = () => {
+    setTitle(titleLocal)
+    setEditOpen(false)
+  }
 
   return (
     <Dialog
@@ -36,6 +50,12 @@ function EditDialog({ editOpen, setEditOpen }: EditDialogProps) {
           label="Worksheet Title"
           type="text"
           onFocus={e => e.target.select()}
+          value={titleLocal}
+          onChange={e => setTitleLocal(e.target.value)}
+          onSubmit={handleSubmit}
+          onKeyUp={e => {
+            if (e.code === 'Enter') handleSubmit()
+          }}
         />
       </DialogContent>
       <DialogActions>
@@ -49,7 +69,8 @@ function EditDialog({ editOpen, setEditOpen }: EditDialogProps) {
         <Button
           color='primary'
           variant='contained'
-          onClick={handleClose}
+          type='submit'
+          onClick={handleSubmit}
         >
           Confirm
         </Button>

@@ -1,4 +1,4 @@
-import { Alert, Button, styled, } from "@mui/material"
+import { Button, styled, } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from '../../../redux/store'
 import { Overflow, Stretch } from "../../styled/containers"
@@ -9,7 +9,6 @@ import AddIcon from '@mui/icons-material/Add'
 import { contentActions } from "../../../redux/slices/contentSlice"
 import { v4 } from "uuid"
 import PosteriorShow from "./PosteriorShow"
-import { AlertSaved } from "../../Main/Alert"
 
 
 const ContentDiv = styled(Overflow(Stretch('div')))`

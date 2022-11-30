@@ -1,7 +1,10 @@
 import { Alert, Button, Snackbar } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
+import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { favoriteActions } from "../../../redux/slices/favoriteSlice";
 import { RootState } from "../../../redux/store";
+import { Content } from "../../../types";
 
 
 interface SavedAlertProps {
@@ -41,7 +44,11 @@ interface OverwriteAlertProps {
 }
 
 export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: OverwriteAlertProps) {
+  const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.title)
+  const hypothesis = useSelector((s: RootState) => s.content.hypothesis)
+  const evidence = useSelector((s: RootState) => s.content.evidence)
+  const addFavorite = (c: Content) => dispatch(favoriteActions.addItem(c))
 
   return (
     <Snackbar
@@ -64,7 +71,7 @@ export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: Ov
             color='warning'
             variant='outlined'
             onClick={e => {
-              alert('TODO: save to state')
+              addFavorite({ title, hypothesis, evidence })
               setOverwriteAlertOpen(false)
               e.stopPropagation()
             }}

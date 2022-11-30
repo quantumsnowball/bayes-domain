@@ -9,10 +9,12 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { useState } from "react"
 import EditDialog from "./EditDialog"
+import { SavedAlert } from "./Alert"
 
 function TitleSection() {
   const title = useSelector((s: RootState) => s.content.title)
   const [editOpen, setEditOpen] = useState(false)
+  const [savedAlertOpen, setSavedAlertOpen] = useState(false)
 
   const EditTitleButton = () =>
     <IconButton
@@ -25,6 +27,7 @@ function TitleSection() {
   const SaveAsButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
+      onClick={() => setSavedAlertOpen(true)}
     >
       <SaveAsIcon />
     </IconButton>
@@ -42,6 +45,7 @@ function TitleSection() {
         <SaveAsButton />
       </Box>
       <EditDialog {...{ editOpen, setEditOpen }} />
+      <SavedAlert {...{ savedAlertOpen, setSavedAlertOpen }} />
     </>
   )
 }

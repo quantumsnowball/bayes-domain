@@ -5,14 +5,23 @@ import {
 } from "@mui/material"
 import EditIcon from '@mui/icons-material/Edit'
 import SaveAsIcon from '@mui/icons-material/SaveAs'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { useState } from "react"
 import EditDialog from "./EditDialog"
 import { OverwriteAlert, SavedAlert } from "./Alert"
+import { Content } from "../../../types"
+import { favoriteActions } from "../../../redux/slices/favoriteSlice"
 
 function TitleSection() {
+  const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.title)
+  const hypothesis = useSelector((s: RootState) => s.content.hypothesis)
+  const evidence = useSelector((s: RootState) => s.content.evidence)
+  const [favorites, addFavorite] = [
+    useSelector((s: RootState) => s.favorite.items),
+    (c: Content) => dispatch(favoriteActions.addItem(c))
+  ]
   const [editOpen, setEditOpen] = useState(false)
   const [savedAlertOpen, setSavedAlertOpen] = useState(false)
   const [overwriteAlertOpen, setOverwriteAlertOpen] = useState(false)
@@ -28,7 +37,16 @@ function TitleSection() {
   const SaveAsButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
-      onClick={() => setSavedAlertOpen(true)}
+      onClick={() => {
+        for (var fav of favorites) {
+          if (fav.title === title) {
+            setOverwriteAlertOpen(true)
+            return
+          }
+        }
+        addFavorite({ title, hypothesis, evidence })
+        setSavedAlertOpen(true)
+      }}
     >
       <SaveAsIcon />
     </IconButton>

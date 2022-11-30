@@ -8,7 +8,7 @@ const favoriteSlice = createSlice({
     items: [] as Content[]
   },
   reducers: {
-    addFavoriteItem: (s, a: PayloadAction<Content>) => {
+    addItem: (s, a: PayloadAction<Content>) => {
       s.items.push(a.payload)
     }
   }

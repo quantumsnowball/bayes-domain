@@ -16,15 +16,16 @@ function TitleSection() {
 
   const EditTitleButton = () =>
     <IconButton
+      sx={{ color: '#ccc' }}
       onClick={() => setEditOpen(true)}
-      sx={{ color: '#fff' }}
     >
       <EditIcon />
     </IconButton>
 
   const SaveAsButton = () =>
     <IconButton
-      sx={{ color: '#fff' }}>
+      sx={{ color: '#ccc' }}
+    >
       <SaveAsIcon />
     </IconButton>
 

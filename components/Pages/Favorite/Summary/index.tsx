@@ -1,4 +1,4 @@
-import { Avatar, Chip, IconButton, Paper, Typography } from "@mui/material"
+import { Avatar, Chip, IconButton, Paper } from "@mui/material"
 import { FC } from "react"
 import { Content } from "../../../../types"
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -8,9 +8,9 @@ import { favoriteActions } from "../../../../redux/slices/favoriteSlice"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { Box } from "@mui/system"
 import { Evidence } from "../../../../types/evidence"
-import { calPosterior, genPosteriorProbTag, SharpAvatar } from "../../utils"
 import { TitleRow } from "./Title"
 import { PosteriorRow } from "./Posterior"
+import { HypothesisRow } from "./Hypothesis"
 
 
 interface SummaryProps {
@@ -22,28 +22,6 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const removeFavorite = (title: string) => dispatch(favoriteActions.removeItem(title))
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
 
-  const HypothesisRow = () =>
-    <Box
-      sx={{
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'space-between',
-        my: 1
-      }}
-    >
-      <Chip
-        avatar={<Avatar>H</Avatar>}
-        label={content.hypothesis.title}
-        variant='outlined'
-        color='primary'
-      />
-      <Chip
-        avatar={<Avatar>P</Avatar>}
-        label={content.hypothesis.prior.toFixed(4)}
-        variant='outlined'
-        color='primary'
-      />
-    </Box>
 
   const EvidenceRow = ({ ev, i }: { ev: Evidence, i: number }) => {
     const prior = content.hypothesis.prior
@@ -113,7 +91,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
     >
       <TitleRow {...{ content }} />
       <PosteriorRow {...{ content }} />
-      <HypothesisRow />
+      <HypothesisRow {...{ content }} />
       {
         Object.values(content.evidence).map((ev, i) =>
           <EvidenceRow key={ev.title} {...{ ev, i }} />)

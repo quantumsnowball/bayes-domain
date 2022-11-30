@@ -31,7 +31,7 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
         sx={{ py: 2, width: '100%' }}
         onClick={() => setSavedAlertOpen(false)}
       >
-        Worksheet saved as '{title}' successfully.
+        Worksheet saved as {"'"}{title}{"'"} successfully.
       </Alert>
     </Snackbar>
   )
@@ -86,7 +86,7 @@ export function OverwriteAlert({
           </Button>
         }
       >
-        Worksheet '{title}' already exists!
+        Worksheet {"'"}{title}{"'"} already exists!
       </Alert>
     </Snackbar>
   )

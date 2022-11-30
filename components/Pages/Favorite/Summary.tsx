@@ -154,7 +154,10 @@ const Summary: FC<SummaryProps> = ({ content }) => {
     >
       <TitleRow />
       <HypothesisRow />
-      {Object.values(content.evidence).map((ev, i) => <EvidenceRow {...{ ev, i }} />)}
+      {
+        Object.values(content.evidence).map((ev, i) =>
+          <EvidenceRow key={ev.title} {...{ ev, i }} />)
+      }
       <OperationRow />
     </Paper>
   )

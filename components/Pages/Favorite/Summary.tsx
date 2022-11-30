@@ -8,6 +8,7 @@ import { favoriteActions } from "../../../redux/slices/favoriteSlice"
 import { contentActions } from "../../../redux/slices/contentSlice"
 import { Box } from "@mui/system"
 import { Evidence } from "../../../types/evidence"
+import { calPosterior } from "../utils"
 
 
 interface SummaryProps {
@@ -21,16 +22,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const theme = useTheme()
 
   const TitleRow = () => {
-    const posterior = content.evidence.reduce(
-      (p_H: number, ev: Evidence) => {
-        const p_H_null = 1 - p_H
-        const p_E_given_H = ev.likelihood
-        const p_E_given_H_null = ev.normalizer
-        const p_E = (p_H * p_E_given_H + p_H_null * p_E_given_H_null)
-        const p_H_given_E = p_E_given_H / p_E * p_H
-        return p_H_given_E
-      },
-      content.hypothesis.prior)
+    const posterior = calPosterior(content.evidence, content.hypothesis.prior)
 
     return (
       <Paper

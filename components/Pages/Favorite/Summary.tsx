@@ -22,6 +22,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
       key={content.title}
       elevation={1}
       sx={{
+        m: 1,
         p: 1,
         textAlign: 'left'
       }}

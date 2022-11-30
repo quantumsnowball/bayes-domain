@@ -20,25 +20,32 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
 
   const TitleRow = () =>
-    <Box
-      sx={{
-        flex: 1,
-        display: 'flex',
-        justifyContent: 'space-between'
-      }}
+    <Paper
+      elevation={1}
+      variant='outlined'
+      sx={{ p: 1 }}
     >
-      <Typography variant='h5'>
-        {content.title}
-      </Typography>
-      <Chip />
-    </Box>
+      <Box
+        sx={{
+          flex: 1,
+          display: 'flex',
+          justifyContent: 'space-between'
+        }}
+      >
+        <Typography variant='h5'>
+          {content.title}
+        </Typography>
+        <Chip />
+      </Box >
+    </Paper>
 
   const HypothesisRow = () =>
     <Box
       sx={{
         flex: 1,
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        my: 1
       }}
     >
       <Chip
@@ -65,7 +72,8 @@ const Summary: FC<SummaryProps> = ({ content }) => {
           sx={{
             flex: 1,
             display: 'flex',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            my: 1
           }}
         >
           <Chip

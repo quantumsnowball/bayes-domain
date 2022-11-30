@@ -2,8 +2,10 @@ import { IconButton, Paper, Typography } from "@mui/material"
 import { FC } from "react"
 import { Content } from "../../../types"
 import DeleteIcon from '@mui/icons-material/Delete'
+import DownloadIcon from '@mui/icons-material/Download'
 import { useDispatch } from "react-redux"
 import { favoriteActions } from "../../../redux/slices/favoriteSlice"
+import { contentActions } from "../../../redux/slices/contentSlice"
 
 
 interface SummaryProps {
@@ -13,6 +15,7 @@ interface SummaryProps {
 const Summary: FC<SummaryProps> = ({ content }) => {
   const dispatch = useDispatch()
   const removeFavorite = (title: string) => dispatch(favoriteActions.removeItem(title))
+  const setContent = (content: Content) => dispatch(contentActions.setContent(content))
 
   return (
     <Paper
@@ -46,6 +49,16 @@ const Summary: FC<SummaryProps> = ({ content }) => {
           e.stopPropagation()
         }}>
         <DeleteIcon />
+      </IconButton>
+      <IconButton
+        color="primary"
+        size='small'
+        onClick={e => {
+          // alert(`TODO: gonna replace the workspace by ${content.title}`)
+          setContent(content)
+          e.stopPropagation()
+        }}>
+        <DownloadIcon />
       </IconButton>
     </Paper>
   )

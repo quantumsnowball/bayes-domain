@@ -16,6 +16,11 @@ const contentSlice = createSlice({
     evidence: [] as Evidence[],
   } as Content,
   reducers: {
+    setContent: (s, a: PayloadAction<Content>) => {
+      s.title = a.payload.title
+      s.hypothesis = a.payload.hypothesis
+      s.evidence = a.payload.evidence
+    },
     setTitle: (s, a: PayloadAction<string>) => {
       s.title = a.payload
     },

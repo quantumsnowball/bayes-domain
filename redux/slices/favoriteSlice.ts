@@ -10,6 +10,9 @@ const favoriteSlice = createSlice({
   reducers: {
     setItem: (s, a: PayloadAction<Content>) => {
       s.items[a.payload.title] = a.payload
+    },
+    removeItem: (s, a: PayloadAction<string>) => {
+      delete s.items[a.payload]
     }
   }
 })

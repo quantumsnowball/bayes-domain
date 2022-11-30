@@ -11,6 +11,7 @@ import { Evidence } from "../../../../types/evidence"
 import { TitleRow } from "./Title"
 import { PosteriorRow } from "./Posterior"
 import { HypothesisRow } from "./Hypothesis"
+import { EvidenceRows } from "./Evidence"
 
 
 interface SummaryProps {
@@ -23,35 +24,6 @@ const Summary: FC<SummaryProps> = ({ content }) => {
   const setContent = (content: Content) => dispatch(contentActions.setContent(content))
 
 
-  const EvidenceRow = ({ ev, i }: { ev: Evidence, i: number }) => {
-    const prior = content.hypothesis.prior
-    const bayesFactor = ev.likelihood / (prior * ev.likelihood + (1 - prior) * ev.normalizer)
-
-    return (
-      < >
-        <Box
-          sx={{
-            flex: 1,
-            display: 'flex',
-            justifyContent: 'space-between',
-            my: 1
-          }}
-        >
-          <Chip
-            avatar={<Avatar>E{i + 1}</Avatar>}
-            label={ev.title}
-            variant='outlined'
-            color='secondary'
-          />
-          <Chip
-            avatar={<Avatar>x</Avatar>}
-            label={bayesFactor.toFixed(4)}
-            variant='outlined'
-          />
-        </Box>
-      </>
-    )
-  }
 
   const OperationRow = () =>
     <Box sx={{
@@ -92,10 +64,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
       <TitleRow {...{ content }} />
       <PosteriorRow {...{ content }} />
       <HypothesisRow {...{ content }} />
-      {
-        Object.values(content.evidence).map((ev, i) =>
-          <EvidenceRow key={ev.title} {...{ ev, i }} />)
-      }
+      <EvidenceRows {...{ content }} />
       <OperationRow />
     </Paper>
   )

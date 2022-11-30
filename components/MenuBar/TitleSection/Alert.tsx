@@ -41,9 +41,14 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
 interface OverwriteAlertProps {
   overwriteAlertOpen: boolean
   setOverwriteAlertOpen: Dispatch<SetStateAction<boolean>>
+  setSavedAlertOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: OverwriteAlertProps) {
+export function OverwriteAlert({
+  overwriteAlertOpen,
+  setOverwriteAlertOpen,
+  setSavedAlertOpen
+}: OverwriteAlertProps) {
   const dispatch = useDispatch()
   const title = useSelector((s: RootState) => s.content.title)
   const hypothesis = useSelector((s: RootState) => s.content.hypothesis)
@@ -74,6 +79,7 @@ export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: Ov
               replaceFavorite({ title, hypothesis, evidence })
               setOverwriteAlertOpen(false)
               e.stopPropagation()
+              setSavedAlertOpen(true)
             }}
           >
             Overwrite

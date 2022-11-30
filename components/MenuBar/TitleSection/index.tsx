@@ -63,7 +63,11 @@ function TitleSection() {
       </Box>
       <EditDialog {...{ editOpen, setEditOpen }} />
       <SavedAlert {...{ savedAlertOpen, setSavedAlertOpen }} />
-      <OverwriteAlert {...{ overwriteAlertOpen, setOverwriteAlertOpen }} />
+      <OverwriteAlert {...{
+        overwriteAlertOpen,
+        setOverwriteAlertOpen,
+        setSavedAlertOpen
+      }} />
     </>
   )
 }

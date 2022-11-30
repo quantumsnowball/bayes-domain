@@ -1,4 +1,4 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Button, Snackbar } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
@@ -29,6 +29,48 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
         onClick={() => setSavedAlertOpen(false)}
       >
         Worksheet saved as '{title}' successfully.
+      </Alert>
+    </Snackbar>
+  )
+}
+
+
+interface OverwriteAlertProps {
+  overwriteAlertOpen: boolean
+  setOverwriteAlertOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: OverwriteAlertProps) {
+  const title = useSelector((s: RootState) => s.content.title)
+
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center'
+      }}
+      autoHideDuration={20000}
+      open={overwriteAlertOpen}
+      onClose={() => setOverwriteAlertOpen(false)}
+      sx={{ mt: 8 }}
+    >
+      <Alert
+        variant='filled'
+        color='info'
+        onClick={() => setOverwriteAlertOpen(false)}
+        action={
+          <Button
+            size='small'
+            onClick={e => {
+              alert('TODO: save to state')
+              e.stopPropagation()
+            }}
+          >
+            Overwrite
+          </Button>
+        }
+      >
+        Worksheet '{title}' already exists!
       </Alert>
     </Snackbar>
   )

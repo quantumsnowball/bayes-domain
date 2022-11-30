@@ -9,12 +9,13 @@ import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { useState } from "react"
 import EditDialog from "./EditDialog"
-import { SavedAlert } from "./Alert"
+import { OverwriteAlert, SavedAlert } from "./Alert"
 
 function TitleSection() {
   const title = useSelector((s: RootState) => s.content.title)
   const [editOpen, setEditOpen] = useState(false)
   const [savedAlertOpen, setSavedAlertOpen] = useState(false)
+  const [overwriteAlertOpen, setOverwriteAlertOpen] = useState(false)
 
   const EditTitleButton = () =>
     <IconButton
@@ -27,7 +28,7 @@ function TitleSection() {
   const SaveAsButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
-      onClick={() => setSavedAlertOpen(true)}
+      onClick={() => setOverwriteAlertOpen(true)}
     >
       <SaveAsIcon />
     </IconButton>
@@ -46,6 +47,7 @@ function TitleSection() {
       </Box>
       <EditDialog {...{ editOpen, setEditOpen }} />
       <SavedAlert {...{ savedAlertOpen, setSavedAlertOpen }} />
+      <OverwriteAlert {...{ overwriteAlertOpen, setOverwriteAlertOpen }} />
     </>
   )
 }

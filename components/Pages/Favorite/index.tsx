@@ -1,7 +1,14 @@
-import { Typography } from "@mui/material"
+import {
+  Paper,
+  Typography
+} from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { Content } from "../../../types"
+import Summary from "./Summary"
+
+
+
 
 function Favorite() {
   const favorites = useSelector((s: RootState) => s.favorite.items)
@@ -9,12 +16,7 @@ function Favorite() {
   return (
     <>
       {Object.values(favorites).map((content: Content) =>
-        <div key={content.title}>
-          <Typography> {content.title}: {content.hypothesis.title} </Typography>
-          {Object.values(content.evidence).map((ev) =>
-            <Typography>{ev.title}</Typography>
-          )}
-        </div>
+        <Summary key={content.title} content={content} />
       )}
     </>
   )

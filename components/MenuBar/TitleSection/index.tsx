@@ -20,7 +20,7 @@ function TitleSection() {
   const evidence = useSelector((s: RootState) => s.content.evidence)
   const [favorites, addFavorite] = [
     useSelector((s: RootState) => s.favorite.items),
-    (c: Content) => dispatch(favoriteActions.addItem(c))
+    (c: Content) => dispatch(favoriteActions.setItem(c))
   ]
   const [editOpen, setEditOpen] = useState(false)
   const [savedAlertOpen, setSavedAlertOpen] = useState(false)
@@ -38,11 +38,9 @@ function TitleSection() {
     <IconButton
       sx={{ color: '#ccc' }}
       onClick={() => {
-        for (var fav of favorites) {
-          if (fav.title === title) {
-            setOverwriteAlertOpen(true)
-            return
-          }
+        if (title in favorites) {
+          setOverwriteAlertOpen(true)
+          return
         }
         addFavorite({ title, hypothesis, evidence })
         setSavedAlertOpen(true)

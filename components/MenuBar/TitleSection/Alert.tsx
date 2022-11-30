@@ -48,7 +48,7 @@ export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: Ov
   const title = useSelector((s: RootState) => s.content.title)
   const hypothesis = useSelector((s: RootState) => s.content.hypothesis)
   const evidence = useSelector((s: RootState) => s.content.evidence)
-  const addFavorite = (c: Content) => dispatch(favoriteActions.addItem(c))
+  const replaceFavorite = (c: Content) => dispatch(favoriteActions.setItem(c))
 
   return (
     <Snackbar
@@ -71,7 +71,7 @@ export function OverwriteAlert({ overwriteAlertOpen, setOverwriteAlertOpen }: Ov
             color='warning'
             variant='outlined'
             onClick={e => {
-              addFavorite({ title, hypothesis, evidence })
+              replaceFavorite({ title, hypothesis, evidence })
               setOverwriteAlertOpen(false)
               e.stopPropagation()
             }}

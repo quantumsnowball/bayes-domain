@@ -5,11 +5,11 @@ import { Content } from '../../types'
 const favoriteSlice = createSlice({
   name: 'favorite',
   initialState: {
-    items: [] as Content[]
+    items: {} as { [key: string]: Content }
   },
   reducers: {
-    addItem: (s, a: PayloadAction<Content>) => {
-      s.items.push(a.payload)
+    setItem: (s, a: PayloadAction<Content>) => {
+      s.items[a.payload.title] = a.payload
     }
   }
 })

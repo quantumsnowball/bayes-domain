@@ -3,7 +3,7 @@
   "short_name": "Bayes",
   "theme_color": "#303030",
   "background_color": "#303030",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "scope": "/",
   "start_url": "/",

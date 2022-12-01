@@ -3,7 +3,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material"
-import EditIcon from '@mui/icons-material/Edit'
+import RestartAltIcon from '@mui/icons-material/RestartAlt'
 import SaveAsIcon from '@mui/icons-material/SaveAs'
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
@@ -28,13 +28,13 @@ export function Toolbar() {
   const [overwriteAlertOpen, setOverwriteAlertOpen] = useState(false)
   const [titleErrorAlertOpen, setTitleErrorAlertOpen] = useState(false)
 
-  const EditTitleButton = () =>
+  const ResetButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
-      aria-label='Edit Title'
+      aria-label='Reset WorkSpace'
       onClick={() => setEditOpen(true)}
     >
-      <EditIcon />
+      <RestartAltIcon />
     </IconButton>
 
   const SaveAsButton = () =>
@@ -61,7 +61,7 @@ export function Toolbar() {
 
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <EditTitleButton />
+        <ResetButton />
         <Typography
           component="span"
           sx={{ cursor: 'pointer' }}

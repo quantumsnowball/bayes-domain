@@ -2,9 +2,9 @@ import { Alert, Button, Snackbar } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { favoriteActions } from "../../../redux/slices/favoriteSlice";
-import { RootState } from "../../../redux/store";
-import { Content } from "../../../types";
+import { favoriteActions } from "../../../../redux/slices/favoriteSlice";
+import { RootState } from "../../../../redux/store";
+import { Content } from "../../../../types";
 
 
 interface SavedAlertProps {

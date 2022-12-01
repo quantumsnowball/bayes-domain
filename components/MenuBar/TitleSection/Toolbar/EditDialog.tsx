@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { contentActions } from "../../../redux/slices/contentSlice";
-import { RootState } from "../../../redux/store";
+import { contentActions } from "../../../../redux/slices/contentSlice";
+import { RootState } from "../../../../redux/store";
 
 
 interface EditDialogProps {
@@ -29,8 +29,10 @@ function EditDialog({ editOpen, setEditOpen }: EditDialogProps) {
   const handleClose = () => setEditOpen(false)
 
   const handleSubmit = () => {
-    setTitle(titleLocal)
-    setEditOpen(false)
+    if (titleLocal.length > 0) {
+      setTitle(titleLocal)
+      setEditOpen(false)
+    }
   }
 
   return (
@@ -67,6 +69,7 @@ function EditDialog({ editOpen, setEditOpen }: EditDialogProps) {
           Cancel
         </Button>
         <Button
+          disabled={titleLocal.length === 0}
           color='primary'
           variant='contained'
           type='submit'

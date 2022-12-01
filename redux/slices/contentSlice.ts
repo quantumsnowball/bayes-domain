@@ -1,20 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { DEFAULT_CONTENT } from '../../constants/content'
 import { Content } from '../../types'
 import { Evidence } from '../../types/evidence'
-import { Hypothesis } from '../../types/hypothesis'
 
 
 const contentSlice = createSlice({
   name: 'content',
-  initialState: {
-    title: 'Untitled',
-    hypothesis: {
-      title: 'Untitled Hypothesis',
-      prior: 0.5,
-      priorText: '1/2',
-    } as Hypothesis,
-    evidence: [] as Evidence[],
-  } as Content,
+  initialState: DEFAULT_CONTENT,
   reducers: {
     setContent: (s, a: PayloadAction<Content>) => {
       s.title = a.payload.title

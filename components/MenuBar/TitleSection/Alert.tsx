@@ -92,3 +92,33 @@ export function OverwriteAlert({
   )
 }
 
+
+interface ErrorAlertProps {
+  text: string
+  open: boolean
+  setOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export function ErrorAlert({ text, open, setOpen }: ErrorAlertProps) {
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center'
+      }}
+      open={open}
+      onClose={() => setOpen(false)}
+      autoHideDuration={10000}
+      sx={{ mt: 8 }}
+    >
+      <Alert
+        color='error'
+        variant='filled'
+        sx={{ py: 2, width: '100%' }}
+        onClick={() => setOpen(false)}
+      >
+        {text}
+      </Alert>
+    </Snackbar>
+  )
+}

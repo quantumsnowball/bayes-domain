@@ -12,6 +12,8 @@ import EditDialog from "./EditDialog"
 import { ErrorAlert, OverwriteAlert, SavedAlert } from "./Alert"
 import { Content } from "../../../../types"
 import { favoriteActions } from "../../../../redux/slices/favoriteSlice"
+import { contentActions } from "../../../../redux/slices/contentSlice"
+import { DEFAULT_CONTENT } from "../../../../constants/content"
 
 
 export function Toolbar() {
@@ -19,6 +21,7 @@ export function Toolbar() {
   const title = useSelector((s: RootState) => s.content.title)
   const hypothesis = useSelector((s: RootState) => s.content.hypothesis)
   const evidence = useSelector((s: RootState) => s.content.evidence)
+  const setContent = (c: Content) => dispatch(contentActions.setContent(c))
   const [favorites, addFavorite] = [
     useSelector((s: RootState) => s.favorite.items),
     (c: Content) => dispatch(favoriteActions.setItem(c))
@@ -32,7 +35,7 @@ export function Toolbar() {
     <IconButton
       sx={{ color: '#ccc' }}
       aria-label='Reset WorkSpace'
-      onClick={() => setEditOpen(true)}
+      onClick={() => setContent(DEFAULT_CONTENT)}
     >
       <RestartAltIcon />
     </IconButton>

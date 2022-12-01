@@ -9,11 +9,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { useState } from "react"
 import EditDialog from "./EditDialog"
-import { ErrorAlert, OverwriteAlert, SavedAlert } from "./Alert"
+import { ErrorAlert, OverwriteAlert, ResetAlert, SavedAlert } from "./Alert"
 import { Content } from "../../../../types"
 import { favoriteActions } from "../../../../redux/slices/favoriteSlice"
-import { contentActions } from "../../../../redux/slices/contentSlice"
-import { DEFAULT_CONTENT } from "../../../../constants/content"
 
 
 export function Toolbar() {
@@ -21,13 +19,13 @@ export function Toolbar() {
   const title = useSelector((s: RootState) => s.content.title)
   const hypothesis = useSelector((s: RootState) => s.content.hypothesis)
   const evidence = useSelector((s: RootState) => s.content.evidence)
-  const setContent = (c: Content) => dispatch(contentActions.setContent(c))
   const [favorites, addFavorite] = [
     useSelector((s: RootState) => s.favorite.items),
     (c: Content) => dispatch(favoriteActions.setItem(c))
   ]
   const [editOpen, setEditOpen] = useState(false)
   const [savedAlertOpen, setSavedAlertOpen] = useState(false)
+  const [resetAlertOpen, setResetAlertOpen] = useState(false)
   const [overwriteAlertOpen, setOverwriteAlertOpen] = useState(false)
   const [titleErrorAlertOpen, setTitleErrorAlertOpen] = useState(false)
 
@@ -35,7 +33,7 @@ export function Toolbar() {
     <IconButton
       sx={{ color: '#ccc' }}
       aria-label='Reset WorkSpace'
-      onClick={() => setContent(DEFAULT_CONTENT)}
+      onClick={() => setResetAlertOpen(true)}
     >
       <RestartAltIcon />
     </IconButton>
@@ -76,6 +74,7 @@ export function Toolbar() {
       </Box>
       <EditDialog {...{ editOpen, setEditOpen }} />
       <SavedAlert {...{ savedAlertOpen, setSavedAlertOpen }} />
+      <ResetAlert {...{ resetAlertOpen, setResetAlertOpen }} />
       <OverwriteAlert {...{
         overwriteAlertOpen,
         setOverwriteAlertOpen,

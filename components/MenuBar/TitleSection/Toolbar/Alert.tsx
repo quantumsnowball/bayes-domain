@@ -2,6 +2,8 @@ import { Alert, Button, Snackbar } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { DEFAULT_CONTENT } from "../../../../constants/content";
+import { contentActions } from "../../../../redux/slices/contentSlice";
 import { favoriteActions } from "../../../../redux/slices/favoriteSlice";
 import { RootState } from "../../../../redux/store";
 import { Content } from "../../../../types";
@@ -37,6 +39,53 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
   )
 }
 
+interface ResetAlertProps {
+  resetAlertOpen: boolean
+  setResetAlertOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export function ResetAlert({
+  resetAlertOpen,
+  setResetAlertOpen,
+}: ResetAlertProps) {
+  const dispatch = useDispatch()
+  const setContent = (c: Content) => dispatch(contentActions.setContent(c))
+
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center'
+      }}
+      autoHideDuration={20000}
+      open={resetAlertOpen}
+      onClose={() => setResetAlertOpen(false)}
+      sx={{ mt: 8 }}
+    >
+      <Alert
+        color='warning'
+        sx={{ py: 2, width: '100%' }}
+        onClick={() => setResetAlertOpen(false)}
+        action={
+          <Button
+            size='small'
+            color='warning'
+            variant='outlined'
+            onClick={e => {
+              setContent(DEFAULT_CONTENT)
+              setResetAlertOpen(false)
+              e.stopPropagation()
+            }}
+          >
+            Reset
+          </Button>
+        }
+      >
+        Are your sure to reset the worksheet?
+      </Alert>
+    </Snackbar>
+  )
+}
 
 interface OverwriteAlertProps {
   overwriteAlertOpen: boolean

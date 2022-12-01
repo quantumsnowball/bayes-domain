@@ -6,6 +6,7 @@ import { RootState } from '../../../redux/store'
 import { useDispatch } from 'react-redux'
 import { layoutActions } from '../../../redux/slices/layoutSlice'
 import { MenuLabel, MenuButtonGrouper } from './common'
+import { VERSION } from '../../../constants'
 
 
 function AboutMenu() {
@@ -22,6 +23,12 @@ function AboutMenu() {
       />
       <Collapse in={menuAboutExpanded} timeout="auto" unmountOnExit>
         <List>
+          <MenuLabel
+            icon={<InfoIcon />}
+            label={`version ${VERSION}`}
+            level={1}
+            primaryTypographyProps={{ variant: 'caption' }}
+          />
           <MenuLabel
             icon={<InfoIcon />}
             label={`@2022\nQuantum Snowball`}

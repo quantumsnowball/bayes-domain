@@ -65,6 +65,7 @@ export function Toolbar() {
         <Typography
           component="span"
           sx={{ cursor: 'pointer' }}
+          onClick={() => setEditOpen(true)}
         >
           {title}
         </Typography>

@@ -5,6 +5,10 @@ const withPWA = require('next-pwa')({
 
 module.exports = withPWA({
   // config
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
   reactStrictMode: true,
   swcMinify: true,
 })

@@ -29,6 +29,7 @@ function TitleSection() {
   const EditTitleButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
+      aria-label='Edit Title'
       onClick={() => setEditOpen(true)}
     >
       <EditIcon />
@@ -37,6 +38,7 @@ function TitleSection() {
   const SaveAsButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
+      aria-label='Save As Favorite'
       onClick={() => {
         if (title in favorites) {
           setOverwriteAlertOpen(true)

@@ -32,7 +32,10 @@ const MenuBar = () => {
     </IconButton>
 
   const ThemeModeButton = () =>
-    <IconButton onClick={() => dispatch(themeActions.toggleMode())}>
+    <IconButton
+      aria-label="Toggle Dark Mode"
+      onClick={() => dispatch(themeActions.toggleMode())}
+    >
       {theme.palette.mode === 'light' ?
         <LightModeIcon sx={{ color: '#fff' }} /> : <DarkModeIcon />}
     </IconButton>

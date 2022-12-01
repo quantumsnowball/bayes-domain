@@ -29,6 +29,7 @@ function NextApp({ Component, pageProps }: AppProps) {
         />
         <link rel="apple-touch-icon" href="/icon-512.png"></link>
         <meta name="theme-color" content="#303030" />
+        <meta name="robots" content="all" />
       </Head>
       <App>
         <Component {...pageProps} />

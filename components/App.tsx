@@ -1,5 +1,5 @@
 import { store, persistor, RootState } from '../redux/store'
-import { Provider, useDispatch, useSelector } from 'react-redux'
+import { Provider, useSelector } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { createTheme, styled, ThemeProvider } from '@mui/material'
 import { CustomFC } from '../types'
@@ -8,6 +8,7 @@ import Main from './Main'
 import { CenterContent } from './styled/containers'
 import { useCallback, useEffect } from 'react'
 import chooseTheme from '../styles/theme'
+import BottomNav from './BottomNav'
 
 
 const defaultTheme = createTheme()
@@ -28,6 +29,7 @@ const App: CustomFC = ({ children }) => {
     <FlexColumnDiv id="app-ctn">
       <MenuBar />
       <Main> {children} </Main>
+      <BottomNav />
     </FlexColumnDiv>
   )
 }

@@ -7,17 +7,21 @@ import {
 import storage from 'redux-persist/lib/storage'
 import { themeReducer } from './slices/themeSlice'
 import { layoutReducer } from './slices/layoutSlice'
+import { contentReducer } from './slices/contentSlice'
+import { favoriteReducer } from './slices/favoriteSlice'
 
 
 // reducers
 const rootReducer = combineReducers({
   theme: themeReducer,
-  layout: layoutReducer
+  layout: layoutReducer,
+  content: contentReducer,
+  favorite: favoriteReducer
 })
 
 // store
 export const store = configureStore({
-  reducer: persistReducer({ key: 'root', storage, blacklist: ['content'] }, rootReducer),
+  reducer: persistReducer({ key: 'root', storage, blacklist: [] }, rootReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

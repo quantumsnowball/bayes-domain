@@ -27,3 +27,12 @@ export const CenterContent: Styler = e => styled(e)`
   text-align: center;
 `;
 
+export const TopContent: Styler = e => styled(e)`
+  /* children */
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: stretch;
+`;
+

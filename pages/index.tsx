@@ -1,10 +1,9 @@
-import App from "../components/App"
+import Home from "../components/Pages/Home"
 
-
-const Home = () => {
+function HomePage() {
   return (
-    <App />
+    <Home />
   )
 }
 
-export default Home
+export default HomePage

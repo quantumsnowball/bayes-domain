@@ -12,6 +12,8 @@ import EditDialog from "./EditDialog"
 import { ErrorAlert, OverwriteAlert, SavedAlert } from "./Alert"
 import { Content } from "../../../types"
 import { favoriteActions } from "../../../redux/slices/favoriteSlice"
+import { useRouter } from "next/router"
+import { VERSION } from "../../../constants"
 
 function TitleSection() {
   const dispatch = useDispatch()
@@ -26,6 +28,7 @@ function TitleSection() {
   const [savedAlertOpen, setSavedAlertOpen] = useState(false)
   const [overwriteAlertOpen, setOverwriteAlertOpen] = useState(false)
   const [titleErrorAlertOpen, setTitleErrorAlertOpen] = useState(false)
+  const router = useRouter()
 
   const EditTitleButton = () =>
     <IconButton
@@ -58,28 +61,42 @@ function TitleSection() {
 
   return (
     <>
-      <Box sx={{ flexGrow: 1 }}>
-        <EditTitleButton />
-        <Typography
-          component="span"
-          sx={{ cursor: 'pointer' }}
-        >
-          {title}
-        </Typography>
-        <SaveAsButton />
-      </Box>
-      <EditDialog {...{ editOpen, setEditOpen }} />
-      <SavedAlert {...{ savedAlertOpen, setSavedAlertOpen }} />
-      <OverwriteAlert {...{
-        overwriteAlertOpen,
-        setOverwriteAlertOpen,
-        setSavedAlertOpen
-      }} />
-      <ErrorAlert
-        text='Please enter a title before saving.'
-        open={titleErrorAlertOpen}
-        setOpen={setTitleErrorAlertOpen}
-      />
+      {
+        router.pathname === '/' ?
+          <>
+            <Box sx={{ flexGrow: 1 }}>
+              <EditTitleButton />
+              <Typography
+                component="span"
+                sx={{ cursor: 'pointer' }}
+              >
+                {title}
+              </Typography>
+              <SaveAsButton />
+            </Box>
+            <EditDialog {...{ editOpen, setEditOpen }} />
+            <SavedAlert {...{ savedAlertOpen, setSavedAlertOpen }} />
+            <OverwriteAlert {...{
+              overwriteAlertOpen,
+              setOverwriteAlertOpen,
+              setSavedAlertOpen
+            }} />
+            <ErrorAlert
+              text='Please enter a title before saving.'
+              open={titleErrorAlertOpen}
+              setOpen={setTitleErrorAlertOpen}
+            />
+          </>
+          :
+          <Box sx={{ flexGrow: 1 }}>
+            <Typography
+              component="span"
+              sx={{ cursor: 'pointer' }}
+            >
+              Bayes, v{VERSION}
+            </Typography>
+          </Box>
+      }
     </>
   )
 }

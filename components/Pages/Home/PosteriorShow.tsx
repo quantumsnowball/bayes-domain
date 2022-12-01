@@ -1,4 +1,4 @@
-import { Avatar, Paper, useTheme, } from "@mui/material"
+import { Paper, } from "@mui/material"
 import { useSelector } from "react-redux"
 import { RootState } from "../../../redux/store"
 import { NormalSlider } from "./share/Slider"

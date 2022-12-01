@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { Dispatch, SetStateAction, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { contentActions } from "../../../redux/slices/contentSlice";
-import { RootState } from "../../../redux/store";
+import { contentActions } from "../../../../redux/slices/contentSlice";
+import { RootState } from "../../../../redux/store";
 
 
 interface EditDialogProps {

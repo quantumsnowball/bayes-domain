@@ -14,18 +14,15 @@ export const TitleRow: FC<TitleRowProps> = ({
   content
 }) => {
   const LeftChip = () =>
-    <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-start' }}>
-      <Chip
-        avatar={<Avatar>P</Avatar>}
-        label={content.hypothesis.prior.toFixed(4)}
-        variant='outlined'
-        color='primary'
-      />
-    </Box>
+    <Chip
+      avatar={<Avatar>P</Avatar>}
+      label={content.hypothesis.prior.toFixed(4)}
+      variant='outlined'
+      color='primary'
+    />
 
   const CenterText = () =>
     <Typography
-      variant='h5'
       sx={{ flex: 1, textAlign: 'center' }}
     >
       {content.title}
@@ -34,14 +31,12 @@ export const TitleRow: FC<TitleRowProps> = ({
   const RightChip = () => {
     const posterior = calPosterior(content.evidence, content.hypothesis.prior)
     return (
-      <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
-        <Chip
-          avatar={SharpAvatar('P')}
-          label={posterior.toFixed(4)}
-          variant='outlined'
-          color='error'
-        />
-      </Box>
+      <Chip
+        avatar={SharpAvatar('P')}
+        label={posterior.toFixed(4)}
+        variant='outlined'
+        color='error'
+      />
     )
   }
 
@@ -50,7 +45,8 @@ export const TitleRow: FC<TitleRowProps> = ({
       sx={{
         flex: 1,
         display: 'flex',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'baseline'
       }}
     >
       {!expanded ? <LeftChip /> : null}

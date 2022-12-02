@@ -1,19 +1,28 @@
-import { Paper, Typography } from "@mui/material"
+import { Box, Paper, Typography } from "@mui/material"
 import { FC } from "react"
 import { Content } from "../../../../types"
 
 
 export const TitleRow: FC<{ content: Content }> = ({ content }) => {
   return (
-    <Paper
-      elevation={1}
-      variant='outlined'
-      sx={{ p: 1, textAlign: 'center' }}
+    <Box
+      sx={{
+        flex: 1,
+        display: 'flex',
+        justifyContent: 'space-between'
+      }}
     >
-      <Typography variant='h5'>
+      <Typography
+        variant='h5'
+        sx={{
+          flex: 1,
+          textAlign: 'center'
+        }}
+      >
         {content.title}
       </Typography>
-    </Paper>
+
+    </Box>
   )
 }
 

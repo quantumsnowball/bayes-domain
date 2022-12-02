@@ -1,5 +1,5 @@
-import { Paper } from "@mui/material"
-import { FC } from "react"
+import { Accordion, AccordionDetails, AccordionSummary, Box, Paper, Typography } from "@mui/material"
+import { FC, useState } from "react"
 import { Content } from "../../../../types"
 import { TitleRow } from "./Title"
 import { PosteriorRow } from "./Posterior"
@@ -13,22 +13,26 @@ interface SummaryProps {
 }
 
 const Summary: FC<SummaryProps> = ({ content }) => {
+  const [expanded, setExpanded] = useState(false)
+
   return (
-    <Paper
-      key={content.title}
+    <Accordion
+      disableGutters
       elevation={1}
-      sx={{
-        m: 1,
-        p: 1,
-        textAlign: 'left'
-      }}
+      sx={{ m: 1 }}
+      expanded={expanded}
+      onChange={(_, isExpanded) => setExpanded(isExpanded)}
     >
-      <TitleRow {...{ content }} />
-      <PosteriorRow {...{ content }} />
-      <HypothesisRow {...{ content }} />
-      <EvidenceRows {...{ content }} />
-      <OperationRow {...{ content }} />
-    </Paper>
+      <AccordionSummary  >
+        <TitleRow {...{ content }} />
+      </AccordionSummary>
+      <AccordionDetails>
+        <PosteriorRow {...{ content }} />
+        <HypothesisRow {...{ content }} />
+        <EvidenceRows {...{ content }} />
+        <OperationRow {...{ content }} />
+      </AccordionDetails>
+    </Accordion>
   )
 }
 

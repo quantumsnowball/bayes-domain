@@ -7,8 +7,8 @@ import HypothesisCard from "./HypothesisCard"
 import EvidenceCard from "./EvidenceCard"
 import AddIcon from '@mui/icons-material/Add'
 import { contentActions } from "../../../redux/slices/contentSlice"
-import { v4 } from "uuid"
 import PosteriorShow from "./PosteriorShow"
+import { DEFAULT_EVIDENCE } from "../../../constants/content"
 
 
 const ContentDiv = styled(Overflow(Stretch('div')))`
@@ -31,14 +31,7 @@ function Home() {
         color='secondary'
         startIcon={<AddIcon />}
         sx={{ m: 2 }}
-        onClick={() => dispatch(contentActions.addEvidence({
-          uuid: v4(),
-          title: 'Untitled Evidence',
-          likelihood: 0.5,
-          likelihoodText: '1/2',
-          normalizer: 0.5,
-          normalizerText: '1/2',
-        }))}
+        onClick={() => dispatch(contentActions.addEvidence(DEFAULT_EVIDENCE))}
       >
         New Evidence
       </Button>

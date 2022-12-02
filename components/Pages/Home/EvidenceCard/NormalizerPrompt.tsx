@@ -1,5 +1,5 @@
 import { Paper, } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
@@ -26,6 +26,7 @@ function NormalizerPrompt({ i }: NormalizerPromptProps) {
   ]
   const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(normalizer)
+  useEffect(() => setValSync(normalizer), [normalizer])
 
   return (
     <Paper

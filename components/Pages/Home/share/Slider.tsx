@@ -1,15 +1,9 @@
 import { Slider, SliderProps } from "@mui/material"
+import { DEFAULT_SLIDER_PRESETS } from "../../../../constants/layout"
 
 
 export function NormalSlider(props: SliderProps) {
-  const presets: SliderProps = {
-    min: 0.0,
-    max: 1.0,
-    step: 0.0001,
-    valueLabelDisplay: 'on',
-    defaultValue: 0.5,
-    valueLabelFormat: (value: number) => (value * 100).toFixed(2) + '%',
-  }
+  const presets = DEFAULT_SLIDER_PRESETS
 
   return (
     <Slider {...{ ...presets, ...props }} />

@@ -3,13 +3,13 @@ import {
   IconButton,
   Typography,
 } from "@mui/material"
-import EditIcon from '@mui/icons-material/Edit'
+import RestartAltIcon from '@mui/icons-material/RestartAlt'
 import SaveAsIcon from '@mui/icons-material/SaveAs'
 import { useDispatch, useSelector } from "react-redux"
 import { RootState } from "../../../../redux/store"
 import { useState } from "react"
 import EditDialog from "./EditDialog"
-import { ErrorAlert, OverwriteAlert, SavedAlert } from "./Alert"
+import { ErrorAlert, OverwriteAlert, ResetAlert, SavedAlert } from "./Alert"
 import { Content } from "../../../../types"
 import { favoriteActions } from "../../../../redux/slices/favoriteSlice"
 
@@ -25,16 +25,17 @@ export function Toolbar() {
   ]
   const [editOpen, setEditOpen] = useState(false)
   const [savedAlertOpen, setSavedAlertOpen] = useState(false)
+  const [resetAlertOpen, setResetAlertOpen] = useState(false)
   const [overwriteAlertOpen, setOverwriteAlertOpen] = useState(false)
   const [titleErrorAlertOpen, setTitleErrorAlertOpen] = useState(false)
 
-  const EditTitleButton = () =>
+  const ResetButton = () =>
     <IconButton
       sx={{ color: '#ccc' }}
-      aria-label='Edit Title'
-      onClick={() => setEditOpen(true)}
+      aria-label='Reset WorkSpace'
+      onClick={() => setResetAlertOpen(true)}
     >
-      <EditIcon />
+      <RestartAltIcon />
     </IconButton>
 
   const SaveAsButton = () =>
@@ -61,7 +62,7 @@ export function Toolbar() {
 
     <>
       <Box sx={{ flexGrow: 1 }}>
-        <EditTitleButton />
+        <ResetButton />
         <Typography
           component="span"
           sx={{ cursor: 'pointer' }}
@@ -73,6 +74,7 @@ export function Toolbar() {
       </Box>
       <EditDialog {...{ editOpen, setEditOpen }} />
       <SavedAlert {...{ savedAlertOpen, setSavedAlertOpen }} />
+      <ResetAlert {...{ resetAlertOpen, setResetAlertOpen }} />
       <OverwriteAlert {...{
         overwriteAlertOpen,
         setOverwriteAlertOpen,

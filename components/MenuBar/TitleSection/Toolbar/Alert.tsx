@@ -2,9 +2,16 @@ import { Alert, Button, Snackbar } from "@mui/material";
 import { Dispatch, SetStateAction } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import { DEFAULT_CONTENT } from "../../../../constants/content";
+import { contentActions } from "../../../../redux/slices/contentSlice";
 import { favoriteActions } from "../../../../redux/slices/favoriteSlice";
 import { RootState } from "../../../../redux/store";
 import { Content } from "../../../../types";
+import {
+  CONSENT_ALERT_DURATION,
+  ERROR_ALERT_DURATION,
+  SUCCESS_ALERT_DURATION
+} from "../../../../constants/layout";
 
 
 interface SavedAlertProps {
@@ -21,7 +28,7 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
         vertical: 'top',
         horizontal: 'center'
       }}
-      autoHideDuration={10000}
+      autoHideDuration={SUCCESS_ALERT_DURATION}
       open={savedAlertOpen}
       onClose={() => setSavedAlertOpen(false)}
       sx={{ mt: 8 }}
@@ -37,6 +44,53 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
   )
 }
 
+interface ResetAlertProps {
+  resetAlertOpen: boolean
+  setResetAlertOpen: Dispatch<SetStateAction<boolean>>
+}
+
+export function ResetAlert({
+  resetAlertOpen,
+  setResetAlertOpen,
+}: ResetAlertProps) {
+  const dispatch = useDispatch()
+  const setContent = (c: Content) => dispatch(contentActions.setContent(c))
+
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'top',
+        horizontal: 'center'
+      }}
+      autoHideDuration={CONSENT_ALERT_DURATION}
+      open={resetAlertOpen}
+      onClose={() => setResetAlertOpen(false)}
+      sx={{ mt: 8 }}
+    >
+      <Alert
+        color='warning'
+        sx={{ py: 2, width: '100%' }}
+        onClick={() => setResetAlertOpen(false)}
+        action={
+          <Button
+            size='small'
+            color='warning'
+            variant='outlined'
+            onClick={e => {
+              setContent(DEFAULT_CONTENT)
+              setResetAlertOpen(false)
+              e.stopPropagation()
+            }}
+          >
+            Reset
+          </Button>
+        }
+      >
+        Are your sure to reset the worksheet?
+      </Alert>
+    </Snackbar>
+  )
+}
 
 interface OverwriteAlertProps {
   overwriteAlertOpen: boolean
@@ -61,7 +115,7 @@ export function OverwriteAlert({
         vertical: 'top',
         horizontal: 'center'
       }}
-      autoHideDuration={20000}
+      autoHideDuration={CONSENT_ALERT_DURATION}
       open={overwriteAlertOpen}
       onClose={() => setOverwriteAlertOpen(false)}
       sx={{ mt: 8 }}
@@ -108,7 +162,7 @@ export function ErrorAlert({ text, open, setOpen }: ErrorAlertProps) {
       }}
       open={open}
       onClose={() => setOpen(false)}
-      autoHideDuration={10000}
+      autoHideDuration={ERROR_ALERT_DURATION}
       sx={{ mt: 8 }}
     >
       <Alert

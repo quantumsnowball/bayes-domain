@@ -1,5 +1,5 @@
 import { Paper } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
@@ -25,6 +25,7 @@ function LikelihoodPrompt({ i }: LikelihoodPromptProps) {
   ]
   const hypothesisTitle = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(likelihood)
+  useEffect(() => setValSync(likelihood), [likelihood])
 
   return (
     <Paper

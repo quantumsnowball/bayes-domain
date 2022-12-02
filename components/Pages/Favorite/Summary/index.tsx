@@ -24,7 +24,7 @@ const Summary: FC<SummaryProps> = ({ content }) => {
       onChange={(_, isExpanded) => setExpanded(isExpanded)}
     >
       <AccordionSummary  >
-        <TitleRow {...{ content }} />
+        <TitleRow {...{ expanded, content }} />
       </AccordionSummary>
       <AccordionDetails>
         <PosteriorRow {...{ content }} />

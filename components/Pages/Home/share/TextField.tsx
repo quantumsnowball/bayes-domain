@@ -1,5 +1,6 @@
 import { Chip, ChipProps, InputAdornment, TextField, TextFieldProps } from "@mui/material"
 import { ChangeEventHandler, useState } from "react"
+import { DEFAULT_TEXTFIELD_PRESETS } from "../../../../constants/layout"
 
 
 type NormalTextFieldProps = TextFieldProps & {
@@ -15,9 +16,7 @@ export function NormalTextField(props: NormalTextFieldProps) {
   } = props
 
   const presets: TextFieldProps = {
-    fullWidth: true,
-    variant: 'outlined',
-    onFocus: e => e.target.select(),
+    ...DEFAULT_TEXTFIELD_PRESETS,
     InputProps: {
       startAdornment:
         <InputAdornment position="start" >

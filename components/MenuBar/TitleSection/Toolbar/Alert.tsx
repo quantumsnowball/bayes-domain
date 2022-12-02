@@ -7,6 +7,11 @@ import { contentActions } from "../../../../redux/slices/contentSlice";
 import { favoriteActions } from "../../../../redux/slices/favoriteSlice";
 import { RootState } from "../../../../redux/store";
 import { Content } from "../../../../types";
+import {
+  CONSENT_ALERT_DURATION,
+  ERROR_ALERT_DURATION,
+  SUCCESS_ALERT_DURATION
+} from "../../../../constants/layout";
 
 
 interface SavedAlertProps {
@@ -23,7 +28,7 @@ export function SavedAlert({ savedAlertOpen, setSavedAlertOpen }: SavedAlertProp
         vertical: 'top',
         horizontal: 'center'
       }}
-      autoHideDuration={10000}
+      autoHideDuration={SUCCESS_ALERT_DURATION}
       open={savedAlertOpen}
       onClose={() => setSavedAlertOpen(false)}
       sx={{ mt: 8 }}
@@ -57,7 +62,7 @@ export function ResetAlert({
         vertical: 'top',
         horizontal: 'center'
       }}
-      autoHideDuration={20000}
+      autoHideDuration={CONSENT_ALERT_DURATION}
       open={resetAlertOpen}
       onClose={() => setResetAlertOpen(false)}
       sx={{ mt: 8 }}
@@ -110,7 +115,7 @@ export function OverwriteAlert({
         vertical: 'top',
         horizontal: 'center'
       }}
-      autoHideDuration={20000}
+      autoHideDuration={CONSENT_ALERT_DURATION}
       open={overwriteAlertOpen}
       onClose={() => setOverwriteAlertOpen(false)}
       sx={{ mt: 8 }}
@@ -157,7 +162,7 @@ export function ErrorAlert({ text, open, setOpen }: ErrorAlertProps) {
       }}
       open={open}
       onClose={() => setOpen(false)}
-      autoHideDuration={10000}
+      autoHideDuration={ERROR_ALERT_DURATION}
       sx={{ mt: 8 }}
     >
       <Alert

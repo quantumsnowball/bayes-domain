@@ -6,10 +6,12 @@ import {
 import ExploreIcon from '@mui/icons-material/Explore'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 
 function BottomNav() {
-  const [value, setValue] = useState(0)
+  const router = useRouter()
+  const [value, setValue] = useState(router.pathname === '/' ? 0 : 1)
 
   return (
     <>

@@ -1,7 +1,7 @@
 import {
   Paper,
 } from "@mui/material"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { contentActions } from "../../../../redux/slices/contentSlice"
 import { RootState } from "../../../../redux/store"
@@ -22,6 +22,7 @@ function PriorPrompt() {
   ]
   const title = useSelector((s: RootState) => s.content.hypothesis.title)
   const [valSync, setValSync] = useState(prior)
+  useEffect(() => setValSync(prior), [prior])
 
   return (
     <Paper

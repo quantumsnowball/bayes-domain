@@ -19,7 +19,8 @@
     "jsx": "preserve",
     "incremental": true,
     "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedParameters": false,
+    "typeRoots": []
   },
   "include": [
     "next-env.d.ts",

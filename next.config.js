@@ -10,5 +10,4 @@ module.exports = withPWA({
     defaultLocale: "en",
   },
   reactStrictMode: true,
-  swcMinify: true,
 })

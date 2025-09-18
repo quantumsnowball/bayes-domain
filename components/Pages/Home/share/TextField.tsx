@@ -54,7 +54,7 @@ export function ProbTextField(props: ProbTextFieldProps) {
       try {
         onTyping(e)
         setEvalError(false)
-      } catch (error) {
+      } catch {
         setEvalError(true)
       }
     }

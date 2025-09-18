@@ -15,6 +15,7 @@ const defaultTheme = createTheme()
 
 const FlexColumnDiv = styled(CenterContent('div'))`
   /* cover full viewport */
+  align-self: auto;
   position: fixed;
   height: 100%;
   width: 100%;

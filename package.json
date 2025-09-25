@@ -1,6 +1,6 @@
 {
   "name": "bayes-domain",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -26,6 +26,7 @@
     "react": "19.1.1",
     "react-dom": "19.1.1",
     "react-redux": "^9.2.0",
+    "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
     "typescript": "^5.9.2",
     "uuid": "^13.0.0"
